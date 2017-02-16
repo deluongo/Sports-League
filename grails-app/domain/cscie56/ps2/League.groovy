@@ -1,11 +1,12 @@
 package cscie56.ps2
 
-class Conference {
+class League {
 
     String name
+
     Integer id
 
-    static hasMany = [teams:Team]
+    static hasMany = [conferences:Conference]
 
     static constraints = {
     }
