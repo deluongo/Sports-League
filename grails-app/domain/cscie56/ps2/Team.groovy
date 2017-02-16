@@ -2,17 +2,14 @@ package cscie56.ps2
 
 class Team {
 
-    Integer wins
-    Integer losses
-    Integer ties
-    Double winPercent
-    Integer pointsScored
-    Integer pointsAgainst
-    Integer streak
-    def coachingStaff
-    def roster
-
-	String name
+	/* ~~~~~~~~~~~~~~ PROPERTIES ~~~~~~~~~~~~~ */
+	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	String name, streak
+	Integer wins, losses, ties, scored, allowed, delta
+	BigDecimal winPercent
+	Character lastResult, result
+    //def coachingStaff
+    //def roster
 
     static hasMany = [persons:Person]
 

@@ -9,20 +9,13 @@ import grails.transaction.Transactional
 
 /*---------------------------------------------------------------------------------------------*
 * ===========================================
-* CONTROLLER -> SEASON!
+* SEASON CONTROLLER!
 * ===========================================
 * PROPERTIES:
 *     - name, startDate, endDate
 * METHODS:
 *     - showStandings() -> Displays season standings.
-*     - wins() -> Updates Team wins, result & last result
-*     - loses() -> Updates Team losses
-*     - ties() -> Updates Team ties
-*     - scores() -> Updates Team's total points scored
-*     - allowed() -> Updates Team total points allowed
-*     - calcDelta() -> Calculates Team's point differential
-*     - calcWinPercent() -> Calculates Team's winning percentage
-*     - calcStreak() -> Calculates the teams winning or loosing streaks
+*     - simSeason() -> simulates a season
 /*---------------------------------------------------------------------------------------------*/
 class SeasonController {
 
