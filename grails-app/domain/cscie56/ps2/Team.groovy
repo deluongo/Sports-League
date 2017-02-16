@@ -6,7 +6,7 @@ class Team {
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	String name, streak
 	Integer wins, losses, ties, scored, allowed, delta
-	BigDecimal winPercent
+	def winPercent
 	Character lastResult, result
     //def coachingStaff
     //def roster

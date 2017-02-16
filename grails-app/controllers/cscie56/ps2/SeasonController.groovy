@@ -189,9 +189,14 @@ class SeasonController {
 
     /* ~~~~~~~~~~~~~- CREATE TEAMS ~~~~~~~~~~~~ */
     /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def createTeam(String teamName) {
+    def createTeam(teamName, streak, wins, losses, ties,
+                   scored, allowed, delta, winPercent,
+                   lastResult, result) {
         /* ---  create mtea  --- */
-        def newTeam = new Team(name: teamName)
+        def newTeam = new Team(name: teamName, streak: streak, wins: wins, losses: losses, ties: ties,
+                scored: scored, allowed: allowed, delta: delta, winPercent: winPercent,
+                lastResult: lastResult, result: result)
+
         newTeam.save()
     }
 
@@ -252,9 +257,9 @@ class SeasonController {
     *     -
     /*---------------------------------------------------------------------------------------------*/
     def showStandings() {
-        TeamController().create(name: "Warriors")
+        createTeam("Warriors", "w2", 1,  1, 1,  89, 76, 13, 0.5,  "w",  "l")
 
-        render "You successfully added ${Team.findByName("Warriors")}"
+        render "You successfully added the ${Team.findByName("Warriors").name}"
     }
 
 }
