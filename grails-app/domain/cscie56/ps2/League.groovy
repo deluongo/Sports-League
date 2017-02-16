@@ -4,8 +4,6 @@ class League {
 
     String name
 
-    Integer id
-
     static hasMany = [conferences:Conference]
 
     static constraints = {

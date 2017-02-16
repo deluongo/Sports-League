@@ -9,8 +9,6 @@ class Person {
     Boolean coach
     Integer pointsScored
 
-    Integer id
-
     static belongsTo = [teams:Team]
 
     static constraints = {

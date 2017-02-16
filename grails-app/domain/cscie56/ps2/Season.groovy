@@ -6,8 +6,6 @@ class Season {
     Date startDate
     Date endDate
 
-    Integer id
-
 
     static hasMany = [teams:Team]
 

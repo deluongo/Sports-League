@@ -12,7 +12,6 @@ class Team {
     def coachingStaff
     def roster
 
-    Integer id
 	String name
 
     static hasMany = [persons:Person]
