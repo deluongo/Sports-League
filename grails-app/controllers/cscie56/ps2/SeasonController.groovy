@@ -146,6 +146,55 @@ class SeasonController {
         }
     }
 
+    /*---------------------------------------------------------------------------------------------*
+    * ===========================================
+    * FUNCTION -> CREATES DATABASE TABLES
+    * ===========================================
+    * INPUTS:
+    *     -
+    * FUNCTIONS:
+    *     - playGame(homeTeam, awayTeam)
+    * DESCRIPTION:
+    *     - Simulates an entire season of games for every team
+    * OUTPUT:
+    *     - None
+    *     - (Updates league list with simulated stats)
+    /*---------------------------------------------------------------------------------------------*/
+
+
+    /* ~~~~~~~~~~~~~ CREATE LEAGUE ~~~~~~~~~~~~ */
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def createLeague(String leagueName) {
+        /* ---  create league  --- */
+        def newLeague = new League(name: leagueName)
+        newLeague.save()
+    }
+
+    /* ~~~~~~~~~~~ CREATE CONFERENCE ~~~~~~~~~~ */
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def createConference(String conferenceName) {
+        /* ---  create conference  --- */
+        def newConference = new Conference(name: conferenceName)
+        newConference.save()
+    }
+
+
+    /* ~~~~~~~~~~~~~ CREATE SEASON ~~~~~~~~~~~~ */
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def createSeason(String seasonName) {
+        /* ---  create mtea  --- */
+        def newSeason = new Season(name: seasoname)
+        newSeason.save()
+    }
+
+    /* ~~~~~~~~~~~~~- CREATE TEAMS ~~~~~~~~~~~~ */
+    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def createTeam(String teamName) {
+        /* ---  create mtea  --- */
+        def newTeam = new Team(name: teamName)
+        newTeam.save()
+    }
+
 
     /*---------------------------------------------------------------------------------------------*
     * ===========================================
@@ -162,25 +211,30 @@ class SeasonController {
     *     - None
     *     - (Updates league list with simulated stats)
     /*---------------------------------------------------------------------------------------------*/
-    def simSeason(List league, Integer numGames) {
-        /* ---  create league  --- */
-        def NBA = new League(name: "NBA")
-        NBA.save()
+    def simSeason() {
+
+        /* ---  create NBA  --- */
+        //def NBA = new League(name: "NBA")
+        //NBA.save()
+
         /* ---  create conferences  --- */
 
         /* ---  create teams  --- */
+        //createTeam("Warriors")
+        //def team = Team.findByName("Warriors")
+        //numGames.each{
+        //    tempLeague = league
+        //    Collections.shuffle(tempLeague)
+        //    gmsPerNight = (Math.floor(league.size()/2))*2
+        //    for(i=0; i<numGames; i++) {
+        //        for(j=0; j<gmsPerNight; j+=2) {
+        //            playGame(tempLeague[j], tempLeague[j+1])
+        //       }
 
-        numGames.each{
-            tempLeague = league
-            Collections.shuffle(tempLeague)
-            gmsPerNight = (Math.floor(league.size()/2))*2
-            for(i=0; i<numGames; i++) {
-                for(j=0; j<gmsPerNight; j+=2) {
-                    playGame(tempLeague[j], tempLeague[j+1])
-                }
+        //    }
+        //}
 
-            }
-        }
+        render "You successfully added ${team}"
     }
 
 
@@ -198,15 +252,9 @@ class SeasonController {
     *     -
     /*---------------------------------------------------------------------------------------------*/
     def showStandings() {
-        league.sort{-it.winPercent}
-        printf("--------------------\n")
-        printf("Basketball Standings\n")
-        printf("--------------------\n\n")
-        printf("%-8s  %5s   %2s   %-6s   %-6s %1s %9s %6s %8s%n", "Team", "Wins", "Losses", "Ties", "%", "Scored", "Allowed", "Delta", "Streak")
-        printf("---------------------------------------------------------------------------%n");
-        league.each {
-            System.out.printf("%-7s  %5d   %4d   %6d   %6.1f%% %7d  %7s %7s %7s%n", it.name, it.wins, it.losses, it.ties, it.winPercent, it.scored, it.allowed, it.delta, it.streak)
-        }
+        TeamController().create(name: "Warriors")
+
+        render "You successfully added ${Team.findByName("Warriors")}"
     }
 
 }
