@@ -14,7 +14,7 @@ class TeamControllerSpec extends Specification {
         //params["name"] = 'someValidName'
         //assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
 
-        params << [name: "name", streak: 1, wins: 1, losses: 1, ties: 0, scored:89, allowed:76, delta:13, winPercent: 0.5, lastResult: "w", result: "l"]
+        params << [name: "name", streak: 'w2', location: "NY", wins: 1, losses: 1, ties: 0, scored:89, allowed:76, delta:13, winPercent: 0.5, lastResult: "w", result: "l"]
 
     }
 

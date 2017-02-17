@@ -6,8 +6,8 @@ class Season {
     Date startDate
     Date endDate
 
-
-    static hasMany = [teams:Team]
+    static belongsTo = [league:League]
+    static hasMany = [conferences:Conference]
 
     static constraints = {
     }

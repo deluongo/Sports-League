@@ -5,7 +5,7 @@ class Game {
     String homeTeam
     String awayTeam
     String winner
-    String looser
+    String loser
     Integer homePoints
     Integer awayPoints
     Date gameDate

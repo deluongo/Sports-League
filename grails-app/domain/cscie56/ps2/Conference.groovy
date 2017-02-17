@@ -4,6 +4,7 @@ class Conference {
 
     String name
 
+    static belongsTo = [seasons:Season]
     static hasMany = [teams:Team]
 
     static constraints = {

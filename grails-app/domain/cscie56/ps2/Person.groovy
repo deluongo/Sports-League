@@ -4,12 +4,11 @@ class Person {
 
     String firstName
     String lastName
-    Integer number
-    Boolean player
-    Boolean coach
+    def number
+    String role
     Integer pointsScored
 
-    static belongsTo = [teams:Team]
+    static belongsTo = [team:Team]
 
     static constraints = {
     }
