@@ -46,6 +46,16 @@ class BootStrap {
         Conference west = new Conference(name: 'Western Conference', seasons: season)
         saveObject(west)
 
+
+        /*  ---------------             *** TEST DELETE***           ---------------  */
+        League testL = new League(name: 'testL')
+        saveObject(testL)
+        Season testS = new Season(name: 'testS', startDate: new Date(), endDate: new Date(), league: testL)
+        saveObject(testS)
+        Conference testC = new Conference(name: 'testC', seasons: testS)
+        saveObject(testC)
+        Team test = saveTeam("Warriors", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Golden State", testC)
+
         /*      ----------- !!! -----------      */
         /* ---     GOLDEN STATE WARRIORS     --- */
         /*      ---------------------------      */
@@ -338,8 +348,6 @@ class BootStrap {
             /* ___  participating teams  ___ */
             def teamList = []
             conferences.each{ conf -> teamList.addAll(Team.findAllByConference(conf))}
-            //def teamList = Team.findAllByConference(conferences)
-            println(teamList.size())
 
             /*  --------------             *** Simulate Games ***           ---------------  */
             Integer gmsPerNight = (Math.floor(teamList.size()/2))*2

@@ -4,42 +4,39 @@ class Team {
 
 	/* ~~~~~~~~~~~~~~ PROPERTIES ~~~~~~~~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	String name, streak, location
-	Integer wins, losses, ties, scored, allowed, delta
-	def winPercent
+	String name, streak, location, homeRecord, roadRecord, L10
+	Integer wins, losses, ties, scored, allowed, delta, seed
+	BigDecimal winPercent
 	Character lastResult, result
-    //def coachingStaff
-    //def roster
 
 	static belongsTo = [conference:Conference]
 
     static hasMany = [persons:Person]
-
 
     static constraints = {
 
     }
 
 	/*---------------------------------------------------------------------------------------------*
-* ===========================================
-* FUNCTIONS -> CALCULATE & UPDATE STATS!
-* ===========================================
-* INPUTS:
-*     -
-* FUNCTIONS:
-*     - wins()
-*     - loses()
-*     - ties()
-*     - scores(pts)
-*     - allows(pts)
-*     - calcDelta()
-*     - calcWinPercent()
-*     - calcStreak()
-* DESCRIPTION:
-*     - A suite of functions used to update team stats
-* OUTPUT:
-*     -
-/*---------------------------------------------------------------------------------------------*/
+	* ===========================================
+	* FUNCTIONS -> CALCULATE & UPDATE STATS!
+	* ===========================================
+	* INPUTS:
+	*     -
+	* FUNCTIONS:
+	*     - wins()
+	*     - loses()
+	*     - ties()
+	*     - scores(pts)
+	*     - allows(pts)
+	*     - calcDelta()
+	*     - calcWinPercent()
+	*     - calcStreak()
+	* DESCRIPTION:
+	*     - A suite of functions used to update team stats
+	* OUTPUT:
+	*     -
+	/*---------------------------------------------------------------------------------------------*/
 
 	/* ~~~~~~~~~~~~ UPDATE STATS ~~~~~~~~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
