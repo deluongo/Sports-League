@@ -4,8 +4,8 @@ class Team {
 
 	/* ~~~~~~~~~~~~~~ PROPERTIES ~~~~~~~~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	String name, streak, location, homeRecord, roadRecord, L10
-	Integer wins, losses, ties, scored, allowed, delta, seed
+	String name, streak, location, homeRecord, roadRecord, l10
+	Integer wins, losses, ties, scored, allowed, delta, seed, gamesBack, gamesPlayed
 	BigDecimal winPercent
 	Character lastResult, result
 

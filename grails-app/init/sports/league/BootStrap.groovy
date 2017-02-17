@@ -46,16 +46,6 @@ class BootStrap {
         Conference west = new Conference(name: 'Western Conference', seasons: season)
         saveObject(west)
 
-
-        /*  ---------------             *** TEST DELETE***           ---------------  */
-        League testL = new League(name: 'testL')
-        saveObject(testL)
-        Season testS = new Season(name: 'testS', startDate: new Date(), endDate: new Date(), league: testL)
-        saveObject(testS)
-        Conference testC = new Conference(name: 'testC', seasons: testS)
-        saveObject(testC)
-        Team test = saveTeam("Warriors", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Golden State", testC)
-
         /*      ----------- !!! -----------      */
         /* ---     GOLDEN STATE WARRIORS     --- */
         /*      ---------------------------      */
@@ -191,6 +181,7 @@ class BootStrap {
 
     /*  ============================ !!! ---*** SAVE ***--- !!! ===========================  */
 
+
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ CREATE TEAMS ~~~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -198,7 +189,8 @@ class BootStrap {
         /* ___  create team  ___ */
         Team newTeam = new Team(name: teamName, streak: streak, wins: wins, losses: losses, ties: ties,
                 scored: scored, allowed: allowed, delta: delta, winPercent: winPercent,
-                lastResult: lastResult, result: result, location: location, conference: conference)
+                lastResult: lastResult, result: result, location: location, conference: conference,
+                seed: -1, gamesBack: -1, l10: "0-0", homeRecord: "0-0", roadRecord: "0-0", gamesPlayed: 0)
         /* ___  save team  ___ */
         saveObject(newTeam)
         /* ___  return team object ___ */
@@ -271,6 +263,9 @@ class BootStrap {
         /* ___  instantiate  ___ */
         String winner
         String loser
+        /* ___  games played  ___ */
+        homeTeam.gamesPlayed += 1
+        awayTeam.gamesPlayed += 1
         /* ___  scored  ___ */
         homeTeam.scores(ptsHome)
         awayTeam.scores(ptsAway)
@@ -279,22 +274,28 @@ class BootStrap {
         awayTeam.allows(ptsHome)
         /* ___ record ___ */
         if (ptsHome > ptsAway) {
+            /* ___  home win  ___ */
             winner = homeTeam.name
             loser = awayTeam.name
             homeTeam.wins()
             awayTeam.loses()
         }
         else if (ptsHome < ptsAway) {
+            /* ___  away win  ___ */
             winner = awayTeam.name
             loser = homeTeam.name
             homeTeam.loses()
             awayTeam.wins()
         }
         else {
-            winner = 'tie'
-            loser = 'tie'
-            homeTeam.ties()
-            awayTeam.ties()
+            /* ___  tie  ___ */
+            ptsHome += 1
+            homeTeam.scores(1)
+            /* ___  home team gets tie break  ___ */
+            winner = homeTeam.name
+            loser = awayTeam.name
+            homeTeam.wins()
+            awayTeam.loses()
         }
         /* ___  winPercent  ___ */
         homeTeam.calcWinPercent()

@@ -11,7 +11,10 @@ class TeamControllerSpec extends Specification {
         assert params != null
 
         // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
+        params << [name: "name", streak: 'w2', location: "NY", wins: 1, losses: 1, ties: 0, scored:89, allowed:76, delta:13,
+                   winPercent: 0.5, lastResult: "W", result: "L", seed: 1, gamesBack: 0, homeRecord: "10-0", roadRecord: "9-0",
+                   l10: "10-0", gamesPlayed: 0]
+
         assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
     }
 
