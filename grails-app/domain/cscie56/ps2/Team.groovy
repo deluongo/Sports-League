@@ -1,5 +1,20 @@
 package cscie56.ps2
 
+
+/*---------------------------------------------------------------------------------------------*
+* ===========================================
+*           TEAM <- DOMAIN CLASS
+* ===========================================
+* FUNCTIONS:
+*     - saveTeam() <- creates a new Team
+*     - savePlayer() <- creates a new Person of type Player
+*     - saveCoach() <- creates a new Person of type Coach
+*     - playGame() <- Simulates a game between two teams & updates Teams Tables with results
+*     - simSeason() <- Simulates a season & updates all Teams Tables with results & stats
+* TO DO:
+*     - Create COMPLETE PLAYER ROSTER
+*     - Add skill grade to IMPROVE SIMULATION
+/*---------------------------------------------------------------------------------------------*/
 class Team {
 
 	/* ~~~~~~~~~~~~~~ PROPERTIES ~~~~~~~~~~~~~ */
@@ -11,7 +26,11 @@ class Team {
 
 	static belongsTo = [conference:Conference]
 
-    static hasMany = [persons:Person]
+	static hasMany = [persons: Person, homeGames: Game, roadGames: Game]
+	static mappedBy = [homeGames: "hostTeam",
+	                   roadGames: "guestTeam"]
+
+    //static hasMany = [persons:Person]
 
     static constraints = {
 

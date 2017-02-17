@@ -15,11 +15,12 @@ import cscie56.ps2.Person
 *     - Creates new tables and rows for Leagues, Seasons, Conferences, Teams, Persons, and Games.
 *     - Simulates an 82 game NBA season, filling all tables with dummy data.
 * FUNCTIONS:
-*     - saveTeam() <- creates a new Team
-*     - savePlayer() <- creates a new Person of type Player
-*     - saveCoach() <- creates a new Person of type Coach
-*     - playGame() <- Simulates a game between two teams & updates Teams Tables with results
-*     - simSeason() <- Simulates a season & updates all Teams Tables with results & stats
+*     - wins() <- Updates win total, last result, and result
+*     - loses() <- Updates loss total, last result, and result
+*     - ties() <- Updates tie total, last result, and result
+*     - scores() <- Updates total points scored
+*     - allows() <- Updates total points allowed
+*     -
 * TO DO:
 *     - Create COMPLETE PLAYER ROSTER
 *     - Add skill grade to IMPROVE SIMULATION
@@ -315,7 +316,7 @@ class BootStrap {
         /*  --------------                *** Save Game ***             ---------------  */
         /* ___  create game instance ___ */
         Game newGame = new Game(homeTeam: homeTeamName, awayTeam: awayTeamName, winner: winner, loser: loser, homePoints: ptsHome,
-                awayPoints: ptsAway, gameDate: new Date(), location: homeTeam.location)
+                awayPoints: ptsAway, gameDate: new Date(), location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam)
         /* ___  save game ___ */
         saveObject(newGame)
     }
