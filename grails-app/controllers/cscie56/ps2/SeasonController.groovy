@@ -321,7 +321,7 @@ class SeasonController {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ SHOW STANDINGS ~~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def showStandings(Team team) {
+    def showStandings(String conferenceIndex) {
         /*------------------------------------------*
         * ===========================================
         * FUNCTION -> SHOW STANDINGS!
@@ -347,12 +347,16 @@ class SeasonController {
         def westTeams = Team.findAllByConference(westernConference)
         def eastTeams = Team.findAllByConference(easternConference)
 
-        /*  --------------          *** Create Variable Index  ***      ---------------  */
-        def teams = [west: westTeams, east: eastTeams]
+        /*  --------------          *** Create Conference Map  ***      ---------------  */
+        def team
+        if (conferenceIndex == '1') { team = westTeams }
+        else { team = eastTeams}
 
+        print team
+        print team. getClass()
         /*  --------------            *** Display Standings ***         ---------------  */
         /* ___  open standings view ___ */
-        render(view: "showStandings", model: [seasonName: westernConference.name, team: teams])
+        render(view: "showStandings/${conferenceIndex}", model: [seasonName: westernConference.seasons.name.first(), teamList: team])
     }
     /*  ----------------------------   ( custom rendering )   -----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */

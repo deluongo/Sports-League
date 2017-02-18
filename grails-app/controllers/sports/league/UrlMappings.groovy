@@ -9,8 +9,19 @@ class UrlMappings {
             }
         }
 
+        "/season/showStandings/$conferenceIndex?" {
+            controller = 'season'
+            action = 'showStandings'
+        }
+
+        "/league/season/showStandings/$conferenceIndex?" {
+            controller = 'league'
+            action = 'season'
+        }
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }
+
 }
