@@ -297,9 +297,13 @@ def calcSeed() {
 
 		/*  --------------          *** Calculate Games Back ***        ---------------  */
 		/* ___  west teams  ___ */
-		westTeams.eachWithIndex{ team, idx -> team.gamesBack = ((westMaxWins - team.wins) + (westMaxLosses - team.losses) / 2) }
+		westTeams.eachWithIndex{ team, idx ->
+			team.gamesBack = ( (westMaxWins - team.wins) + (team.losses - westMaxLosses) ) / 2
+		}
 		/* ___  east teams  ___ */
-		eastTeams.eachWithIndex{ team, idx -> team.gamesBack = ((eastMaxWins - team.wins) + (eastMaxLosses - team.losses) / 2) }
+		eastTeams.eachWithIndex{ team, idx ->
+			team.gamesBack = ( (eastMaxWins - team.wins) + (team.losses - eastMaxLosses) ) / 2
+		}
 
 	}
 	/*  --------------------------------   ( functions )   --------------------------------  */
