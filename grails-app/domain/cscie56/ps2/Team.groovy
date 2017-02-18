@@ -1,100 +1,153 @@
 package cscie56.ps2
 
-
 /*---------------------------------------------------------------------------------------------*
 * ===========================================
 *           TEAM <- DOMAIN CLASS
 * ===========================================
+* PROPERTIES:
+*     - [Base] name, streak, location, homeRecord, roadRecord, l10, wins, losses, ties, scored,
+*       allowed, delta, seed, gamesBack, gamesPlayed, winPercent, lastResult, result
+*     - [Mapped Domain Classes] conference, persons, homeGames, roadGames
 * FUNCTIONS:
-*     - saveTeam() <- creates a new Team
-*     - savePlayer() <- creates a new Person of type Player
-*     - saveCoach() <- creates a new Person of type Coach
-*     - playGame() <- Simulates a game between two teams & updates Teams Tables with results
-*     - simSeason() <- Simulates a season & updates all Teams Tables with results & stats
+*       ~* game results *~
+*          ------------
+*     - wins() <- Updates win total, last result, and result
+*     - loses() <- Updates loss total, last result, and result
+*     - ties() <- Updates tie total, last result, and result
+*     - scores() <- Updates total points scored
+*     - allows() <- Updates total points allowed
+*       ~* calculate stats *~
+*          ---------------
+*     - calcDelta() <- Calculates the point differential
+*     - calcWinPercent() <- Calculates winning percentage
+*     - calcStreak() <- Calculates the winning streak
+*     - calcHomeRecord() <- Calculates the record in home games
+*     - calcRoadRecord() <- Calculates the record in away games
+*     - calcLast10() <- Calculates the record in the last 10 games
+*     - calcSeed() <- Calculates the conference ranking (AKA playoff seed)
+*     - calcGamesBack() <- Calculates the record in the last 10 games
 * TO DO:
-*     - Create COMPLETE PLAYER ROSTER
-*     - Add skill grade to IMPROVE SIMULATION
+*     - FINISH FUNCTIONS the calc l10, homeRecord, roadRecord, seed, and gamesBack
 /*---------------------------------------------------------------------------------------------*/
 class Team {
 
-	/* ~~~~~~~~~~~~~~ PROPERTIES ~~~~~~~~~~~~~ */
-	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+	/*                          ==============  ***  ==============                          *
+	 #  ---------------------         Class ~Team~ Definition          --------------------  #
+	 *                          ===================================                          */
+
+
+    /*  _________________________                                  ________________________  */
+	/*  ========================= !!! ---*** PROPERTIES ***--- !!! ========================  */
+
+
+	/*  ---------------         *** Instantiate Variables ***       ---------------  */
 	String name, streak, location, homeRecord, roadRecord, l10
 	Integer wins, losses, ties, scored, allowed, delta, seed, gamesBack, gamesPlayed
 	BigDecimal winPercent
 	Character lastResult, result
 
+	/*  ---------------             *** GORM Mapping ***            ---------------  */
 	static belongsTo = [conference:Conference]
-
 	static hasMany = [persons: Person, homeGames: Game, roadGames: Game]
 	static mappedBy = [homeGames: "hostTeam",
 	                   roadGames: "guestTeam"]
-
-    //static hasMany = [persons:Person]
-
+	/*  ---------------              *** Constraints ***            ---------------  */
     static constraints = {
-
     }
 
-	/*---------------------------------------------------------------------------------------------*
-	* ===========================================
-	* FUNCTIONS -> CALCULATE & UPDATE STATS!
-	* ===========================================
-	* INPUTS:
-	*     -
-	* FUNCTIONS:
-	*     - wins()
-	*     - loses()
-	*     - ties()
-	*     - scores(pts)
-	*     - allows(pts)
-	*     - calcDelta()
-	*     - calcWinPercent()
-	*     - calcStreak()
-	* DESCRIPTION:
-	*     - A suite of functions used to update team stats
-	* OUTPUT:
-	*     -
-	/*---------------------------------------------------------------------------------------------*/
 
-	/* ~~~~~~~~~~~~ UPDATE STATS ~~~~~~~~~~~~~ */
-	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	/* ---  Team Wins Game  --- */
-	Integer wins() {
+	/*  _________________________                                  ________________________  */
+	/*  ========================= !!! ---*** FUNCTIONS ***--- !!! =========================  */
+
+
+	/*  ---------------      *** Game Results - Update Stats ***    ---------------  */
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ WINS GAME ~~~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	Integer wins(String gameLocation) {
+
+		/*  ---------------              *** Parse Record ***           ---------------  */
+		/* ___  home splits  ___ */
+		Integer homeWins = homeRecord.split("-")[0].toInteger()
+		Integer homeLosses = homeRecord.split("-")[1].toInteger()
+		/* ___  road splits  ___ */
+		Integer roadWins = roadRecord.split("-")[0].toInteger()
+		Integer roadLosses = roadRecord.split("-")[1].toInteger()
+
+		/*  ---------------              *** Update Stats ***           ---------------  */
+		/* ___  home record  ___ */
+		if(gameLocation == location) {homeRecord = "${homeWins+1}-${homeLosses}"}
+		/* ___  away record  ___ */
+		else {roadRecord = "${roadWins+1}-${roadLosses}"}
+		/* ___  win total  ___ */
 		wins += 1
+		/* ___  recent results  ___ */
 		lastResult = result
 		result = "W"
 	}
-	/* ---  Team Loses Game  --- */
-	Integer loses() {
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ LOSES GAME ~~~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	Integer loses(String gameLocation) {
+		/*  ---------------              *** Parse Record ***           ---------------  */
+		/* ___  home splits  ___ */
+		Integer homeWins = homeRecord.split("-")[0].toInteger()
+		Integer homeLosses = homeRecord.split("-")[1].toInteger()
+		/* ___  road splits  ___ */
+		Integer roadWins = roadRecord.split("-")[0].toInteger()
+		Integer roadLosses = roadRecord.split("-")[1].toInteger()
+		/*  ---------------              *** Update Stats ***           ---------------  */
+		/* ___  home record  ___ */
+		if(gameLocation == location) {homeRecord = "${homeWins}-${homeLosses+1}"}
+		/* ___  away record  ___ */
+		else {roadRecord = "${roadWins}-${roadLosses+1}"}
+		/* ___  loss total  ___ */
 		losses += 1
+		/* ___  recent results  ___ */
 		lastResult = result
 		result = "L"
 	}
-	/* ---  Team Ties Game  --- */
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ TIES GAME ~~~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer ties() {
 		ties += 1
 		lastResult = result
 		result = "T"
 	}
-	/* ---  Update Points Scored  --- */
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ POINTS SCORED ~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer scores(pts) {
 		scored += pts
 	}
-	/* ---  Update Points Allowed  --- */
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ POINTS ALLOWED ~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer allows(pts) {
 		allowed += pts
 	}
 
-	/* ~~~~~~~~~~ CALCULATE STATS ~~~~~~~~~~~~ */
-	/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	/* ---  Calculate Point Differential  --- */
+	/*  ---------------           *** Stat Calculations ***         ---------------  */
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ POINT DIFFERENTIAL ~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer calcDelta()
 	{
 		delta = scored - allowed
 		delta
 	}
-	/* ---  Calculate Winning Percentage  --- */
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ WINNING PERCENTAGE ~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	BigDecimal calcWinPercent() {
 		if (losses == 0) {
 			if (wins == 0) {
@@ -109,7 +162,10 @@ class Team {
 			return winPercent
 		}
 	}
-	/* ---  Calculate Winning Streak  --- */
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ WINNING STREAK ~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	String calcStreak() {
 		Integer streakLength
 		if (result == lastResult) {
@@ -123,3 +179,5 @@ class Team {
 		streak
 	}
 }
+/*  ------------------------------   ( domain class  )   ------------------------------  */
+/*  -----------------------------------   ~ END ~    ----------------------------------  */

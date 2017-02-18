@@ -1,5 +1,6 @@
+/* ___  packages  ___ */
 package sports.league
-
+/* ___  domain classes  ___ */
 import cscie56.ps2.League
 import cscie56.ps2.Conference
 import cscie56.ps2.Season
@@ -15,12 +16,11 @@ import cscie56.ps2.Person
 *     - Creates new tables and rows for Leagues, Seasons, Conferences, Teams, Persons, and Games.
 *     - Simulates an 82 game NBA season, filling all tables with dummy data.
 * FUNCTIONS:
-*     - wins() <- Updates win total, last result, and result
-*     - loses() <- Updates loss total, last result, and result
-*     - ties() <- Updates tie total, last result, and result
-*     - scores() <- Updates total points scored
-*     - allows() <- Updates total points allowed
-*     -
+*     - saveTeam() <- creates a new Team
+*     - savePlayer() <- creates a new Person of type Player
+*     - saveCoach() <- creates a new Person of type Coach
+*     - playGame() <- Simulates a game between two teams & updates Teams Tables with results
+*     - simSeason() <- Simulates a season & updates all Teams Tables with results & stats
 * TO DO:
 *     - Create COMPLETE PLAYER ROSTER
 *     - Add skill grade to IMPROVE SIMULATION
@@ -180,6 +180,7 @@ class BootStrap {
      *                          ===================================                          */
 
 
+    /*  ____________________________                            ___________________________  */
     /*  ============================ !!! ---*** SAVE ***--- !!! ===========================  */
 
 
@@ -232,7 +233,9 @@ class BootStrap {
     }
 
 
+    /*  ___________________________                                _________________________  */
     /*  =========================== !!! ---*** SIMULATE ***--- !!! -------------------------  */
+
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ PLAY GAME ~~~~~~~~~~~~~~
@@ -278,15 +281,15 @@ class BootStrap {
             /* ___  home win  ___ */
             winner = homeTeam.name
             loser = awayTeam.name
-            homeTeam.wins()
-            awayTeam.loses()
+            homeTeam.wins(homeTeam.location)
+            awayTeam.loses(homeTeam.location)
         }
         else if (ptsHome < ptsAway) {
             /* ___  away win  ___ */
             winner = awayTeam.name
             loser = homeTeam.name
-            homeTeam.loses()
-            awayTeam.wins()
+            homeTeam.loses(homeTeam.location)
+            awayTeam.wins(homeTeam.location)
         }
         else {
             /* ___  tie  ___ */
@@ -295,8 +298,8 @@ class BootStrap {
             /* ___  home team gets tie break  ___ */
             winner = homeTeam.name
             loser = awayTeam.name
-            homeTeam.wins()
-            awayTeam.loses()
+            homeTeam.wins(homeTeam.location)
+            awayTeam.loses(homeTeam.location)
         }
         /* ___  winPercent  ___ */
         homeTeam.calcWinPercent()
