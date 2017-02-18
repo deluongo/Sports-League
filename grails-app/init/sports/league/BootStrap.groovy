@@ -264,9 +264,21 @@ class BootStrap {
         Integer ptsAway = random.nextInt(65) + 65
 
         /*  --------------              *** Update Stats ***            ---------------  */
+        Map result = updateStats(homeTeam, awayTeam, ptsHome, ptsAway)
+
+        /*  --------------                *** Save Game ***             ---------------  */
+        /* ___  create game instance ___ */
+        Game newGame = new Game(homeTeam: homeTeamName, awayTeam: awayTeamName, winner: result["winner"], loser: result["loser"], homePoints: ptsHome,
+                awayPoints: ptsAway, gameDate: new Date(), location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam)
+        /* ___  save game ___ */
+        saveObject(newGame)
+    }
+
+    def updateStats(Team homeTeam, Team awayTeam, ptsHome, ptsAway) {
         /* ___  instantiate  ___ */
         String winner
         String loser
+
         /* ___  games played  ___ */
         homeTeam.gamesPlayed += 1
         awayTeam.gamesPlayed += 1
@@ -277,6 +289,9 @@ class BootStrap {
         homeTeam.allows(ptsAway)
         awayTeam.allows(ptsHome)
         /* ___ record ___ */
+
+        /* ___  home team gets tie break  ___ */
+        if (ptsHome == ptsAway) { ptsHome += 1 }
         if (ptsHome > ptsAway) {
             /* ___  home win  ___ */
             winner = homeTeam.name
@@ -284,23 +299,14 @@ class BootStrap {
             homeTeam.wins(homeTeam.location)
             awayTeam.loses(homeTeam.location)
         }
-        else if (ptsHome < ptsAway) {
+        else {
             /* ___  away win  ___ */
             winner = awayTeam.name
             loser = homeTeam.name
             homeTeam.loses(homeTeam.location)
             awayTeam.wins(homeTeam.location)
         }
-        else {
-            /* ___  tie  ___ */
-            ptsHome += 1
-            homeTeam.scores(1)
-            /* ___  home team gets tie break  ___ */
-            winner = homeTeam.name
-            loser = awayTeam.name
-            homeTeam.wins(homeTeam.location)
-            awayTeam.loses(homeTeam.location)
-        }
+
         /* ___  winPercent  ___ */
         homeTeam.calcWinPercent()
         awayTeam.calcWinPercent()
@@ -311,18 +317,14 @@ class BootStrap {
         homeTeam.calcStreak()
         awayTeam.calcStreak()
 
-        /*  --------------                *** Save Team ***             ---------------  */
         /* __ ~Teams~ ___*/
         saveObject(homeTeam)
         saveObject(awayTeam)
 
-        /*  --------------                *** Save Game ***             ---------------  */
-        /* ___  create game instance ___ */
-        Game newGame = new Game(homeTeam: homeTeamName, awayTeam: awayTeamName, winner: winner, loser: loser, homePoints: ptsHome,
-                awayPoints: ptsAway, gameDate: new Date(), location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam)
-        /* ___  save game ___ */
-        saveObject(newGame)
+        Map result = [winner: winner, loser: loser]
+        result
     }
+
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ SIM SEASON ~~~~~~~~~~~~~~
