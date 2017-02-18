@@ -19,7 +19,18 @@ import grails.transaction.Transactional
 /*---------------------------------------------------------------------------------------------*/
 class SeasonController {
 
-    /*---------------------------------------------------------------------------------------------*
+    /*                          ==============  ***  ==============                          *
+     #  ---------------------             CRUD Operations             ---------------------  #
+     *                          ===================================                          */
+
+
+    /*  ______________________                                       ______________________  */
+    /*  ====================== !!! ---*** BUILT IN METHODS ***--- !!! =====================  */
+
+
+
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    /*--------------------------------------------------------------------*
     * ===========================================
     * BUILT-IN METHODS -> DISPLAY FORM!
     * ===========================================
@@ -30,31 +41,33 @@ class SeasonController {
     * DESCRIPTION:
     *     - Update season data
     /*---------------------------------------------------------------------------------------------*/
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-
-    /* ~~~~~~~~~~~~~~~~ INDEX ~~~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~(primary method)~~~~~~~~~~~ */
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~~ INDEX ~~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Season.list(params), model:[seasonCount: Season.count()]
     }
 
-    /* ~~~~~~~~~~~~~~~~ SHOW ~~~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~(displays page)~~~~~~~~~~~ */
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~~ SHOW ~~~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def show(Season season) {
         respond season
     }
 
-    /* ~~~~~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~~(new season)~~~~~~~~~~~~~ */
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~ CREATE ~~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def create() {
         respond new Season(params)
     }
 
-    /* ~~~~~~~~~~~~~~~~~ SAVE ~~~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~~~(team data)~~~~~~~~~~~~~ */
     @Transactional
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~~ SAVE ~~~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def save(Season season) {
         if (season == null) {
             transactionStatus.setRollbackOnly()
@@ -79,15 +92,17 @@ class SeasonController {
         }
     }
 
-    /* ~~~~~~~~~~~~~~~~ EDIT ~~~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~(change data)~~~~~~~~~~~~ */
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~~ EDIT ~~~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def edit(Season season) {
         respond season
     }
 
-    /* ~~~~~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~(add new data)~~~~~~~~~~~~ */
     @Transactional
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~ UPDATE ~~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def update(Season season) {
         if (season == null) {
             transactionStatus.setRollbackOnly()
@@ -112,9 +127,11 @@ class SeasonController {
         }
     }
 
-    /* ~~~~~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~(remove season)~~~~~~~~~~~ */
     @Transactional
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~ DELETE ~~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def delete(Season season) {
 
         if (season == null) {
@@ -134,8 +151,10 @@ class SeasonController {
         }
     }
 
-    /* ~~~~~~~~~~~~~~ NOT FOUND ~~~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~(displays error)~~~~~~~~~~~ */
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ NOT FOUND ~~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     protected void notFound() {
         request.withFormat {
             form multipartForm {
@@ -146,120 +165,168 @@ class SeasonController {
         }
     }
 
-    /*---------------------------------------------------------------------------------------------*
-    * ===========================================
-    * FUNCTION -> CREATES DATABASE TABLES
-    * ===========================================
-    * INPUTS:
-    *     -
-    * FUNCTIONS:
-    *     - playGame(homeTeam, awayTeam)
-    * DESCRIPTION:
-    *     - Simulates an entire season of games for every team
-    * OUTPUT:
-    *     - None
-    *     - (Updates league list with simulated stats)
-    /*---------------------------------------------------------------------------------------------*/
+    /*                          ==============  ***  ==============                          *
+     #  ---------------------            CUSTOM FUNCTIONS             ---------------------  #
+     *                          ===================================                          */
 
 
-    /* ~~~~~~~~~~~~~ CREATE LEAGUE ~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def createLeague(String leagueName) {
-        /* ---  create league  --- */
-        def newLeague = new League(name: leagueName)
-        newLeague.save()
-    }
-
-    /* ~~~~~~~~~~~ CREATE CONFERENCE ~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def createConference(String conferenceName) {
-        /* ---  create conference  --- */
-        def newConference = new Conference(name: conferenceName)
-        newConference.save()
-    }
+    /*  ______________________                                       ______________________  */
+    /*  ====================== !!! ---*** PRIMARY FUNCTION ***--- !!!======================  */
 
 
-    /* ~~~~~~~~~~~~~ CREATE SEASON ~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def createSeason(String seasonName) {
-        /* ---  create mtea  --- */
-        def newSeason = new Season(name: seasoname)
-        newSeason.save()
-    }
-
-    /* ~~~~~~~~~~~~~- CREATE TEAMS ~~~~~~~~~~~~ */
-    /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def createTeam(teamName, streak, wins, losses, ties,
-                   scored, allowed, delta, winPercent,
-                   lastResult, result) {
-        /* ---  create mtea  --- */
-        def newTeam = new Team(name: teamName, streak: streak, wins: wins, losses: losses, ties: ties,
-                scored: scored, allowed: allowed, delta: delta, winPercent: winPercent,
-                lastResult: lastResult, result: result)
-
-        newTeam.save()
-    }
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	*   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ SIM SEASON ~~~~~~~~~~~~~~
+	*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def simSeason(String seasonName, Integer numGames) {
+        /* ---------------------------------------------
+        *  INPUTS:
+        *     - Number of Games per Season (Integer numGames)
+        *     - League of Teams (List league)
+        *  FUNCTIONS:
+        *     - playGame(homeTeam, awayTeam)
+        *  DESCRIPTION:
+        *     - Simulates an entire season of games for every team
+        *  OUTPUT:
+        *     - None
+        *     - (Updates league list with simulated stats)
+        /*---------------------------------------------------------------------------------------------*/
 
 
-    /*---------------------------------------------------------------------------------------------*
-    * ===========================================
-    * FUNCTION -> SIMULATE A SEASON!
-    * ===========================================
-    * INPUTS:
-    *     - Number of Games per Season (Integer numGames)
-    *     - League of Teams (List league)
-    * FUNCTIONS:
-    *     - playGame(homeTeam, awayTeam)
-    * DESCRIPTION:
-    *     - Simulates an entire season of games for every team
-    * OUTPUT:
-    *     - None
-    *     - (Updates league list with simulated stats)
-    /*---------------------------------------------------------------------------------------------*/
-    def simSeason() {
+        /*  --------------          *** Loop Through Each Game ***      ---------------  */
+        numGames.each{
 
-        /* ---  create NBA  --- */
-        //def NBA = new League(name: "NBA")
-        //NBA.save()
+            /*  --------------             *** Load Team List ***           ---------------  */
+            /* ___  current season  ___ */
+            Season season = Season.findByName(seasonName)
+            /* ___  set calendar  ___ */
+            Date date = season.startDate - 7
+            def seasonDates = []
+            /* ___  participating conferences  ___ */
+            def conferences = Conference.findAllBySeasons(season)
+            /* ___  participating teams  ___ */
+            def teamList = []
+            conferences.each{ conf -> teamList.addAll(Team.findAllByConference(conf))}
 
-        /* ---  create conferences  --- */
-
-        /* ---  create teams  --- */
-        //createTeam("Warriors")
-        //def team = Team.findByName("Warriors")
-        //numGames.each{
-        //    tempLeague = league
-        //    Collections.shuffle(tempLeague)
-        //    gmsPerNight = (Math.floor(league.size()/2))*2
-        //    for(i=0; i<numGames; i++) {
-        //        for(j=0; j<gmsPerNight; j+=2) {
-        //            playGame(tempLeague[j], tempLeague[j+1])
-        //       }
-
-        //    }
-        //}
-
-        render "You successfully added ${team}"
+            /*  --------------             *** Simulate Games ***           ---------------  */
+            Integer gmsPerNight = (Math.floor(teamList.size()/2))*2
+            /* ___  weeks of games  ___ */
+            for(int i=0; i<numGames; i++) {
+                /* ___  randomize matchups  ___ */
+                Collections.shuffle(teamList)
+                /* ___  set calender week  ___ */
+                date += 7
+                seasonDates << date
+                /* ___  each team plays once  ___ */
+                for(int j=0; j<gmsPerNight; j+=2) {
+                    playGame(teamList[j].name, teamList[j+1].name, seasonDates[i])
+                }
+            }
+        }
     }
 
 
-    /*---------------------------------------------------------------------------------------------*
-    * ===========================================
-    * FUNCTION -> SHOW STANDINGS!
-    * ===========================================
-    * INPUTS:
-    *     -
-    * FUNCTIONS:
-    *     - playGame(homeTeam, awayTeam)
-    * DESCRIPTION:
-    *     - Displays league standings in the browser
-    * OUTPUT:
-    *     -
-    /*---------------------------------------------------------------------------------------------*/
+    /*  _____________________                                         _____________________  */
+    /*  ===================== !!! ---*** SIMULATION HELPERS ***--- !!!=====================  */
+
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ PLAY GAME ~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def playGame(String homeTeamName, String awayTeamName, Date date) {
+        /* -------------------------------------------------
+        *  INPUTS:
+        *     - Home Team (String homeTeam)
+        *     - Away Team (String awayTeam)
+        *     - Points 4 Home Team (Int ptsHome)
+        *     - Points 4 Away Team (Int ptsAway)
+        *  DESCRIPTION:
+        *     - Updates wins, losses, ties, winPercent, scored, allowed, delta for Home & Away Teams
+        /*---------------------------------------------------------------------------------------------*/
+
+
+        /*  ---------------             *** Load ~Teams~ ***            ---------------  */
+        Team homeTeam = Team.findByName(homeTeamName) //.where(season = thisSeason)
+        Team awayTeam = Team.findByName(awayTeamName)
+
+        /*  ---------------               *** Play Game ***             ---------------  */
+        /* ___  generate random score  ___ */
+        Random random = new Random()
+        /* ___  w/ home court advantage  ___ */
+        Integer ptsHome = random.nextInt(70) + 70
+        Integer ptsAway = random.nextInt(65) + 65
+
+        /*  ---------------           *** Determine Winner ***          ---------------  */
+        Map result = determineResult(homeTeam, ptsHome, awayTeam, ptsAway)
+
+        /*  --------------                *** Save Game ***             ---------------  */
+        /* ___  create game instance ___ */
+        Game newGame = new Game(homeTeam: homeTeamName, awayTeam: awayTeamName, winner: result["winner"], loser: result["loser"], homePoints: ptsHome,
+                awayPoints: ptsAway, gameDate: date, location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam)
+        /* ___  save game ___ */
+        saveObject(newGame)
+
+    }
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~ DETERMINE RESULT ~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def determineResult(Team homeTeam, ptsHome, Team awayTeam, ptsAway) {
+        Map result
+        /* ___  home team gets tie break  ___ */
+        if (ptsHome == ptsAway) { ptsHome += 1 }
+        /* ___  determine result  ___ */
+        if (ptsHome > ptsAway) {
+            /* ___  update team stats  ___ */
+            homeTeam.storeResults(ptsHome, ptsAway, homeTeam.location)
+            awayTeam.storeResults(ptsAway, ptsHome, homeTeam.location)
+            /* ___  home team wins  ___ */
+            result = [winner: homeTeam.name, loser:awayTeam.name]
+
+        }
+        else {
+            /* ___  update team stats  ___ */
+            homeTeam.storeResults(ptsHome, ptsAway, homeTeam.location)
+            awayTeam.storeResults(ptsAway, ptsHome, homeTeam.location)
+            /* ___  visiting team wins  ___ */
+            result = [winner: awayTeam.name, loser:homeTeam.name]
+        }
+        result
+    }
+    /*  ---------------------------   ( simulate functions )   ----------------------------  */
+    /*  -----------------------------------   ~ END ~    ----------------------------------  */
+
+
+
     def showStandings() {
-        createTeam("Warriors", "w2", 1,  1, 1,  89, 76, 13, 0.5,  "w",  "l")
+        /*------------------------------------------*
+        * ===========================================
+        * FUNCTION -> SHOW STANDINGS!
+        * ===========================================
+        * INPUTS:
+        *     -
+        * FUNCTIONS:
+        *     - playGame(homeTeam, awayTeam)
+        * DESCRIPTION:
+        *     - Displays league standings in the browser
+        * OUTPUT:
+        *     -
+        /*---------------------------------------------------------------------------------------------*/
 
-        render "You successfully added the ${Team.findByName("Warriors").name}"
+        render(view: "showStandings")
     }
+
+
+    /*                          ==============  ***  ==============                          *
+     #  ---------------------                 SCRIPTS                 ---------------------  #
+     *                          ===================================                          */
+
+
+    /*  ______________________                                       ______________________  */
+    /*  ====================== !!! ---*** SIMULATE SEASON ***--- !!! ======================  */
+    simSeason('2017', 82)
+
+    /*  ____________________                                           ____________________  */
+    /*  ==================== !!! ---*** LOAD STANDINGS VIEW ***--- !!! ====================  */
+    simSeason('2017', 82)
 
 }
