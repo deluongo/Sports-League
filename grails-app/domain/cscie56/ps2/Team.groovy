@@ -42,16 +42,16 @@ class Team {
 
 
 	/*  -------------------         *** Instantiate Variables ***       -------------------  */
-	String name, streak, location, homeRecord, roadRecord, l10
-	Integer wins, losses, ties, scored, allowed, delta, seed, gamesBack, gamesPlayed
+	String name, streak, location, homeRecord, roadRecord, l10, lastResult, result
+	Integer wins, losses, ties, delta, seed, gamesBack, gamesPlayed, scored, allowed
 	BigDecimal winPercent
-	Character lastResult, result
 
 	/*  -------------------             *** GORM Mapping ***            -------------------  */
 	static belongsTo = [conference:Conference]
 	static hasMany = [persons: Person, homeGames: Game, roadGames: Game]
 	static mappedBy = [homeGames: "hostTeam",
 	                   roadGames: "guestTeam"]
+
 	/*  -------------------              *** Constraints ***            -------------------  */
     static constraints = {
     }
@@ -163,6 +163,7 @@ class Team {
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer scores(pts) {
 		scored += pts
+		scored
 	}
 
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -170,6 +171,7 @@ class Team {
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer allows(pts) {
 		allowed += pts
+		allowed
 	}
 
 

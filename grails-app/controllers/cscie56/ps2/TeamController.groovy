@@ -84,15 +84,21 @@ class TeamController {
             return
         }
 
-        team.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'team.label', default: 'Team'), team.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        else if ( (team.persons != null) || (team.homeGames != null) || (team.roadGames != null) ) {
+            respond team.errors, view:'edit'
         }
+        else {
+            team.delete flush:true
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'default.deleted.message', args: [message(code: 'team.label', default: 'Team'), team.id])
+                    redirect action:"index", method:"GET"
+                }
+                '*'{ render status: NO_CONTENT }
+            }
+        }
+
+
     }
 
     protected void notFound() {

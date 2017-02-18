@@ -18,8 +18,7 @@
             <g:if test="${flash.message}">
                 <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:table collection="${teamList}" properties="['seed', 'homeGames', 'roadGames', 'location', 'name', 'gamesPlayed','wins', 'losses', 'winPercent',
-                                                           'gamesBack', 'homeRecord', 'roadRecord', 'l10', 'streak', 'conference']" />
+            <f:table collection="${teamList}" />
 
             <div class="pagination">
                 <g:paginate total="${teamCount ?: 0}" />

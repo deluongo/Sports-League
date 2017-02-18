@@ -11,7 +11,7 @@ class SeasonControllerSpec extends Specification {
         assert params != null
 
         League nba = new League(name: 'NBA')
-        params << [name: "name", startDate:new Date(), endDate:new Date(), id:1, league: nba]
+        params << [name: "name", startDate: new Date(), endDate: new Date(), id:1, league: nba]
     }
 
     void "Test the index action returns the correct model"() {
