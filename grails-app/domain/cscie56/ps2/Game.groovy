@@ -13,7 +13,7 @@ class Game {
 
     Team hostTeam
     Team guestTeam
-
+    
     static constraints = {
     }
 }

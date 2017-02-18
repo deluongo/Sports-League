@@ -55,13 +55,14 @@ class Team {
 	/*  -------------------              *** Constraints ***            -------------------  */
     static constraints = {
     }
-
+	/*  ------------------------------ ( class definitions )   ----------------------------  */
+	/*  -----------------------------------   ~ END ~    ----------------------------------  */
 
 	/*                          ==============  ***  ==============                          *
 	 #  ---------------------                Functions                 --------------------  #
 	 *                          ===================================                          */
 
-	/*  _________________________                                  ________________________  */
+	/*  __________________                                              ___________________  */
 	/*  ================== !!! ---*** PRIMARY UPDATE FUNCTION ***--- !!!===================  */
 
 
@@ -86,6 +87,12 @@ class Team {
 		calcDelta()
 		/* ___  streak  ___ */
 		calcStreak()
+		/* ___  last 10  ___ */
+		calcLast10()
+		/* ___  seed  ___ */
+		Map rankedTeams = calcSeed()
+		/* ___  games back  ___ */
+		calcGamesBack(rankedTeams.west, rankedTeams.east)
 	}
 
 
@@ -210,6 +217,93 @@ class Team {
 		}
 		streak
 	}
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ LAST 10 Games ~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	String calcLast10() {
+
+		/*  --------------             *** List of Games ***            ---------------  */
+		/* ___  games won ___ */
+		def gamesWon = Game.findAllByWinner(name)
+		/* ___  games lost  ___ */
+		def gamesLost = Game.findAllByLoser(name)
+
+		/* ___  all games  ___ */
+		def gamesList = []
+		if(gamesWon) { gamesList.addAll(gamesWon) }
+		if(gamesLost) { gamesList.addAll(gamesLost) }
+
+		/*  --------------           *** Find Last 10 Games ***         ---------------  */
+		/* ___  sort by date played  ___ */
+		def last10Games = gamesList.sort{it.gameDate}.reverse().take(10)
+
+		/*  --------------         *** Find Games Won & Lost ***        ---------------  */
+		/* ___  wins in last 10  ___ */
+		def recentWins = last10Games.findAll{it.winner == name}
+		/* ___  losses in last 10  ___ */
+		def recentLosses = last10Games.findAll{it.loser == name}
+
+		/*  --------------             *** Update Record ***            ---------------  */
+		/* ___  calculate wins & losses  ___ */
+		l10 = "${recentWins.size()}-${recentLosses.size()}"
+	}
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ LAST 10 Games ~~~~~~~~~~~~
+ *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+def calcSeed() {
+
+		/*  --------------            *** Load All Teams ***            ---------------  */
+		/* ___  Load Conference Objects  ___ */
+		def westernConference = Conference.findAllByName("Western Conference")
+		def easternConference = Conference.findAllByName("Eastern Conference")
+		/* ___  Teams List by Conference  ___ */
+		def westTeams = Team.findAllByConference(westernConference)
+		def eastTeams = Team.findAllByConference(easternConference)
+
+		/*  --------------         *** Get Ranked Team List ***         ---------------  */
+		/* ___  western conference teams  ___ */
+		westTeams = westTeams.sort{it.wins}.reverse().take(10)
+		/* ___  eastern conference teams  ___ */
+		eastTeams = eastTeams.sort{it.wins}.reverse().take(10)
+
+		/*  --------------              *** Assign Seeds ***            ---------------  */
+		/* ___  seed west  ___ */
+		westTeams.eachWithIndex{ team, idx -> team.seed = idx + 1}
+		/* ___  seed east  ___ */
+		eastTeams.eachWithIndex{ team, idx -> team.seed = idx + 1}
+
+		/*  --------------        *** Return Ranked Team List ***       ---------------  */
+		/* ___  join conference lists  ___ */
+		Map rankedLists = [west: westTeams, east: eastTeams]
+		/* ___  return  ___ */
+		rankedLists
+	}
+
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ Games Back ~~~~~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	def calcGamesBack(westTeams, eastTeams) {
+
+		/*  --------------          *** Determine First Place ***        ---------------  */
+		/* ___  1st place wins  ___ */
+		Integer westMaxWins = westTeams[0].wins
+		Integer eastMaxWins = eastTeams[0].wins
+		/* ___  1st place losses  ___ */
+		Integer westMaxLosses = westTeams[0].losses
+		Integer eastMaxLosses = eastTeams[0].losses
+
+		/*  --------------          *** Calculate Games Back ***        ---------------  */
+		/* ___  west teams  ___ */
+		westTeams.eachWithIndex{ team, idx -> team.gamesBack = ((westMaxWins - team.wins) + (westMaxLosses - team.losses)) / 2}
+		/* ___  east teams  ___ */
+		eastTeams.eachWithIndex{ team, idx -> team.gamesBack = ((eastMaxWins - team.wins) + (eastMaxLosses - team.losses)) / 2}
+
+	}
+	/*  --------------------------------   ( functions )   --------------------------------  */
+	/*  -----------------------------------   ~ END ~    ----------------------------------  */
 }
 /*  ------------------------------   ( domain class  )   ------------------------------  */
 /*  -----------------------------------   ~ END ~    ----------------------------------  */
