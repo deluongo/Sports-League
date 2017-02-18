@@ -238,8 +238,8 @@ class BootStrap {
 
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ PLAY GAME ~~~~~~~~~~~~~~
-     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+ *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ PLAY GAME ~~~~~~~~~~~~~~
+ *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def playGame(String homeTeamName, String awayTeamName) {
         /* -------------------------------------------------
         *  INPUTS:
@@ -256,15 +256,15 @@ class BootStrap {
         Team homeTeam = Team.findByName(homeTeamName) //.where(season = thisSeason)
         Team awayTeam = Team.findByName(awayTeamName)
 
-        /*  ---------------              *** Scoreboard ***             ---------------  */
+        /*  ---------------               *** Play Game ***             ---------------  */
         /* ___  generate random score  ___ */
         Random random = new Random()
-        /* ___  w/ w/ home court advantage  ___ */
+        /* ___  w/ home court advantage  ___ */
         Integer ptsHome = random.nextInt(70) + 70
         Integer ptsAway = random.nextInt(65) + 65
 
-        /*  --------------              *** Update Stats ***            ---------------  */
-        Map result = updateStats(homeTeam, awayTeam, ptsHome, ptsAway)
+        /*  ---------------           *** Determine Winner ***          ---------------  */
+        Map result = determineResult(homeTeam, ptsHome, awayTeam, ptsAway)
 
         /*  --------------                *** Save Game ***             ---------------  */
         /* ___  create game instance ___ */
@@ -274,55 +274,54 @@ class BootStrap {
         saveObject(newGame)
     }
 
-    def updateStats(Team homeTeam, Team awayTeam, ptsHome, ptsAway) {
-        /* ___  instantiate  ___ */
-        String winner
-        String loser
-
-        /* ___  games played  ___ */
-        homeTeam.gamesPlayed += 1
-        awayTeam.gamesPlayed += 1
-        /* ___  scored  ___ */
-        homeTeam.scores(ptsHome)
-        awayTeam.scores(ptsAway)
-        /* ___  allowed  ___ */
-        homeTeam.allows(ptsAway)
-        awayTeam.allows(ptsHome)
-        /* ___ record ___ */
-
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~ DETERMINE RESULT ~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def determineResult(Team homeTeam, ptsHome, Team awayTeam, ptsAway) {
         /* ___  home team gets tie break  ___ */
         if (ptsHome == ptsAway) { ptsHome += 1 }
+        /* ___  determine result  ___ */
         if (ptsHome > ptsAway) {
-            /* ___  home win  ___ */
-            winner = homeTeam.name
-            loser = awayTeam.name
-            homeTeam.wins(homeTeam.location)
-            awayTeam.loses(homeTeam.location)
+            /* ___  update team stats  ___ */
+            storeResults(homeTeam, ptsHome, ptsAway, homeTeam.location)
+            storeResults(awayTeam, ptsAway, ptsHome, homeTeam.location)
+            /* ___  home team wins  ___ */
+            Map result = [winner: homeTeam.name, loser:awayTeam.name]
+
         }
         else {
-            /* ___  away win  ___ */
-            winner = awayTeam.name
-            loser = homeTeam.name
-            homeTeam.loses(homeTeam.location)
-            awayTeam.wins(homeTeam.location)
+            /* ___  update team stats  ___ */
+            storeResults(homeTeam, ptsHome, ptsAway, homeTeam.location)
+            storeResults(awayTeam, ptsAway, ptsHome, homeTeam.location)
+            /* ___  visiting team wins  ___ */
+            Map result = [winner: awayTeam.name, loser:homeTeam.name]
         }
-
-        /* ___  winPercent  ___ */
-        homeTeam.calcWinPercent()
-        awayTeam.calcWinPercent()
-        /* ___  delta  ___ */
-        homeTeam.calcDelta()
-        awayTeam.calcDelta()
-        /* ___  streak  ___ */
-        homeTeam.calcStreak()
-        awayTeam.calcStreak()
-
-        /* __ ~Teams~ ___*/
-        saveObject(homeTeam)
-        saveObject(awayTeam)
-
-        Map result = [winner: winner, loser: loser]
         result
+    }
+
+    /*  ---------------         *** Post Game - Update All Stats ***        ---------------  */
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ STORE GAME RESULTS ~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def storeResults(Team team, Integer ptsScored, Integer ptsAllowed, String location) {
+        /*  --------------              *** Update Stats ***            ---------------  */
+
+        /* ___  games played  ___ */
+        team.gamesPlayed += 1
+        /* ___  scored  ___ */
+        team.scores(ptsScored)
+        /* ___  allowed  ___ */
+        team.allows(ptsAllowed)
+        /* ___ record ___ */
+        if (ptsScored - ptsAllowed > 0) { team.wins(location) }
+        else { team.loses(location) }
+        /* ___  winPercent  ___ */
+        team.calcWinPercent()
+        /* ___  delta  ___ */
+        team.calcDelta()
+        /* ___  streak  ___ */
+        team.calcStreak()
     }
 
 
