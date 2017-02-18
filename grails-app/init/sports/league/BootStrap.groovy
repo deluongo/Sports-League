@@ -278,6 +278,7 @@ class BootStrap {
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~ DETERMINE RESULT ~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def determineResult(Team homeTeam, ptsHome, Team awayTeam, ptsAway) {
+        Map result
         /* ___  home team gets tie break  ___ */
         if (ptsHome == ptsAway) { ptsHome += 1 }
         /* ___  determine result  ___ */
@@ -286,7 +287,7 @@ class BootStrap {
             storeResults(homeTeam, ptsHome, ptsAway, homeTeam.location)
             storeResults(awayTeam, ptsAway, ptsHome, homeTeam.location)
             /* ___  home team wins  ___ */
-            Map result = [winner: homeTeam.name, loser:awayTeam.name]
+            result = [winner: homeTeam.name, loser:awayTeam.name]
 
         }
         else {
@@ -294,7 +295,7 @@ class BootStrap {
             storeResults(homeTeam, ptsHome, ptsAway, homeTeam.location)
             storeResults(awayTeam, ptsAway, ptsHome, homeTeam.location)
             /* ___  visiting team wins  ___ */
-            Map result = [winner: awayTeam.name, loser:homeTeam.name]
+            result = [winner: awayTeam.name, loser:homeTeam.name]
         }
         result
     }
