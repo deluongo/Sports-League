@@ -1,4 +1,6 @@
 package cscie56.ps2
+/* ___  domain classes  ___ */
+import cscie56.ps2.Team
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -292,12 +294,34 @@ class SeasonController {
         }
         result
     }
-    /*  ---------------------------   ( simulate functions )   ----------------------------  */
+
+
+    /*  ________________________                                   ________________________  */
+    /*  ======================== !!! ---*** SAVE HELPERS ***--- !!!========================  */
+
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ SAVE OBJECTS ~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def saveObject(object) {
+        if (!object.save(flush:true)) {
+            object.errors.allErrors.each { println it }
+        }
+    }
+
+
+    /*  ----------------------------   ( helper functions )   -----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */
 
 
+    /*                          ==============  ***  ==============                          *
+     #  ---------------------             CUSTOM RENDERING            ---------------------  #
+     *                          ===================================                          */
 
-    def showStandings() {
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ SHOW STANDINGS ~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def showStandings(Team team) {
         /*------------------------------------------*
         * ===========================================
         * FUNCTION -> SHOW STANDINGS!
@@ -312,21 +336,26 @@ class SeasonController {
         *     -
         /*---------------------------------------------------------------------------------------------*/
 
-        render(view: "showStandings")
+        /*  --------------               *** Sim Season  ***            ---------------  */
+        //simSeason('2017', 82)
+
+        /*  --------------            *** Load All Teams ***            ---------------  */
+        /* ___  Load Conference Objects  ___ */
+        def westernConference = Conference.findAllByName("Western Conference")
+        def easternConference = Conference.findAllByName("Eastern Conference")
+        /* ___  Teams List by Conference  ___ */
+        def westTeams = Team.findAllByConference(westernConference)
+        def eastTeams = Team.findAllByConference(easternConference)
+
+        /*  --------------          *** Create Variable Index  ***      ---------------  */
+        def teams = [west: westTeams, east: eastTeams]
+
+        /*  --------------            *** Display Standings ***         ---------------  */
+        /* ___  open standings view ___ */
+        render(view: "showStandings", model: [seasonName: westernConference.name, team: teams])
     }
-
-
-    /*                          ==============  ***  ==============                          *
-     #  ---------------------                 SCRIPTS                 ---------------------  #
-     *                          ===================================                          */
-
-
-    /*  ______________________                                       ______________________  */
-    /*  ====================== !!! ---*** SIMULATE SEASON ***--- !!! ======================  */
-    simSeason('2017', 82)
-
-    /*  ____________________                                           ____________________  */
-    /*  ==================== !!! ---*** LOAD STANDINGS VIEW ***--- !!! ====================  */
-    simSeason('2017', 82)
-
+    /*  ----------------------------   ( custom rendering )   -----------------------------  */
+    /*  -----------------------------------   ~ END ~    ----------------------------------  */
 }
+/*  ----------------------------   ( season controller )   ----------------------------  */
+/*  -----------------------------------   ~ END ~    ----------------------------------  */
