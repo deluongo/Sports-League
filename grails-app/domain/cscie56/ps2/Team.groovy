@@ -41,33 +41,64 @@ class Team {
 	/*  ========================= !!! ---*** PROPERTIES ***--- !!! ========================  */
 
 
-	/*  ---------------         *** Instantiate Variables ***       ---------------  */
+	/*  -------------------         *** Instantiate Variables ***       -------------------  */
 	String name, streak, location, homeRecord, roadRecord, l10
 	Integer wins, losses, ties, scored, allowed, delta, seed, gamesBack, gamesPlayed
 	BigDecimal winPercent
 	Character lastResult, result
 
-	/*  ---------------             *** GORM Mapping ***            ---------------  */
+	/*  -------------------             *** GORM Mapping ***            -------------------  */
 	static belongsTo = [conference:Conference]
 	static hasMany = [persons: Person, homeGames: Game, roadGames: Game]
 	static mappedBy = [homeGames: "hostTeam",
 	                   roadGames: "guestTeam"]
-	/*  ---------------              *** Constraints ***            ---------------  */
+	/*  -------------------              *** Constraints ***            -------------------  */
     static constraints = {
     }
 
 
+	/*                          ==============  ***  ==============                          *
+	 #  ---------------------                Functions                 --------------------  #
+	 *                          ===================================                          */
+
 	/*  _________________________                                  ________________________  */
-	/*  ========================= !!! ---*** FUNCTIONS ***--- !!! =========================  */
+	/*  ================== !!! ---*** PRIMARY UPDATE FUNCTION ***--- !!!===================  */
 
 
-	/*  ---------------      *** Game Results - Update Stats ***    ---------------  */
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ STORE GAME RESULTS ~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	def storeResults(Integer ptsScored, Integer ptsAllowed, String location) {
+		/*  ---------------           *** Parse Properties ***          ---------------  */
+		/* ___  games played  ___ */
+		gamesPlayed += 1
+		/* ___  scored  ___ */
+		scores(ptsScored)
+		/* ___  allowed  ___ */
+		allows(ptsAllowed)
+		/* ___ record ___ */
+		if (ptsScored - ptsAllowed > 0) { wins(location) }
+		else { loses(location) }
+		/*  --------------             *** Calculate Stats ***          ---------------  */
+		/* ___  winPercent  ___ */
+		calcWinPercent()
+		/* ___  delta  ___ */
+		calcDelta()
+		/* ___  streak  ___ */
+		calcStreak()
+	}
+
+
+	/*  ______________________                                        _____________________  */
+	/*  ====================== !!! ---*** HELPER FUNCTIONS ***--- !!! =====================  */
+
+
+	/*  -------------------            *** Property Update***           -------------------  */
 
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ WINS GAME ~~~~~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer wins(String gameLocation) {
-
 		/*  ---------------              *** Parse Record ***           ---------------  */
 		/* ___  home splits  ___ */
 		Integer homeWins = homeRecord.split("-")[0].toInteger()
@@ -134,7 +165,8 @@ class Team {
 		allowed += pts
 	}
 
-	/*  ---------------           *** Stat Calculations ***         ---------------  */
+
+	/*  -------------------          *** Stat Calculations ***          -------------------  */
 
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ POINT DIFFERENTIAL ~~~~~~~~~~

@@ -8,6 +8,8 @@ import cscie56.ps2.Team
 import cscie56.ps2.Game
 import cscie56.ps2.Person
 
+import java.lang.reflect.Array
+
 /*---------------------------------------------------------------------------------------------*
 * ===========================================
 *           INITIALIZES DATABASE
@@ -40,7 +42,11 @@ class BootStrap {
         saveObject(nba)
 
         /*  ---------------             *** 2017 ~Season~ ***           ---------------  */
-        Season season = new Season(name: '2017', startDate: new Date(), endDate: new Date(), league: nba)
+        /* ___  dates  ___ */
+        def startDate = Date.parse("MM-dd-yyyy", "08-01-2016")
+        def endDate = Date.parse("MM-dd-yyyy", "08-01-2017")
+        /* ___  save  ___ */
+        Season season = new Season(name: '2017', startDate: startDate, endDate: endDate, league: nba)
         saveObject(season)
 
         /*  ---------------          *** Western ~Conference~ ***       ---------------  */
@@ -238,9 +244,9 @@ class BootStrap {
 
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ PLAY GAME ~~~~~~~~~~~~~~
- *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def playGame(String homeTeamName, String awayTeamName) {
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ PLAY GAME ~~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def playGame(String homeTeamName, String awayTeamName, Date date) {
         /* -------------------------------------------------
         *  INPUTS:
         *     - Home Team (String homeTeam)
@@ -269,7 +275,7 @@ class BootStrap {
         /*  --------------                *** Save Game ***             ---------------  */
         /* ___  create game instance ___ */
         Game newGame = new Game(homeTeam: homeTeamName, awayTeam: awayTeamName, winner: result["winner"], loser: result["loser"], homePoints: ptsHome,
-                awayPoints: ptsAway, gameDate: new Date(), location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam)
+                awayPoints: ptsAway, gameDate: date, location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam)
         /* ___  save game ___ */
         saveObject(newGame)
     }
@@ -284,47 +290,21 @@ class BootStrap {
         /* ___  determine result  ___ */
         if (ptsHome > ptsAway) {
             /* ___  update team stats  ___ */
-            storeResults(homeTeam, ptsHome, ptsAway, homeTeam.location)
-            storeResults(awayTeam, ptsAway, ptsHome, homeTeam.location)
+            homeTeam.storeResults(ptsHome, ptsAway, homeTeam.location)
+            awayTeam.storeResults(ptsAway, ptsHome, homeTeam.location)
             /* ___  home team wins  ___ */
             result = [winner: homeTeam.name, loser:awayTeam.name]
 
         }
         else {
             /* ___  update team stats  ___ */
-            storeResults(homeTeam, ptsHome, ptsAway, homeTeam.location)
-            storeResults(awayTeam, ptsAway, ptsHome, homeTeam.location)
+            homeTeam.storeResults(ptsHome, ptsAway, homeTeam.location)
+            awayTeam.storeResults(ptsAway, ptsHome, homeTeam.location)
             /* ___  visiting team wins  ___ */
             result = [winner: awayTeam.name, loser:homeTeam.name]
         }
         result
     }
-
-    /*  ---------------         *** Post Game - Update All Stats ***        ---------------  */
-
-    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ STORE GAME RESULTS ~~~~~~~~~~
-	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def storeResults(Team team, Integer ptsScored, Integer ptsAllowed, String location) {
-        /*  --------------              *** Update Stats ***            ---------------  */
-
-        /* ___  games played  ___ */
-        team.gamesPlayed += 1
-        /* ___  scored  ___ */
-        team.scores(ptsScored)
-        /* ___  allowed  ___ */
-        team.allows(ptsAllowed)
-        /* ___ record ___ */
-        if (ptsScored - ptsAllowed > 0) { team.wins(location) }
-        else { team.loses(location) }
-        /* ___  winPercent  ___ */
-        team.calcWinPercent()
-        /* ___  delta  ___ */
-        team.calcDelta()
-        /* ___  streak  ___ */
-        team.calcStreak()
-    }
-
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ SIM SEASON ~~~~~~~~~~~~~~
@@ -350,6 +330,9 @@ class BootStrap {
             /*  --------------             *** Load Team List ***           ---------------  */
             /* ___  current season  ___ */
             Season season = Season.findByName(seasonName)
+            /* ___  set calendar  ___ */
+            Date date = season.startDate - 7
+            def seasonDates = []
             /* ___  participating conferences  ___ */
             def conferences = Conference.findAllBySeasons(season)
             /* ___  participating teams  ___ */
@@ -362,9 +345,12 @@ class BootStrap {
             for(int i=0; i<numGames; i++) {
                 /* ___  randomize matchups  ___ */
                 Collections.shuffle(teamList)
+                date += 7
+                seasonDates << date + 7
+                print "----***${seasonDates[i]}----\n"
                 /* ___  each team plays once  ___ */
                 for(int j=0; j<gmsPerNight; j+=2) {
-                    playGame(teamList[j].name, teamList[j+1].name)
+                    playGame(teamList[j].name, teamList[j+1].name, seasonDates[i])
                 }
             }
         }
