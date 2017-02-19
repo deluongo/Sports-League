@@ -232,7 +232,7 @@ class Team {
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	def getSeed() {
 		/*--|  SORTED BY WIN PERCENT  |--*/
-		conferenceRankings.indexOf(this+1)
+		conferenceRankings.indexOf(this)+1
 	}
 
 
