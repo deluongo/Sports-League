@@ -56,6 +56,8 @@ class Team {
 	static belongsTo = [conference:Conference]
 	static hasMany = [persons: Person, homeGames: Game, roadGames: Game]
 
+	static mappedBy = [homeGames: "hostTeam",
+	                   roadGames: "guestTeam"]
 	/*  -------------------              *** Constraints ***            -------------------  */
 	static constraints = {
 	}
@@ -271,6 +273,7 @@ class Team {
 		/*--|  get GAMES LIST -> SORT by DATE -> get LAST 10  |--*/
 		allGames.sort(it.date).take(10)
 	}
+
 
 
 	/*  ---------------------------   ( transient functions )   ---------------------------  */

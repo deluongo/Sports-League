@@ -261,7 +261,6 @@ class BootStrap {
 
         /*  ---------------             *** Load ~Teams~ ***            ---------------  */
         Team homeTeam = Team.findByName(homeTeamName) //.where(season = thisSeason)
-        print "---${homeTeam.getClass()}"
         Team awayTeam = Team.findByName(awayTeamName)
 
         /*  ---------------               *** Play Game ***             ---------------  */
@@ -278,9 +277,6 @@ class BootStrap {
         /* ___  create game instance ___ */
         Game newGame = new Game(homeTeam: homeTeamName, awayTeam: awayTeamName, winner: result["winner"], loser: result["loser"], homePoints: ptsHome,
                 awayPoints: ptsAway, gameDate: date, location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam).save(flush:true)
-
-        homeTeam.addToHomeGames(newGame)
-        awayTeam.addToRoadGames(newGame)
 
     }
 
