@@ -11,9 +11,9 @@ class Game {
     Date gameDate
     String location
 
-    Team hostTeam
-    Team guestTeam
-    
+    static hasMany = [hostTeam: Team, guestTeam: Team]
+    static belongsTo = Team
+
     static constraints = {
     }
 }

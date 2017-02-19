@@ -35,6 +35,12 @@
                             <th>Road</th>
                             <th>L10</th>
                             <th>Streak</th>
+                            <th>Scored</th>
+                            <th>Allowed</th>
+                            <th>Diff.</th>
+                            <th>HOME REC</th>
+                            <th>ROAD REC</th>
+                            <th>GAMES PLAYED</th>
                         </thead>
                         <tbody>
                         <g:each status="i" in="${teamList.sort{it.seed}}" var="team">
@@ -50,6 +56,12 @@
                                 <td>${team.roadRecord?.encodeAsHTML()}</td>
                                 <td>${team.l10?.encodeAsHTML()}</td>
                                 <td>${team.streak?.encodeAsHTML()}</td>
+                                <td>${team.scored?.encodeAsHTML()}</td>
+                                <td>${team.allowed?.encodeAsHTML()}</td>
+                                <td>${team.delta?.encodeAsHTML()}</td>
+                                <td>${team.homeRecord?.encodeAsHTML()}</td>
+                                <td>${team.roadRecord?.encodeAsHTML()}</td>
+                                <td>${team.gamesPlayed?.encodeAsHTML()}</td>
                             </tr>
                         </g:each>
                         </tbody>

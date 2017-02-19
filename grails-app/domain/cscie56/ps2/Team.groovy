@@ -37,90 +37,262 @@ class Team {
 	 *                          ===================================                          */
 
 
+
     /*  _________________________                                  ________________________  */
 	/*  ========================= !!! ---*** PROPERTIES ***--- !!! ========================  */
 
-	/*  -------------------           *** Define Transients ***         -------------------  */
-
-
 	/*  -------------------         *** Instantiate Variables ***       -------------------  */
-	String name, streak, location, homeRecord, roadRecord, l10, lastResult, result
-	Integer wins, losses, ties, delta, seed, gamesBack, gamesPlayed, scored, allowed
-	BigDecimal winPercent
+	String name, location, lastResult, result
+	Integer wins, losses, ties, seed, gamesPlayed, scored, allowed
+
+	/*  -------------------           *** List Transients ***         -------------------  */
+	static transients = [
+			/* ___  stats  ___ */
+			'homeRecord', 'roadRecord', 'delta', 'streak', 'l10', 'seed', 'winPercent', 'gamesBack',
+			/* ___  helpers  ___ */
+			'conferenceLeader', 'conferenceRankings', 'allGames', 'last10Games']
 
 	/*  -------------------             *** GORM Mapping ***            -------------------  */
 	static belongsTo = [conference:Conference]
 	static hasMany = [persons: Person, homeGames: Game, roadGames: Game]
-	static mappedBy = [homeGames: "hostTeam",
-	                   roadGames: "guestTeam"]
 
 	/*  -------------------              *** Constraints ***            -------------------  */
-    static constraints = {
-    }
+	static constraints = {
+	}
+
+
 	/*  ------------------------------ ( class definitions )   ----------------------------  */
 	/*  -----------------------------------   ~ END ~    ----------------------------------  */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	/*                          ==============  ***  ==============                          *
 	 #  ---------------------                Functions                 --------------------  #
 	 *                          ===================================                          */
 
-	/*  __________________                                              ___________________  */
-	/*  ================== !!! ---*** PRIMARY UPDATE FUNCTION ***--- !!!===================  */
 
 
-	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ STORE GAME RESULTS ~~~~~~~~~~
-	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	def storeResults(Integer ptsScored, Integer ptsAllowed, String location) {
-		/*  ---------------           *** Parse Properties ***          ---------------  */
-		/* ___  games played  ___ */
-		gamesPlayed += 1
-		/* ___  scored  ___ */
-		scores(ptsScored)
-		/* ___  allowed  ___ */
-		allows(ptsAllowed)
-		/* ___ record ___ */
-		if (ptsScored - ptsAllowed > 0) { wins(location) }
-		else { loses(location) }
-		/*  --------------             *** Calculate Stats ***          ---------------  */
-		/* ___  winPercent  ___ */
-		calcWinPercent()
-		/* ___  delta  ___ */
-		calcDelta()
-		/* ___  streak  ___ */
-		calcStreak()
-		/* ___  last 10  ___ */
-		calcLast10()
-		/* ___  seed  ___ */
-		Map rankedTeams = calcSeed()
-		/* ___  games back  ___ */
-		calcGamesBack(rankedTeams.west, rankedTeams.east)
+
+
+
+	/*  _________________________                                  ________________________  */
+	/*  ========================= !!! ---*** TRANSIENTS ***--- !!! ========================  */
+
+
+
+	/*  -------------------                *** Record ***               -------------------  */
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~ HOME RECORD ~~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	String getHomeRecord() {
+
+		/* ___  instantiate  ___ */
+		Integer homeWins = 0
+		Integer homeLosses = 0
+		/* ___  loop home games  ___ */
+		print "\n--"
+		homeGames.each{print homeGames.gameDate}
+		print homeGames.size()
+		print "--\n"
+		homeGames.each{
+			/* ___  home wins  ___ */
+			if (it.winner == name) { homeWins += 1}
+			/* ___  home losses  ___ */
+			else { homeLosses += 1}
+		}
+		/* ___  home record  ___ */
+		"${homeWins}-${homeLosses}"
 	}
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~ ROAD RECORD ~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	String getRoadRecord() {
+		/* ___  instantiate  ___ */
+		Integer roadWins = 0
+		Integer roadLosses = 0
+		/* ___  loop home games  ___ */
+		roadGames.each{
+			/* ___  home wins  ___ */
+			if (it.winner == name) { roadWins += 1}
+			/* ___  home losses  ___ */
+			else { roadLosses += 1}
+		}
+		/* ___  road record  ___ */
+		"${roadWins}-${roadLosses}"
+	}
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~ WINNING PERCENT ~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	BigDecimal getWinPercent() {
+		if (losses == 0) {
+			if (wins == 0) {
+				return 00.0
+			} else {
+				return 100.0
+			}
+		} else {
+			return (wins / (wins + losses))*100
+		}
+	}
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~~ LAST 10 GAMES ~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	String getL10() {
+		/*  --------------             *** List of Games ***            ---------------  */
+		/* ___  games won ___ */
+		def gamesWon = Game.findAllByWinner(name)
+		/* ___  games lost  ___ */
+		def gamesLost = Game.findAllByLoser(name)
+		/* ___  all games  ___ */
+		def gamesList = []
+		if(gamesWon) { gamesList.addAll(gamesWon) }
+		if(gamesLost) { gamesList.addAll(gamesLost) }
+		/*  --------------           *** Find Last 10 Games ***         ---------------  */
+		/* ___  sort by date played  ___ */
+		def last10Games = gamesList.sort{it.gameDate}.reverse().take(10)
+		/*  --------------         *** Find Games Won & Lost ***        ---------------  */
+		/* ___  wins in last 10  ___ */
+		def recentWins = last10Games.findAll{it.winner == name}
+		/* ___  losses in last 10  ___ */
+		def recentLosses = last10Games.findAll{it.loser == name}
+		/*  --------------             *** Update Record ***            ---------------  */
+		/* ___  calculate wins & losses  ___ */
+		"${recentWins.size()}-${recentLosses.size()}"
+	}
+
+
+	/*  -------------------                *** Points ***               -------------------  */
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~ POINT DIFFERENTIAL ~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	String getDelta() {
+		scored - allowed
+	}
+
+
+	/*  ---------------              *** Parse Record ***           ---------------  */
+
+
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~~~~~ STREAK ~~~~~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	String getStreak() {
+		/*--|  get ALL GAMES -> sort by MOST RECENT  |--*/
+		def schedule = allGames.reverse()
+		/*--|  determine WINNER of LAST GAME  |--*/
+		def lastWinner = schedule[0].winner
+		/*--|  determine RESULT of LAST GAME  |--*/
+		if (lastWinner == name) {
+			/*--|  IF WIN return 'W' + INDEX of LAST LOSS as STREAK LENGTH  |--*/
+			return "$lastResult${schedule.drop(0).findIndexOf{ it.winner != name }}"
+			// SAMPLE OUTPUT: "W2"
+		}
+		else {
+			/*--|  IF LOSS return 'L" + INDEX of LAST WIN as STREAK LENGTH  |--*/
+			return "$lastResult${schedule.drop(0).findIndexOf{ it.winner == name }}"
+			// SAMPLE OUTPUT: "L1"
+		}
+	}
+
+
+	/*  ---------------                *** Standings ***            ---------------  */
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~ PLAYOFF SEEDING ~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	def getSeed() {
+		/*--|  SORTED BY WIN PERCENT  |--*/
+		conferenceRankings.indexOf(this)
+	}
+
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~~~ GAMES BACK ~~~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	Integer getGamesBack() {
+		/*--|  (lead wins - trail wins) + (trail losses - lead losses  |--*/
+		( (conferenceLeader.wins - wins) + (losses - conferenceLeader.losses) ) / 2
+	}
+
+
+	/*  ---------------                 *** Helpers ***             ---------------  */
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~~~ CONFERENCE LEADER ~~~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	Team getConferenceLeader() {
+		/*--|  GET 1st place TEAM  |--*/
+		conferenceRankings[0]
+	}
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~ LIST CONFERENCE STANDINGS ~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	def getConferenceRankings() {
+		/*--|  LIST in conference TEAM -> SORT by WIN%  |--*/
+		Team.findAllByConference(conference).sort{it.winPercent}.reverse()
+	}
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~~~~ LIST ALL GAMES ~~~~~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	//Timeline ordering
+	def getAllGames() {
+		/*--|  SORTED BY DATE -> first to last  |--*/
+		(homeGames << roadGames).sort{it.gameDate}.reverse()
+	}
+
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~~~~ LIST LAST 10 GAMES ~~~~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	def getLast10Games() {
+		/*--|  get GAMES LIST -> SORT by DATE -> get LAST 10  |--*/
+		allGames.sort(it.date).take(10)
+	}
+
+
+	/*  ---------------------------   ( transient functions )   ---------------------------  */
+	/*  -----------------------------------   ~ END ~    ----------------------------------  */
+
+
+
 
 
 	/*  ______________________                                        _____________________  */
 	/*  ====================== !!! ---*** HELPER FUNCTIONS ***--- !!! =====================  */
 
 
-	/*  -------------------            *** Property Update***           -------------------  */
+
+
+
+	/*  -------------------             *** Game Results ***            -------------------  */
 
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~ WINS GAME ~~~~~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer wins(String gameLocation) {
-		/*  ---------------              *** Parse Record ***           ---------------  */
-		/* ___  home splits  ___ */
-		Integer homeWins = homeRecord.split("-")[0].toInteger()
-		Integer homeLosses = homeRecord.split("-")[1].toInteger()
-		/* ___  road splits  ___ */
-		Integer roadWins = roadRecord.split("-")[0].toInteger()
-		Integer roadLosses = roadRecord.split("-")[1].toInteger()
-
-		/*  ---------------              *** Update Stats ***           ---------------  */
-		/* ___  home record  ___ */
-		if(gameLocation == location) {homeRecord = "${homeWins+1}-${homeLosses}"}
-		/* ___  away record  ___ */
-		else {roadRecord = "${roadWins+1}-${roadLosses}"}
 		/* ___  win total  ___ */
 		wins += 1
 		/* ___  recent results  ___ */
@@ -132,18 +304,6 @@ class Team {
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ LOSES GAME ~~~~~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	Integer loses(String gameLocation) {
-		/*  ---------------              *** Parse Record ***           ---------------  */
-		/* ___  home splits  ___ */
-		Integer homeWins = homeRecord.split("-")[0].toInteger()
-		Integer homeLosses = homeRecord.split("-")[1].toInteger()
-		/* ___  road splits  ___ */
-		Integer roadWins = roadRecord.split("-")[0].toInteger()
-		Integer roadLosses = roadRecord.split("-")[1].toInteger()
-		/*  ---------------              *** Update Stats ***           ---------------  */
-		/* ___  home record  ___ */
-		if(gameLocation == location) {homeRecord = "${homeWins}-${homeLosses+1}"}
-		/* ___  away record  ___ */
-		else {roadRecord = "${roadWins}-${roadLosses+1}"}
 		/* ___  loss total  ___ */
 		losses += 1
 		/* ___  recent results  ___ */
@@ -175,139 +335,40 @@ class Team {
 		allowed += pts
 		allowed
 	}
-
-
-	/*  -------------------          *** Stat Calculations ***          -------------------  */
-
-	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ POINT DIFFERENTIAL ~~~~~~~~~~
-	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	Integer calcDelta()
-	{
-		delta = scored - allowed
-		delta
-	}
-
-	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ WINNING PERCENTAGE ~~~~~~~~~~
-	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	BigDecimal calcWinPercent() {
-		if (losses == 0) {
-			if (wins == 0) {
-				winPercent = 00.0
-				return winPercent
-			} else {
-				winPercent = 100.0
-				return winPercent
-			}
-		} else {
-			winPercent = (wins / (wins + losses))*100
-			return winPercent
-		}
-	}
-
-	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ WINNING STREAK ~~~~~~~~~~~~
-	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	String calcStreak() {
-		Integer streakLength
-		if (result == lastResult) {
-			streakLength = streak.reverse().take(1).reverse().toInteger()
-			streakLength = streakLength + 1
-			streak = "$result$streakLength"
-		}
-		else {
-			streak = "${result}1"
-		}
-		streak
-	}
-
-	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ LAST 10 Games ~~~~~~~~~~~~
-	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	String calcLast10() {
-
-		/*  --------------             *** List of Games ***            ---------------  */
-		/* ___  games won ___ */
-		def gamesWon = Game.findAllByWinner(name)
-		/* ___  games lost  ___ */
-		def gamesLost = Game.findAllByLoser(name)
-		/* ___  all games  ___ */
-		def gamesList = []
-		if(gamesWon) { gamesList.addAll(gamesWon) }
-		if(gamesLost) { gamesList.addAll(gamesLost) }
-		/*  --------------           *** Find Last 10 Games ***         ---------------  */
-		/* ___  sort by date played  ___ */
-		def last10Games = gamesList.sort{it.gameDate}.reverse().take(10)
-		/*  --------------         *** Find Games Won & Lost ***        ---------------  */
-		/* ___  wins in last 10  ___ */
-		def recentWins = last10Games.findAll{it.winner == name}
-		/* ___  losses in last 10  ___ */
-		def recentLosses = last10Games.findAll{it.loser == name}
-		/*  --------------             *** Update Record ***            ---------------  */
-		/* ___  calculate wins & losses  ___ */
-		l10 = "${recentWins.size()}-${recentLosses.size()}"
-	}
-
-	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ LAST 10 Games ~~~~~~~~~~~~
- *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-def calcSeed() {
-
-		/*  --------------            *** Load All Teams ***            ---------------  */
-		/* ___  Load Conference Objects  ___ */
-		def westernConference = Conference.findAllByName("Western Conference")
-		def easternConference = Conference.findAllByName("Eastern Conference")
-		/* ___  Teams List by Conference  ___ */
-		def westTeams = Team.findAllByConference(westernConference)
-		def eastTeams = Team.findAllByConference(easternConference)
-
-		/*  --------------         *** Get Ranked Team List ***         ---------------  */
-		/* ___  western conference teams  ___ */
-		westTeams = westTeams.sort{it.wins}.reverse().take(10)
-		/* ___  eastern conference teams  ___ */
-		eastTeams = eastTeams.sort{it.wins}.reverse().take(10)
-
-		/*  --------------              *** Assign Seeds ***            ---------------  */
-		/* ___  seed west  ___ */
-		westTeams.eachWithIndex{ team, idx -> team.seed = idx + 1}
-		/* ___  seed east  ___ */
-		eastTeams.eachWithIndex{ team, idx -> team.seed = idx + 1}
-
-		/*  --------------        *** Return Ranked Team List ***       ---------------  */
-		/* ___  join conference lists  ___ */
-		Map rankedLists = [west: westTeams, east: eastTeams]
-		/* ___  return  ___ */
-		rankedLists
-	}
-
-
-	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ Games Back ~~~~~~~~~~~~~~
-	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-	def calcGamesBack(westTeams, eastTeams) {
-
-		/*  --------------          *** Determine First Place ***        ---------------  */
-		/* ___  1st place wins  ___ */
-		Integer westMaxWins = westTeams[0].wins
-		Integer eastMaxWins = eastTeams[0].wins
-		/* ___  1st place losses  ___ */
-		Integer westMaxLosses = westTeams[0].losses
-		Integer eastMaxLosses = eastTeams[0].losses
-
-		/*  --------------          *** Calculate Games Back ***        ---------------  */
-		/* ___  west teams  ___ */
-		westTeams.eachWithIndex{ team, idx ->
-			team.gamesBack = ( (westMaxWins - team.wins) + (team.losses - westMaxLosses) ) / 2
-		}
-		/* ___  east teams  ___ */
-		eastTeams.eachWithIndex{ team, idx ->
-			team.gamesBack = ( (eastMaxWins - team.wins) + (team.losses - eastMaxLosses) ) / 2
-		}
-
-	}
-	/*  --------------------------------   ( functions )   --------------------------------  */
+	/*  ----------------------------   ( helper functions )   -----------------------------  */
 	/*  -----------------------------------   ~ END ~    ----------------------------------  */
+
+
+
+
+
+	/*  __________________                                              ___________________  */
+	/*  ================== !!! ---*** PRIMARY UPDATE FUNCTION ***--- !!!===================  */
+
+
+
+	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ STORE GAME RESULTS ~~~~~~~~~~
+	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+	def storeResults(Integer ptsScored, Integer ptsAllowed, String location) {
+		/*  ---------------            *** Update Properties ***           ---------------  */
+		/* ___  games played  ___ */
+		gamesPlayed += 1
+		/* ___  scored  ___ */
+		scores(ptsScored)
+		/* ___  allowed  ___ */
+		allows(ptsAllowed)
+		/* ___ record ___ */
+		if (ptsScored - ptsAllowed > 0) { wins(location) }
+		else { loses(location) }
+	}
+	/*  ----------------------------   ( primary function )   -----------------------------  */
+	/*  -----------------------------------   ~ END ~    ----------------------------------  */
+
+
+
+
+
 }
 /*  ------------------------------   ( domain class  )   ------------------------------  */
 /*  -----------------------------------   ~ END ~    ----------------------------------  */
