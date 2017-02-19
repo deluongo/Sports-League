@@ -230,22 +230,18 @@ class Team {
 		def gamesWon = Game.findAllByWinner(name)
 		/* ___  games lost  ___ */
 		def gamesLost = Game.findAllByLoser(name)
-
 		/* ___  all games  ___ */
 		def gamesList = []
 		if(gamesWon) { gamesList.addAll(gamesWon) }
 		if(gamesLost) { gamesList.addAll(gamesLost) }
-
 		/*  --------------           *** Find Last 10 Games ***         ---------------  */
 		/* ___  sort by date played  ___ */
 		def last10Games = gamesList.sort{it.gameDate}.reverse().take(10)
-
 		/*  --------------         *** Find Games Won & Lost ***        ---------------  */
 		/* ___  wins in last 10  ___ */
 		def recentWins = last10Games.findAll{it.winner == name}
 		/* ___  losses in last 10  ___ */
 		def recentLosses = last10Games.findAll{it.loser == name}
-
 		/*  --------------             *** Update Record ***            ---------------  */
 		/* ___  calculate wins & losses  ___ */
 		l10 = "${recentWins.size()}-${recentLosses.size()}"

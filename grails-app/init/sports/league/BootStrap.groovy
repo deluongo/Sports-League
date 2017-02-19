@@ -43,8 +43,8 @@ class BootStrap {
 
         /*  ---------------             *** 2017 ~Season~ ***           ---------------  */
         /* ___  dates  ___ */
-        def startDate = Date.parse("MM-dd-yyyy", "10-01-2016")
-        def endDate = Date.parse("MM-dd-yyyy", "10-01-2017")
+        def startDate = Date.parse("MM-dd-yyyy", "1-01-2017")
+        def endDate = Date.parse("MM-dd-yyyy", "12-31-2017")
         /* ___  save  ___ */
         Season season = new Season(name: '2017', startDate: startDate, endDate: endDate, league: nba)
         saveObject(season)
@@ -171,7 +171,7 @@ class BootStrap {
         saveCoach("Dwayne", "Casey", raptors)
 
         /*  ---------------           *** Simulate ~Season~ ***         ---------------  */
-        simSeason('2017', 82)
+        simSeason('2017', 2)
     }
 
     def destroy = {
@@ -279,6 +279,8 @@ class BootStrap {
                 awayPoints: ptsAway, gameDate: date, location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam)
         /* ___  save game ___ */
         saveObject(newGame)
+        homeTeam.calcLast10()
+        awayTeam.calcLast10()
 
     }
 
