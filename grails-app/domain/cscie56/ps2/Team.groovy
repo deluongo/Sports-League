@@ -218,9 +218,14 @@ class Team {
 			// SAMPLE OUTPUT: "W2"
 		}
 		else {
-			/*--|  IF LOSS return 'L" + INDEX of LAST WIN as STREAK LENGTH  |--*/
-			return "$lastResult${schedule.drop(0).findIndexOf{ it.winner == name }}"
-			// SAMPLE OUTPUT: "L1"
+			if (schedule.drop(0).findIndexOf{ it.winner == name } == -1) {
+				return "$lastResult${schedule.size()}"
+			}
+			else {
+				/*--|  IF LOSS return 'L" + INDEX of LAST WIN as STREAK LENGTH  |--*/
+				return "$lastResult${schedule.drop(0).findIndexOf { it.winner == name }}"
+				// SAMPLE OUTPUT: "L1"
+			}
 		}
 	}
 
