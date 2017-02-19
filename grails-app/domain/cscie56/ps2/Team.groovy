@@ -110,8 +110,8 @@ class Team {
 		Integer homeLosses = 0
 		/* ___  loop home games  ___ */
 		print "\n--"
-		homeGames.each{print homeGames.gameDate}
-		print homeGames.size()
+		homeGames = allGames.findAll{it.homeTeam == name}
+		print homeGames
 		print "--\n"
 		homeGames.each{
 			/* ___  home wins  ___ */
@@ -130,6 +130,7 @@ class Team {
 		/* ___  instantiate  ___ */
 		Integer roadWins = 0
 		Integer roadLosses = 0
+		roadGames = roadGames.flatten().unique { a, b -> a.gameDate <=> b.gameDate }
 		/* ___  loop home games  ___ */
 		roadGames.each{
 			/* ___  home wins  ___ */
@@ -207,8 +208,13 @@ class Team {
 		def lastWinner = schedule[0].winner
 		/*--|  determine RESULT of LAST GAME  |--*/
 		if (lastWinner == name) {
-			/*--|  IF WIN return 'W' + INDEX of LAST LOSS as STREAK LENGTH  |--*/
-			return "$lastResult${schedule.drop(0).findIndexOf{ it.winner != name }}"
+			if (schedule.drop(0).findIndexOf{ it.winner != name } == -1) {
+				return "$lastResult${schedule.size()}"
+			}
+			else {
+				/*--|  IF WIN return 'W' + INDEX of LAST LOSS as STREAK LENGTH  |--*/
+				return "$lastResult${schedule.drop(0).findIndexOf { it.winner != name }}"
+			}
 			// SAMPLE OUTPUT: "W2"
 		}
 		else {
@@ -226,7 +232,7 @@ class Team {
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 	def getSeed() {
 		/*--|  SORTED BY WIN PERCENT  |--*/
-		conferenceRankings.indexOf(this)
+		conferenceRankings.indexOf(this+1)
 	}
 
 
@@ -263,7 +269,7 @@ class Team {
 	//Timeline ordering
 	def getAllGames() {
 		/*--|  SORTED BY DATE -> first to last  |--*/
-		(homeGames << roadGames).sort{it.gameDate}.reverse()
+		(homeGames << roadGames).sort{it.gameDate}.flatten().unique { a, b -> a.gameDate <=> b.gameDate }.reverse()
 	}
 
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
