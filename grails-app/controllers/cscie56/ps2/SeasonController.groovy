@@ -348,12 +348,13 @@ class SeasonController {
         def eastTeams = Team.findAllByConference(easternConference)
 
         /*  --------------          *** Create Conference Map  ***      ---------------  */
+
+        /* ___  Ensure Page Load for /season/showStandings  ___ */
+        if (conferenceIndex == null) {conferenceIndex = 1}
         def team
         if (conferenceIndex == '1') { team = westTeams }
         else { team = eastTeams}
 
-        print team
-        print team. getClass()
         /*  --------------            *** Display Standings ***         ---------------  */
         /* ___  open standings view ___ */
         render(view: "showStandings/${conferenceIndex}", model: [seasonName: westernConference.seasons.name.first(), teamList: team])

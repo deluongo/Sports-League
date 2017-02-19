@@ -40,6 +40,8 @@ class Team {
     /*  _________________________                                  ________________________  */
 	/*  ========================= !!! ---*** PROPERTIES ***--- !!! ========================  */
 
+	/*  -------------------           *** Define Transients ***         -------------------  */
+
 
 	/*  -------------------         *** Instantiate Variables ***       -------------------  */
 	String name, streak, location, homeRecord, roadRecord, l10, lastResult, result

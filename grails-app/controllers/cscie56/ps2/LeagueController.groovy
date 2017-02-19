@@ -126,6 +126,8 @@ class LeagueController {
         def eastTeams = Team.findAllByConference(easternConference)
 
         /*  --------------          *** Create Conference Map  ***      ---------------  */
+        /* ___  Ensure Page Load for /season/showStandings  ___ */
+        if (conferenceIndex == null) {conferenceIndex = 1}
         def team
         if (conferenceIndex == '1') { team = westTeams }
         else { team = eastTeams}
