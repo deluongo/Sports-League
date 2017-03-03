@@ -9,6 +9,13 @@ class Person {
     String role
     Integer pointsScored
 
+    static belongsTo = [team:Team]
+
+    static hasMany = [gameStats:GameStats]
+
+    static constraints = {
+    }
+
     //PS3
     String bio
     Date birthDate
@@ -17,12 +24,7 @@ class Person {
     Integer weight
     String universityAttended
 
-    static belongsTo = [team:Team]
-
-    static constraints = {
-    }
-
     static mapping = {
-        bio type: 'longtext'
+        bio type: 'text'
     }
 }
