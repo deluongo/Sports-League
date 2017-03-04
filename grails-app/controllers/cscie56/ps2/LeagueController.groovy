@@ -156,8 +156,8 @@ class LeagueController {
         /*---------------------------------------------------------------------------------------------*/
 
         /*  --------------              *** Select Player ***           ---------------  */
-        def person = Person.get(personIndex)
         personIndex = personIndex ?: "1"
+        def person = Person.get(personIndex)
 
         /*  --------------              *** Display Stats ***           ---------------  */
 
