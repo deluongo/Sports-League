@@ -136,4 +136,30 @@ class LeagueController {
         /* ___  open standings view ___ */
         render(view: "season/showStandings/${conferenceIndex}", model: [seasonName: westernConference.seasons.name, teamList: team])
     }
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ SHOW PLAYER STATS ~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def person(String personIndex) {
+        /*------------------------------------------*
+        * ===========================================
+        * FUNCTION -> SHOW PLAYER STATS!
+        * ===========================================
+        * INPUTS:
+        *     -
+        * FUNCTIONS:
+        *     - playGame(homeTeam, awayTeam)
+        * DESCRIPTION:
+        *     - Displays league standings in the browser
+        * OUTPUT:
+        *     -
+        /*---------------------------------------------------------------------------------------------*/
+
+        /*  --------------              *** Select Player ***           ---------------  */
+        def person = Person.get(personIndex)
+        def personIndex = personIndex ?: "1"
+
+        /*  --------------              *** Display Stats ***           ---------------  */
+        render(view: "season/showStandings/${personIndex}", model: [person: person])
+    }
 }

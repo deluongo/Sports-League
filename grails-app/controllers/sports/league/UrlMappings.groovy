@@ -25,6 +25,11 @@ class UrlMappings {
             action = 'season'
         }
 
+        "/league/person/stats/$personIndex?" {
+            controller = 'league'
+            action = 'person'
+        }
+
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
