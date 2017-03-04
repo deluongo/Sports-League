@@ -26,17 +26,17 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <div class="w3-display-container">
                     <img src="${person.pictureURL}" style="width:100%" alt="Avatar">
                     <div class="w3-display-bottomleft w3-container w3-text-white">
-                        <h2>"${person.firstName} ${person.lastName}"</h2>
+                        <h2>${person.firstName} ${person.lastName}</h2>
                     </div>
                 </div>
                 <div class="w3-container">
                     <div class="w3-row">
-                        <div class="w3-col m6 l6">
+                        <div class="w3-col m5 l5">
                             <p><i class="fa fa-shirtsinbulk fa-fw w3-margin-right w3-large w3-text-teal"></i>Number: ${person.number}</p>
                             <p><i class="fa fa-male fa-fw w3-margin-right w3-large w3-text-teal"></i>Height: ${person.height}</p>
                             <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-large w3-text-teal"></i>Weight: ${person.weight}</p>
                         </div>
-                        <div class="w3-col m6 l6">
+                        <div class="w3-col m7 l7">
                             <p><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Date: ${person.birthDate.toString().substring(0, 10)}</p>
                             <p><i class="fa fa-globe fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Place: ${person.birthPlace}</p>
                             <p><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-large w3-text-teal"></i>College: ${person.universityAttended}</p>
@@ -118,6 +118,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <div class="w3-container">
                     <p>${person.bio}</p>
                 </div>
+                <br />
             </div>
 
             <!-- End Right Column -->
