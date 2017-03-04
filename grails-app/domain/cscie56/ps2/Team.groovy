@@ -109,10 +109,8 @@ class Team {
 		Integer homeWins = 0
 		Integer homeLosses = 0
 		/* ___  loop home games  ___ */
-		print "\n--"
 		homeGames = allGames.findAll{it.homeTeam == name}
-		print homeGames
-		print "--\n"
+
 		homeGames.each{
 			/* ___  home wins  ___ */
 			if (it.winner == name) { homeWins += 1}

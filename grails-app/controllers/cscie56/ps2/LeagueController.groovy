@@ -132,8 +132,6 @@ class LeagueController {
         if (conferenceIndex == '1') { team = westTeams }
         else { team = eastTeams}
 
-        print team
-        print team. getClass()
         /*  --------------            *** Display Standings ***         ---------------  */
         /* ___  open standings view ___ */
         render(view: "season/showStandings/${conferenceIndex}", model: [seasonName: westernConference.seasons.name, teamList: team])

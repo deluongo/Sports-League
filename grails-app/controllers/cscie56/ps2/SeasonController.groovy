@@ -369,7 +369,7 @@ class SeasonController {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~ SHOW LEADERBOARD ~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def showLeaderboard(String conferenceName) {
+    def leaderboard(String conferenceName) {
         /*------------------------------------------*
         * ===========================================
         * FUNCTION -> SHOW STANDINGS!
@@ -398,12 +398,12 @@ class SeasonController {
         /* ___  Players List by Conference  ___ */
         def westPlayers = Person.findAllByTeam(westTeams)
         def eastPlayers = Person.findAllByTeam(eastTeams)
-        def allPlayers = Person.all
+
         /* ___  Remove Coaches  ___ */
         westPlayers.removeIf { it.role != "player" }
         eastPlayers.removeIf { it.role != "player" }
-        allPlayers.removeIf { it.role != "player" }
 
+        def allPlayers = westPlayers + eastPlayers
         //Person.getAll()
 
         /*  --------------          *** Create Conference Map  ***      ---------------  */
