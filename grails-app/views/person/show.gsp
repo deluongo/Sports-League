@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
@@ -91,7 +89,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                 <div class="w3-panel w3-border w3-border-green">
                     <div class="w3-row">
                         <div class="w3-col m6 l9">
-                             <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Player Stats</h2>
+                            <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Player Stats</h2>
                         </div>
                         <div class="w3-col m6 l3">
                             <div class="w3-margin-top w3-margin-bottom">
@@ -143,4 +141,3 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
 </body>
 </html>
-

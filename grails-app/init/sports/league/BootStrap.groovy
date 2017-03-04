@@ -6,7 +6,8 @@ import cscie56.ps2.Conference
 import cscie56.ps2.Season
 import cscie56.ps2.Team
 import cscie56.ps2.Game
-import cscie56.ps2.Person
+import cscie56.ps3.Person
+
 
 /*---------------------------------------------------------------------------------------------*
 * ===========================================
@@ -17,8 +18,8 @@ import cscie56.ps2.Person
 *     - Simulates an 82 game NBA season, filling all tables with dummy data.
 * FUNCTIONS:
 *     - saveTeam() <- creates a new Team
-*     - savePlayer() <- creates a new cscie56.ps2.Person of type Player
-*     - saveCoach() <- creates a new cscie56.ps2.Person of type Coach
+*     - savePlayer() <- creates a new cscie56.ps3.Person of type Player
+*     - saveCoach() <- creates a new cscie56.ps3.Person of type Coach
 *     - playGame() <- Simulates a game between two teams & updates Teams Tables with results
 *     - simSeason() <- Simulates a season & updates all Teams Tables with results & stats
 * TO DO:
@@ -56,7 +57,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team warriors = saveTeam("Warriors", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Golden State", west)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("Steph", "Curry", 30, 0, warriors,
                 "Born in Ohio in 1988 to former NBA player Dell Curry, Stephen Curry garnered national attention for his impressive play at Davidson College. He was drafted in 2009 by the Golden State Warriors, and eventually developed into one of pro basketball's top players with his stellar shooting skills. After garnering Most Valuable Player honors and helping the Warriors win the NBA championship in 2015, Curry led the team to a league-record 73 wins the following season. In May 2016, Curry became the first person to be named Most Valuable Player by unanimous vote in NBA history, and one of only 11 players to win the MVP award two years in a row. ",
                 Date.parse("MM-dd-yyyy", "3-14-1988"), "Akron, OH", "6'3\"", 190, "Davidson", "https://static01.nyt.com/images/2016/02/29/sports/basketball/STEPHCURRY/STEPHCURRY-articleLarge.jpg")
@@ -82,7 +83,7 @@ class BootStrap {
         savePlayer("Zaza", "Pachulia", 27, 0, warriors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://nba.cdn.turner.com/nba/big/teams/warriors/2017/02/01/1485984774906-020117-Shootaround-Zaza-HD-1193865-4.600x336.jpg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Steve", "Kerr", warriors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
@@ -93,7 +94,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team spurs = saveTeam("Spurs", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "San Antonio", west)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("Kawhi", "Leonard", 2, 0, spurs,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://i2.cdn.turner.com/nba/nba/dam/assets/160424143242-kawhi-leonard-san-antonio-spurs-v-memphis-grizzlies--game-four.600x336.jpeg")
@@ -109,7 +110,7 @@ class BootStrap {
         savePlayer("Danny", "Green", 12, 0, spurs,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://i.cdn.turner.com/nba/nba/video/teams/spurs/2015/04/19/DannyGreenShootaround42015mp4-3576842-4.600x336.jpg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Gregg", "Popovich", spurs,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
@@ -119,7 +120,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team rockets = saveTeam("Rockets", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Houston", west)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("James", "Harden", 13, 0, rockets,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "https://pbs.twimg.com/media/CXHhOXvWEAAqMcr.png")
@@ -135,7 +136,7 @@ class BootStrap {
         savePlayer("Patrick", "Beverly", 2, 0, rockets,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://nba.cdn.turner.com/nba/big/teams/rockets/2017/01/22/1485056563298-pat-1154254-10.600x336.jpg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Mike", "D'Antoni", rockets,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
@@ -145,7 +146,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team jazz = saveTeam("Jazz", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Utah", west)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("Gordon", "Hayward", 20, 0, jazz,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://pic.pimg.tw/asdf90809/1402741475-2085664965_n.jpg")
@@ -161,7 +162,7 @@ class BootStrap {
         savePlayer("Derrick", "Favors", 15, 0, jazz,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://nba.cdn.turner.com/nba/big/teams/jazz/2017/01/25/1165696/1485319129684-GettyImages-632626736.jpg-1165696.600x336.jpg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Quin", "Snyder", jazz,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
@@ -175,7 +176,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team cavaliers = saveTeam("Cavaliers", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Cleveland", east)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("Lebron", "James", 23, 0, cavaliers,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://media.thehoopdoctors.com/wp-content/uploads/2016/05/lebron-James-or-michael-jordan.png")
@@ -191,7 +192,7 @@ class BootStrap {
         savePlayer("Channing", "Frye", 8, 0, cavaliers,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://nba.cdn.turner.com/nba/big/teams/cavaliers/2017/03/04/1488603593743-170303-Frye-PostGM-1265669-4.600x336.jpg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Tyronn", "Lue", cavaliers,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
@@ -201,7 +202,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team celtics = saveTeam("Celtics", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Boston", east)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("Isaiah", "Thomas", 4, 0, celtics,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://nba.cdn.turner.com/nba/big/teams/celtics/2016/12/31/1079863/1483161357975-Analysis_123016.jpg-1079863.600x336.jpg")
@@ -217,7 +218,7 @@ class BootStrap {
         savePlayer("Marcus", "Smart", 36, 0, celtics,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.toledoblade.com/image/2014/02/09/600x600_cTR/OSU-Texas-Tech-Basketball.jpg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Brad", "Stevens", celtics,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
@@ -228,7 +229,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team wizards = saveTeam("Wizards", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Washington", east)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("John", "Wall", 2, 0, wizards,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "https://pbs.twimg.com/media/CYi_6KdUEAEdT9y.jpg")
@@ -244,7 +245,7 @@ class BootStrap {
         savePlayer("Kelly", "Oubre Jr.", 12, 0, wizards,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://rushthecourt.net/wp-content/uploads/2015/01/010415-7-CBK-UNLV-at-Kansas-OB-PI.vadapt.620.high_.0-600x336.jpg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Scott", "Brooks", wizards,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
@@ -254,7 +255,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team raptors = saveTeam("Raptors", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Toronto", east)
-        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [starters]  ___ */
         savePlayer("Kyle", "Lowry", 7, 0, raptors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://i2.cdn.turner.com/nba/nba/dam/assets/160414203651-demar-derozan-kyle-lowry-cleveland-cavaliers-v-toronto-raptors.600x336.jpeg")
@@ -270,7 +271,7 @@ class BootStrap {
         savePlayer("Cory", "Joseph", 6, 0, raptors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://i2.cdn.turner.com/nba/nba/dam/assets/151128220728-cory-joseph-kyle-lowry-nba-toronto-raptors-at-washington-wizards.600x336.jpeg")
-        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps3.Person~ [coach]  ___ */
         saveCoach("Dwayne", "Casey", raptors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")

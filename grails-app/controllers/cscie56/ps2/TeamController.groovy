@@ -1,4 +1,6 @@
 package cscie56.ps2
+import cscie56.ps3.Person
+import cscie56.ps3.GameStats
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
