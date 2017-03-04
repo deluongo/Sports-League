@@ -449,7 +449,7 @@ class SeasonController {
 
         /*  --------------            *** Display Standings ***         ---------------  */
         /* ___  open standings view ___ */
-        render(view: "leaderboard/${conferenceName}",
+        render(view: "leaderboard",
                 model: [seasonName: westernConference.seasons.name.first(), teamList: team,
                         scoringLeaders: pointsLeaders,  assistLeaders: assistsLeaders,
                         reboundLeaders: reboundsLeaders, stealLeaders: stealsLeaders,
