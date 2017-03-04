@@ -94,9 +94,7 @@ class Person {
 	 *  ~~~~~ GAMES PLAYED ~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 		Integer getGamesPlayed() {
-			print(shotsAttempted)
-			2
-			//gameStats.size()
+			gameStats.size()
 		}
 
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -152,14 +150,7 @@ class Person {
 	 *  ~~~~~ FG PERCENTAGE ~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 		def getShootingPercentage() {
-			def pct
-			if(shotsAttempted == 0) {
-				pct = 0
-			}
-			else {
-				pct = shotsMade/shotsAttempted
-			}
-			pct
+			(shotsMade/shotsAttempted * 100 as double).round(1)
 		}
 
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -179,15 +170,8 @@ class Person {
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~ 3PT PERCENTAGE ~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
-		BigDecimal getThreePointPercentage() {
-			def pct
-			if(threePointersAttempted == 0) {
-				pct = 0
-			}
-			else {
-				pct = threePointersMade/threePointersAttempted
-			}
-			pct
+		def getThreePointPercentage() {
+			(threePointersMade/threePointersAttempted * 100 as double).round(1)
 		}
 
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -331,21 +315,21 @@ class Person {
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~~ FG % ~~~~~~~~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-		def shooting() {
+		def missed2s() {
 			/* ___  generate random seed  ___ */
 			Random random = new Random()
-			/* ___  random FG%  ___ */
-			random.nextInt(25) + 30
+			/* ___  random misses  ___ */
+			random.nextInt(15)
 		}
 
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~~~ STEALS ~~~~~~~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-		def sniping() {
+		def missed3s() {
 			/* ___  generate random seed  ___ */
 			Random random = new Random()
 			/* ___  random FG%  ___ */
-			random.nextInt(30) + 20
+			random.nextInt(10)
 		}
 
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -368,7 +352,13 @@ class Person {
 			}
 			else {
 				/*--|  get pts off 3's -> round to multiple of 6 -> get total 3's made -> ensure odd number|--*/
-				Integer threes = (int) (pointsScored * percentThrees) / 6 * 6 / 3 - 1
+				Integer threes = (int) (pointsScored * percentThrees) / 6 * 6 / 3
+				if(threes > 1) {
+					threes -= 1
+				}
+				else {
+					threes = 1
+				}
 				/*--|  get total points -> subtract pts off 3's -> get total 2's made |--*/
 				Integer twos =  (pointsScored - threes * 3) / 2
 
@@ -380,8 +370,17 @@ class Person {
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ SHOTS ATTEMPTED ~~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-		def getAttempts(Integer shotsMade, percentMade) {
-			shotsMade / percentMade
+		def calcPercent(Integer shotsMade, Integer shotAttempts) {
+			print(shotsMade)
+			print(shotAttempts)
+			print("\n")
+			if(shotAttempts == 0) {
+				0.0
+			}
+			else {
+				Math.round(shotsMade / shotAttempts * 1000) / 1000 * 100
+			}
+
 		}
 
 	/*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -412,30 +411,27 @@ class Person {
 		def storeResults(Integer totalPts, split) {
 
 			Integer pointsScored = scored(totalPts, split)
-			def fgPercent = shooting()
-			def threePercent = sniping()
 			def shotChart = shotSelection(pointsScored)
-			Integer threesMade = shotChart[1]
+			Integer madeThrees = shotChart[1]
 			Integer twosMade = shotChart[0]
-			Integer shotsMade = threesMade + twosMade
-			Integer twosAttempted = getAttempts(twosMade, fgPercent)
-			Integer threesAttempted = getAttempts(threesMade, threePercent)
+			Integer madeShots = madeThrees + twosMade
+			Integer twosAttempted = twosMade + missed2s()
+			Integer threesAttempted = madeThrees + missed3s()
 			Integer shotAttempts = twosAttempted + threesAttempted
 
 			GameStats newGameStats = new GameStats( player: this, minutesPlayed: 48,
 					points: pointsScored, assists: assisted(totalPts, split),
 					rebounds: rebounded(totalPts, split), steals: stole(split),
 					shotsAttempted: shotAttempts,
-					shotsMade: shotsMade,
-					shootingPercentage: fgPercent,
+					shotsMade: madeShots,
+					shootingPercentage: calcPercent(madeShots, shotAttempts),
 					threePointersAttempted: threesAttempted,
-					threePointersMade: threesMade,
-					threePointPercentage: threePercent,
+					threePointersMade: madeThrees,
+					threePointPercentage: calcPercent(madeThrees, threesAttempted),
 					personalFouls: getFouls()).save(flush:true)
 
 			this.addToGameStats(newGameStats)
 			this.save(flush:true)
-			print(gameStats)
 		}
 	/*  ----------------------------   ( primary function )   -----------------------------  */
 	/*  -----------------------------------   ~ END ~    ----------------------------------  */

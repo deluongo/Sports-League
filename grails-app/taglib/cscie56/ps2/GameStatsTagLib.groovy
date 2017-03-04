@@ -18,6 +18,7 @@ class GameStatsTagLib {
                 th{ mb.yield "Points" }
                 th{ mb.yield "Assists" }
                 th{ mb.yield "Rebounds" }
+                th{ mb.yield "Steals" }
                 th{ mb.yield "FGA" }
                 th{ mb.yield "FGM" }
                 th{ mb.yield "FG%" }
@@ -35,10 +36,10 @@ class GameStatsTagLib {
                 td{mb.yield "${player.steals}"}
                 td{mb.yield "${player.shotsAttempted}"}
                 td{mb.yield "${player.shotsMade}"}
-                td{mb.yield "${player.shootingPercentage}"}
+                td{mb.yield "${player.shootingPercentage}%"}
                 td{mb.yield "${player.threePointersAttempted}"}
                 td{mb.yield "${player.threePointersMade}"}
-                td{mb.yield "${player.threePointPercentage}"}
+                td{mb.yield "${player.threePointPercentage}%"}
                 td{mb.yield "${player.personalFouls}"}
             }
             tr{
@@ -50,10 +51,10 @@ class GameStatsTagLib {
                 td{mb.yield "${player.stealsPerGame}"}
                 td{mb.yield "${player.shotsAttemptedPerGame}"}
                 td{mb.yield "${player.shotsMadePerGame}"}
-                td{mb.yield "${player.shootingPercentage}"}
+                td{mb.yield "${player.shootingPercentage}%"}
                 td{mb.yield "${player.threePointersAttemptedPerGame}"}
                 td{mb.yield "${player.threePointersMadePerGame}"}
-                td{mb.yield "${player.threePointPercentage}"}
+                td{mb.yield "${player.threePointPercentage}%"}
                 td{mb.yield "${player.personalFoulsPerGame}"}
             }
         }
@@ -71,6 +72,7 @@ class GameStatsTagLib {
                 th{ mb.yield "Points" }
                 th{ mb.yield "Assists" }
                 th{ mb.yield "Rebounds" }
+                th{ mb.yield "Steals" }
                 th{ mb.yield "FGA" }
                 th{ mb.yield "FGM" }
                 th{ mb.yield "FG%" }
@@ -88,10 +90,12 @@ class GameStatsTagLib {
                     td{mb.yield "${gm.steals}"}
                     td{mb.yield "${gm.shotsAttempted}"}
                     td{mb.yield "${gm.shotsMade}"}
-                    td{mb.yield "${gm.shootingPercentage}"}
+                    td{mb.yield "${gm.shootingPercentage}%"}
                     td{mb.yield "${gm.threePointersAttempted}"}
                     td{mb.yield "${gm.threePointersMade}"}
-                    td{mb.yield "${gm.threePointPercentage}"}
+                    td{mb.yield "${gm.threePointPercentage}%"}
+                    td{mb.yield "${gm.personalFouls}"}
+
                 }
             }
         }

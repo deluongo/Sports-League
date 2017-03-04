@@ -21,16 +21,16 @@ class GameStats {
     }
 
     GameStats plus(GameStats other) {
-        new GameStats(minutesPlayed: this.minutesPlayed + other.minutesPlayed,
+        GameStats stats =  new GameStats(minutesPlayed: this.minutesPlayed + other.minutesPlayed,
                 points: this.points + other.points, assists: this.assists + other.assists,
                 rebounds: this.rebounds + other.rebounds, steals: this.steals + other.steals,
                 shotsAttempted: this.shotsAttempted + other.shotsAttempted,
-                shotsMade: this.shotsMade + this.shotsMade,
-                shootingPercentage: this.shootingPercentage + other.shootingPercentage,
-                threePointersAttempted: this.threePointersAttempted+ other.threePointersAttempted,
-                threePointersMade: this.threePointersMade + this.threePointersMade,
-                threePointPercentage: this.threePointPercentage + other.threePointPercentage,
+                shotsMade: this.shotsMade + other.shotsMade,
+                threePointersAttempted: this.threePointersAttempted + other.threePointersAttempted,
+                threePointersMade: this.threePointersMade + other.threePointersMade,
                 personalFouls: this.personalFouls + other.personalFouls)
+
+        stats
     }
 
 }
