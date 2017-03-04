@@ -11,8 +11,8 @@ class GameStatsTagLib {
 
         def mb = new groovy.xml.MarkupBuilder(out)
 
-        mb.table{
-            tr{
+        mb.table(class: "w3-table w3-bordered w3-striped w3-border test w3-hoverable w3-centered"){
+            tr(class: "w3-green"){
                 th{ mb.yield "" }
                 th{ mb.yield "Minutes" }
                 th{ mb.yield "Points" }
@@ -66,8 +66,8 @@ class GameStatsTagLib {
 
         def allGameStats = player.gameStats
 
-        mb.table{
-            tr{
+        mb.table(class: "w3-table w3-bordered w3-striped w3-border test w3-hoverable w3-centered"){
+            tr(class: "w3-green"){
                 th{ mb.yield "Minutes" }
                 th{ mb.yield "Points" }
                 th{ mb.yield "Assists" }
