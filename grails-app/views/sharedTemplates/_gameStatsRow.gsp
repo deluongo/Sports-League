@@ -1,5 +1,5 @@
 
-<div class="player" id="${player?.id}">
-    <stats:seasonStats player="${this.person}" ></stats:seasonStats>
-    <stats:perGameStats player="${player}" ></stats:perGameStats>
+<div class="player" id="${person?.id}">
+    <stats:seasonStats player="${person}" ></stats:seasonStats>
+    <stats:perGameStats player="${person}" ></stats:perGameStats>
 </div>

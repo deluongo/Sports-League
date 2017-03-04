@@ -8,8 +8,6 @@ import cscie56.ps2.Team
 import cscie56.ps2.Game
 import cscie56.ps2.Person
 
-import java.lang.reflect.Array
-
 /*---------------------------------------------------------------------------------------------*
 * ===========================================
 *           INITIALIZES DATABASE
@@ -19,8 +17,8 @@ import java.lang.reflect.Array
 *     - Simulates an 82 game NBA season, filling all tables with dummy data.
 * FUNCTIONS:
 *     - saveTeam() <- creates a new Team
-*     - savePlayer() <- creates a new Person of type Player
-*     - saveCoach() <- creates a new Person of type Coach
+*     - savePlayer() <- creates a new cscie56.ps2.Person of type Player
+*     - saveCoach() <- creates a new cscie56.ps2.Person of type Coach
 *     - playGame() <- Simulates a game between two teams & updates Teams Tables with results
 *     - simSeason() <- Simulates a season & updates all Teams Tables with results & stats
 * TO DO:
@@ -58,7 +56,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team warriors = saveTeam("Warriors", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Golden State", west)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Steph", "Curry", 30, 0, warriors,
                 "Born in Ohio in 1988 to former NBA player Dell Curry, Stephen Curry garnered national attention for his impressive play at Davidson College. He was drafted in 2009 by the Golden State Warriors, and eventually developed into one of pro basketball's top players with his stellar shooting skills. After garnering Most Valuable Player honors and helping the Warriors win the NBA championship in 2015, Curry led the team to a league-record 73 wins the following season. In May 2016, Curry became the first person to be named Most Valuable Player by unanimous vote in NBA history, and one of only 11 players to win the MVP award two years in a row. ",
                 Date.parse("MM-dd-yyyy", "3-14-1988"), "Akron, OH", "6'3\"", 190, "Davidson")
@@ -84,7 +82,7 @@ class BootStrap {
         savePlayer("Zaza", "Pachulia", 27, 0, warriors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Steve", "Kerr", warriors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -94,7 +92,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team spurs = saveTeam("Spurs", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "San Antonio", west)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Kawhi", "Leonard", 2, 0, spurs,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -110,7 +108,7 @@ class BootStrap {
         savePlayer("Danny", "Green", 12, 0, spurs,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Gregg", "Popovich", spurs,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -120,7 +118,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team rockets = saveTeam("Rockets", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Houston", west)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("James", "Harden", 13, 0, rockets,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -136,7 +134,7 @@ class BootStrap {
         savePlayer("Patrick", "Beverly", 2, 0, rockets,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Mike", "D'Antoni", rockets,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -146,7 +144,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team jazz = saveTeam("Jazz", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Utah", west)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Gordon", "Hayward", 20, 0, jazz,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -162,7 +160,7 @@ class BootStrap {
         savePlayer("Derrick", "Favors", 15, 0, jazz,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Quin", "Snyder", jazz,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -176,7 +174,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team cavaliers = saveTeam("Cavaliers", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Cleveland", east)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Lebron", "James", 23, 0, cavaliers,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -192,7 +190,7 @@ class BootStrap {
         savePlayer("Channing", "Frye", 8, 0, cavaliers,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Tyronn", "Lue", cavaliers,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -202,7 +200,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team celtics = saveTeam("Celtics", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Boston", east)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Isaiah", "Thomas", 4, 0, celtics,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -218,7 +216,7 @@ class BootStrap {
         savePlayer("Marcus", "Smart", 36, 0, celtics,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Brad", "Stevens", celtics,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -229,7 +227,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team wizards = saveTeam("Wizards", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Washington", east)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("John", "Wall", 2, 0, wizards,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -245,7 +243,7 @@ class BootStrap {
         savePlayer("Kelly", "Oubre Jr.", 12, 0, wizards,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Scott", "Brooks", wizards,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -255,7 +253,7 @@ class BootStrap {
         /*      ---------------------------      */
         /* ___  ~Team~  ___ */
         Team raptors = saveTeam("Raptors", "W0", 0,  0, 0,  0, 0, 0, 0.0,  "-",  "-", "Toronto", east)
-        /* ___  ~Person~ [starters]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Kyle", "Lowry", 7, 0, raptors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -271,7 +269,7 @@ class BootStrap {
         savePlayer("Cory", "Joseph", 6, 0, raptors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
-        /* ___  ~Person~ [coach]  ___ */
+        /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Dwayne", "Casey", raptors,
                 "Coming Soon!!!",
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
@@ -390,6 +388,7 @@ class BootStrap {
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~ DETERMINE RESULT ~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def determineResult(Team homeTeam, ptsHome, Team awayTeam, ptsAway) {
+        /*  ---------------              *** Game Result ***           ---------------  */
         Map result
         /* ___  home team gets tie break  ___ */
         if (ptsHome == ptsAway) { ptsHome += 1 }
@@ -409,6 +408,34 @@ class BootStrap {
             /* ___  visiting team wins  ___ */
             result = [winner: awayTeam.name, loser:homeTeam.name]
         }
+
+
+        /*  ---------------          *** Get List of Players ***       ---------------  */
+        /* ___  get home team players  ___ */
+        def homePlayers = Person.findAllByTeam(homeTeam)
+        homePlayers.removeIf { it.role != "player" }
+        /* ___  get away team players  ___ */
+        def roadPlayers = Person.findAllByTeam(awayTeam)
+        roadPlayers.removeIf { it.role != "player" }
+        /* ___  randomize participation order  ___ */
+        Collections.shuffle(homePlayers)
+        Collections.shuffle(roadPlayers)
+
+        /*  ---------------           *** Get Stat Breakdown ***       ---------------  */
+        def statSplits = [0.35, 0.3, 0.2, 0.1, 0.05]
+
+
+        /*  ---------------           *** Store Player Stats ***       ---------------  */
+        /* ___  HOME | split stats among 5 players  ___ */
+        homePlayers.take(5).eachWithIndex{ player, idx ->
+            player.storeResults(ptsHome, statSplits[idx])
+        }
+        /* ___  ROAD | split stats among 5 players  ___ */
+        roadPlayers.take(5).eachWithIndex{ player, idx ->
+            player.storeResults(ptsAway, statSplits[idx])
+        }
+
+
         result
     }
     /*  ---------------------------   ( simulate functions )   ----------------------------  */

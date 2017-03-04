@@ -2,7 +2,7 @@ package cscie56.ps2
 
 class GameStatsTagLib {
     static defaultEncodeAs = [taglib:'html']
-    static encodeAsForTags = [allStats: [taglib:'html'], statTotalsTR: [taglib:'none']]
+    static encodeAsForTags = [seasonStats: [taglib:'none'], perGameStats: [taglib:'none']]
 
     static namespace = "stats"
 
@@ -10,12 +10,10 @@ class GameStatsTagLib {
         Person player = attrs.player
 
         def mb = new groovy.xml.MarkupBuilder(out)
-        def allGameStats = player.gameStats
-
-        print("${allGameStats}")
 
         mb.table{
             tr{
+                th{ mb.yield "" }
                 th{ mb.yield "Minutes" }
                 th{ mb.yield "Points" }
                 th{ mb.yield "Assists" }
@@ -29,18 +27,34 @@ class GameStatsTagLib {
                 th{ mb.yield "Fouls" }
             }
             tr{
-                td{mb.yield "${allGameStats.sum().minutesPlayed}"}
-                td{mb.yield "${allGameStats.sum().points}"}
-                td{mb.yield "${allGameStats.sum().assists}"}
-                td{mb.yield "${allGameStats.sum().rebounds}"}
-                td{mb.yield "${allGameStats.sum().steals}"}
-                td{mb.yield "${allGameStats.sum().shotsAttempted}"}
-                td{mb.yield "${allGameStats.sum().shotsMade}"}
-                td{mb.yield "${allGameStats.sum().shootingPercentage}"}
-                td{mb.yield "${allGameStats.sum().threePointersAttempted}"}
-                td{mb.yield "${allGameStats.sum().threePointersMade}"}
-                td{mb.yield "${allGameStats.sum().threePointPercentage}"}
-                td{mb.yield "${allGameStats.sum().personalFouls}"}
+                th{ mb.yield "Totals" }
+                td{mb.yield "${player.minutesPlayed}"}
+                td{mb.yield "${player.points}"}
+                td{mb.yield "${player.assists}"}
+                td{mb.yield "${player.rebounds}"}
+                td{mb.yield "${player.steals}"}
+                td{mb.yield "${player.shotsAttempted}"}
+                td{mb.yield "${player.shotsMade}"}
+                td{mb.yield "${player.shootingPercentage}"}
+                td{mb.yield "${player.threePointersAttempted}"}
+                td{mb.yield "${player.threePointersMade}"}
+                td{mb.yield "${player.threePointPercentage}"}
+                td{mb.yield "${player.personalFouls}"}
+            }
+            tr{
+                th{ mb.yield "Per Game" }
+                td{mb.yield "${player.minutesPerGame}"}
+                td{mb.yield "${player.pointsPerGame}"}
+                td{mb.yield "${player.assistsPerGame}"}
+                td{mb.yield "${player.reboundsPerGame}"}
+                td{mb.yield "${player.stealsPerGame}"}
+                td{mb.yield "${player.shotsAttemptedPerGame}"}
+                td{mb.yield "${player.shotsMadePerGame}"}
+                td{mb.yield "${player.shootingPercentage}"}
+                td{mb.yield "${player.threePointersAttemptedPerGame}"}
+                td{mb.yield "${player.threePointersMadePerGame}"}
+                td{mb.yield "${player.threePointPercentage}"}
+                td{mb.yield "${player.personalFoulsPerGame}"}
             }
         }
     }
@@ -50,7 +64,6 @@ class GameStatsTagLib {
         def mb = new groovy.xml.MarkupBuilder(out)
 
         def allGameStats = player.gameStats
-
 
         mb.table{
             tr{
