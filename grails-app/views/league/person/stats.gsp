@@ -121,7 +121,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                             <div class="message" role="status">${flash.message}</div>
                         </g:if>
                         <div>
-                            <g:render template="/sharedTemplates/perGameStatsRow" />
+                            <g:render template="/sharedTemplates/gameStatsRow" />
                         </div>
                         <br />
                     </div>
