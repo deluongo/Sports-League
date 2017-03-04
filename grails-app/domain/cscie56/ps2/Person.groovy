@@ -27,6 +27,7 @@ class Person {
 	String height // must be displayed in feet and inches (e.g., 6’1”)
 	Integer weight
 	String universityAttended
+	String pictureURL
 
 	/*  -------------------          *** Database Designations ***      -------------------  */
 	static mapping = {
@@ -371,9 +372,6 @@ class Person {
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ SHOTS ATTEMPTED ~~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 		def calcPercent(Integer shotsMade, Integer shotAttempts) {
-			print(shotsMade)
-			print(shotAttempts)
-			print("\n")
 			if(shotAttempts == 0) {
 				0.0
 			}

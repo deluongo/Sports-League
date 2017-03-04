@@ -59,7 +59,7 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Steph", "Curry", 30, 0, warriors,
                 "Born in Ohio in 1988 to former NBA player Dell Curry, Stephen Curry garnered national attention for his impressive play at Davidson College. He was drafted in 2009 by the Golden State Warriors, and eventually developed into one of pro basketball's top players with his stellar shooting skills. After garnering Most Valuable Player honors and helping the Warriors win the NBA championship in 2015, Curry led the team to a league-record 73 wins the following season. In May 2016, Curry became the first person to be named Most Valuable Player by unanimous vote in NBA history, and one of only 11 players to win the MVP award two years in a row. ",
-                Date.parse("MM-dd-yyyy", "3-14-1988"), "Akron, OH", "6'3\"", 190, "Davidson")
+                Date.parse("MM-dd-yyyy", "3-14-1988"), "Akron, OH", "6'3\"", 190, "Davidson", "https://static01.nyt.com/images/2016/02/29/sports/basketball/STEPHCURRY/STEPHCURRY-articleLarge.jpg")
         savePlayer("Klay", "Thompson", 11, 0, warriors,
                 "Klay Thompson was born on 8th February 1990 in Los Angeles, California to mother Julie Thompson and former NBA player, Mychal Thompson. When Klay was 2 years old he moved with his family to Lake Oswego, Oregon. And when he was 14 years old he moved to Ladera Ranch, California along with his parents and two siblings. His older brother Mychel played basketball for Pepperdine University whereas his younger brother Trayce Thompson was drafted in the 2009 MLB Draft by the Chicago White Sox.\n" +
                         "\n" +
@@ -68,24 +68,24 @@ class BootStrap {
                         "Klay was previously dating internet sensation, Hannah Stocking but they recently had a breakup over an instagram dispute. There have been rumors that Klay is currently dating Chris Brown’s ex, Karrueche Tran .However the couple have not confirmed anything amidst  the media. \n" +
                         "\n" +
                         "Klay is currently 25 years old, weighs around 98 kgs and is 6 feet 7 inches tall. He was named NbA All-Star, NBA All-Rookie First Team, 2x First Team All-Pac-10. There was a controversy when he was suspended during the final season with Washington State University after his misconduct criminal quotation for marijuana possession was subjected. ",
-                Date.parse("MM-dd-yyyy", "2-08-1990"), "Los Angeles, CA", "6'7\"", 215, "Washington State")
+                Date.parse("MM-dd-yyyy", "2-08-1990"), "Los Angeles, CA", "6'7\"", 215, "Washington State", "http://sports.cbsimg.net/images/visual/whatshot/010816_KlayWs.jpg")
         savePlayer("Kevin", "Durant", 35, 0, warriors,
                 "Kevin Wayne Durant (born September 29, 1988) is an American professional basketball player for the Golden State Warriors of the National Basketball Association (NBA). Durant has won an NBA Most Valuable Player Award, four NBA scoring titles, the NBA Rookie of the Year Award, and two Olympic gold medals. He has also been selected to six All-NBA teams and eight All-Star teams.\n" +
                         "\n" +
                         "Durant was a heavily recruited high school prospect. He played one season of college basketball for the University of Texas, where he won numerous year-end awards and became the first freshman to be named Naismith College Player of the Year. In the 2007 NBA draft, he was selected with the second overall pick by the Seattle SuperSonics. After his rookie season, the team relocated to Oklahoma City and became the Thunder. Durant helped lead Oklahoma City to the 2012 NBA Finals, losing to the Miami Heat in five games. He played nine seasons for the Thunder organization before joining the Warriors in 2016.",
-                Date.parse("MM-dd-yyyy", "9-29-1988"), "Washington, D.C.", "6'9\"", 240, "Texas")
+                Date.parse("MM-dd-yyyy", "9-29-1988"), "Washington, D.C.", "6'9\"", 240, "Texas", "https://turnernbahangtime.files.wordpress.com/2014/12/durant1.jpg")
 
         savePlayer("Draymon", "Green", 23, 0, warriors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "https://espngrantland.files.wordpress.com/2015/04/draymond.jpg?w=1024&h=576")
 
         savePlayer("Zaza", "Pachulia", 27, 0, warriors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://ww2.hdnux.com/photos/56/01/22/12063917/7/1024x1024.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Steve", "Kerr", warriors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*      ----------- !!! -----------      */
         /* ---       SAN ANTONIO SPURS       --- */
@@ -95,23 +95,23 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Kawhi", "Leonard", 2, 0, spurs,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Lamarcus", "Aldridge", 12, 0, spurs,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Pau", "Gasol", 16, 0, spurs,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Manu", "Ginobili", 20, 0, spurs,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Danny", "Green", 12, 0, spurs,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Gregg", "Popovich", spurs,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*      ----------- !!! -----------      */
         /* ---        HOUSTON ROCKETS        --- */
@@ -121,23 +121,23 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("James", "Harden", 13, 0, rockets,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Trevor", "Ariza", 1, 0, rockets,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Ryan", "Anderson", 3, 0, rockets,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Eric", "Gordon", 10, 0, rockets,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Patrick", "Beverly", 2, 0, rockets,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Mike", "D'Antoni", rockets,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*      ----------- !!! -----------      */
         /* ---           UTAH JAZZ           --- */
@@ -147,23 +147,23 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Gordon", "Hayward", 20, 0, jazz,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("George", "Hill", 3, 0, jazz,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Rodney", "Hood", 5, 0, jazz,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Rudy", "Gobert", 27, 0, jazz,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Derrick", "Favors", 15, 0, jazz,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Quin", "Snyder", jazz,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*  ---------------          *** Eastern ~Conference~ ***       ---------------  */
         Conference east = new Conference(name: 'Eastern Conference', seasons: season)
@@ -177,23 +177,23 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Lebron", "James", 23, 0, cavaliers,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Kyrie", "Irving", 2, 0, cavaliers,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Kevin", "Love", 0, 0, cavaliers,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Kyle", "Korver", 26, 0, cavaliers,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Channing", "Frye", 8, 0, cavaliers,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Tyronn", "Lue", cavaliers,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*      ----------- !!! -----------      */
         /* ---         BOSTON CELTICS        --- */
@@ -203,23 +203,23 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Isaiah", "Thomas", 4, 0, celtics,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Avery", "Bradley", 0, 0, celtics,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Al", "Horford", 42, 0, celtics,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Jae", "Crowder", 99, 0, celtics,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Marcus", "Smart", 36, 0, celtics,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Brad", "Stevens", celtics,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ---    --- */
 
         /*      ----------- !!! -----------      */
@@ -230,23 +230,23 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("John", "Wall", 2, 0, wizards,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Bradley", "Beal", 3, 0, wizards,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Trey", "Burke", 33, 0, wizards,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Marcin", "Gortat", 13, 0, wizards,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Kelly", "Oubre Jr.", 12, 0, wizards,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Scott", "Brooks", wizards,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*      ---------- !!! ------------      */
         /* ---        TORONTO RAPTORS        --- */
@@ -256,23 +256,23 @@ class BootStrap {
         /* ___  ~cscie56.ps2.Person~ [starters]  ___ */
         savePlayer("Kyle", "Lowry", 7, 0, raptors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("DeMar", "DeRozan", 10, 0, raptors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Jonas", "Valanciunas", 17, 0, raptors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("DeMarre", "Carroll", 5, 0, raptors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         savePlayer("Cory", "Joseph", 6, 0, raptors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
         /* ___  ~cscie56.ps2.Person~ [coach]  ___ */
         saveCoach("Dwayne", "Casey", raptors,
                 "Coming Soon!!!",
-                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College")
+                Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*  ---------------           *** Simulate ~Season~ ***         ---------------  */
         simSeason('2017', 2)
@@ -464,11 +464,11 @@ class BootStrap {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ CREATE PLAYERS ~~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def savePlayer(firstName, lastName, number, pointsScored, team, bio, birthDate, birthPlace, height, weight, universityAttended) {
+    def savePlayer(firstName, lastName, number, pointsScored, team, bio, birthDate, birthPlace, height, weight, universityAttended, pictureURL) {
         /* ___  create player  ___ */
         Person newPlayer = new Person(firstName: firstName, lastName: lastName, number: number, role: "player",
                 pointsScored: pointsScored, team: team, bio: bio, birthDate: birthDate, birthPlace: birthPlace, height: height,
-                weight: weight, universityAttended: universityAttended)
+                weight: weight, universityAttended: universityAttended, pictureURL: pictureURL)
         /* ___  save player  ___ */
         saveObject(newPlayer)
         /* ___  return player object  ___ */
@@ -478,11 +478,11 @@ class BootStrap {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ CREATE COACHES ~~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def saveCoach(firstName, lastName, team, bio, birthDate, birthPlace, height, weight, universityAttended) {
+    def saveCoach(firstName, lastName, team, bio, birthDate, birthPlace, height, weight, universityAttended, pictureURL) {
         /* ___  create coach  ___ */
         Person newCoach = new Person(firstName: firstName, lastName: lastName, number: "C", role: "coach",
                 pointsScored: 0, team: team, bio: bio, birthDate: birthDate, birthPlace: birthPlace, height: height,
-                weight: weight, universityAttended: universityAttended)
+                weight: weight, universityAttended: universityAttended, pictureURL: pictureURL)
         /* ___  save team  ___ */
         saveObject(newCoach)
         /* ___  return player object  ___ */

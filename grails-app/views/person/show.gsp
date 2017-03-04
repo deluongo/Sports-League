@@ -24,20 +24,25 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 
             <div class="w3-white w3-text-grey w3-card-4">
                 <div class="w3-display-container">
-                    <img src="https://static01.nyt.com/images/2016/02/29/sports/basketball/STEPHCURRY/STEPHCURRY-articleLarge.jpg" style="width:100%" alt="Avatar">
+                    <img src="${person.pictureURL}" style="width:100%" alt="Avatar">
                     <div class="w3-display-bottomleft w3-container w3-text-white">
                         <h2>"${person.firstName} ${person.lastName}"</h2>
                     </div>
                 </div>
                 <div class="w3-container">
-                    <p><i class="fa fa-shirtsinbulk fa-fw w3-margin-right w3-large w3-text-teal"></i>${person.number}</p>
-                    <p><i class="fa fa-male fa-fw w3-margin-right w3-large w3-text-teal"></i>${person.height}</p>
-                    <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-large w3-text-teal"></i>${person.weight}</p>
-                    <p><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>${person.birthDate}</p>
-                    <p><i class="fa fa-globe fa-fw w3-margin-right w3-large w3-text-teal"></i>${person.birthPlace}</p>
-                    <p><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-large w3-text-teal"></i>${person.universityAttended}</p>
+                    <div class="w3-row">
+                        <div class="w3-col m6 l6">
+                            <p><i class="fa fa-shirtsinbulk fa-fw w3-margin-right w3-large w3-text-teal"></i>Number: ${person.number}</p>
+                            <p><i class="fa fa-male fa-fw w3-margin-right w3-large w3-text-teal"></i>Height: ${person.height}</p>
+                            <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-large w3-text-teal"></i>Weight: ${person.weight}</p>
+                        </div>
+                        <div class="w3-col m6 l6">
+                            <p><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Date: ${person.birthDate.toString().substring(0, 10)}</p>
+                            <p><i class="fa fa-globe fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Place: ${person.birthPlace}</p>
+                            <p><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-large w3-text-teal"></i>College: ${person.universityAttended}</p>
+                        </div>
+                    </div>
                     <hr>
-
                     <p class="w3-large"><b><i class="fa fa-asterisk fa-fw w3-margin-right w3-text-teal"></i>Skills</b></p>
                     <p>Long Range</p>
                     <div class="w3-light-grey w3-round-xlarge w3-small">
@@ -57,7 +62,6 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                     <div class="w3-light-grey w3-round-xlarge w3-small">
                         <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:50%">50%</div>
                     </div>
-                    <br>
                     <p>Ball Handeling</p>
                     <div class="w3-light-grey w3-round-xlarge w3-small">
                         <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:80%">80%</div>
