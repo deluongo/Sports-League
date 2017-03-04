@@ -424,22 +424,27 @@ class SeasonController {
             team = allTeams
             players = allPlayers
         }
-        print("\n\n\n")
-        print(players)
+
         /*  --------------            *** Determine Leaders  ***        ---------------  */
 
         /*--|  sort players by PPG -> get top 5 players  |--*/
-        def pointsLeaders = players.sort{it.pointsPerGame}.reverse().take(5)
-        /*--|  sort players by PPG -> get top 5 players  |--*/
-        def assistsLeaders = players.sort{it.assistsPerGame}.reverse().take(5)
-        /*--|  sort players by PPG -> get top 5 players  |--*/
-        def reboundsLeaders = players.sort{it.reboundsPerGame}.reverse().take(5)
-        /*--|  sort players by PPG -> get top 5 players  |--*/
-        def stealsLeaders = players.sort{it.stealsPerGame}.reverse().take(5)
-        /*--|  sort players by PPG -> get top 5 players  |--*/
-        def fgPercentLeaders = players.sort{it.shootingPercentage}.reverse().take(5)
-        /*--|  sort players by PPG -> get top 5 players  |--*/
-        def threePercentLeaders = players.sort{it.threePointPercentage}.reverse().take(5)
+        def pointsRankings = players.sort{it.pointsPerGame}.reverse()
+        def pointsLeaders = pointsRankings.take(5)
+        /*--|  sort players by APG -> get top 5 players  |--*/
+        def assistsRankings = players.sort{it.assistsPerGame}.reverse()
+        def assistsLeaders = assistsRankings.take(5)
+        /*--|  sort players by RPG -> get top 5 players  |--*/
+        def reboundsRankings = players.sort{it.reboundsPerGame}.reverse()
+        def reboundsLeaders = reboundsRankings.take(5)
+        /*--|  sort players by SPG -> get top 5 players  |--*/
+        def stealsRankings = players.sort{it.stealsPerGame}.reverse()
+        def stealsLeaders = stealsRankings.take(5)
+        /*--|  sort players by FG% -> get top 5 players  |--*/
+        def fgPercentRankings = players.sort{it.shootingPercentage}.reverse()
+        def fgPercentLeaders = fgPercentRankings.take(5)
+        /*--|  sort players by 3PT% -> get top 5 players  |--*/
+        def threePercentRankings = players.sort{it.threePointPercentage}.reverse()
+        def threePercentLeaders = threePercentRankings.take(5)
 
 
         /*  --------------            *** Display Standings ***         ---------------  */

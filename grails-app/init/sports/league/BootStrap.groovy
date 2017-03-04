@@ -424,6 +424,7 @@ class BootStrap {
 
         /*  ---------------           *** Get Stat Breakdown ***       ---------------  */
         def statSplits = [0.35, 0.3, 0.2, 0.1, 0.05]
+        Collections.shuffle(statSplits)
 
 
         /*  ---------------           *** Store Player Stats ***       ---------------  */
@@ -432,8 +433,10 @@ class BootStrap {
             player.storeResults(ptsHome, statSplits[idx])
         }
         /* ___  ROAD | split stats among 5 players  ___ */
+        def statSplits2 = [0.35, 0.1, 0.05, 0.3, 0.2]
+        //Collections.shuffle(statSplits2)
         roadPlayers.take(5).eachWithIndex{ player, idx ->
-            player.storeResults(ptsAway, statSplits[idx])
+            player.storeResults(ptsAway, statSplits2[idx])
         }
 
 

@@ -28,54 +28,61 @@
             <!-- First Photo Grid-->
             <div class="w3-row-padding">
                 <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/mountains.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <img src="${scoringLeaders[0].pictureURL}" alt="${scoringLeaders[0].firstName} ${scoringLeaders[0].lastName}" style="width:100%" class="w3-hover-opacity">
                     <div class="w3-container w3-white">
                         <p><b>PPG Leaders</b></p>
-                        <g:each status="i" in="${scoringLeaders}" var="leader">
-                            <p>${i}. <span>${leader.firstName?.encodeAsHTML()} ${leader.lastName?.encodeAsHTML()}</span> <span>${leader.team.location?.encodeAsHTML()}</span> ${leader.pointsPerGame?.encodeAsHTML()}</p>
+                        <g:each status="i" in="${scoringLeaders}" var="pointsLeader">
+                            <p>${i+1}. <span>${pointsLeader.firstName?.encodeAsHTML()} ${pointsLeader.lastName?.encodeAsHTML()}</span> <span>${pointsLeader.team.location?.encodeAsHTML()}</span> ${pointsLeader.pointsPerGame?.encodeAsHTML()}</p>
                         </g:each>
-
-
-
                     </div>
                 </div>
                 <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/lights.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <img src="${assistLeaders[0].pictureURL}" alt="${assistLeaders[0].firstName} ${assistLeaders[0].lastName}" style="width:100%" class="w3-hover-opacity">
                     <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                        <p><b>APG Leaders</b></p>
+                        <g:each status="i" in="${assistLeaders}" var="assLeader">
+                            <p>${i+1}. <span>${assLeader.firstName?.encodeAsHTML()} ${assLeader.lastName?.encodeAsHTML()}</span> <span>${assLeader.team.location?.encodeAsHTML()}</span> ${assLeader.assistsPerGame?.encodeAsHTML()}</p>
+                        </g:each>
                     </div>
                 </div>
                 <div class="w3-third w3-container">
-                    <img src="/w3images/nature.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <img src="${reboundLeaders[0].pictureURL}" alt="${reboundLeaders[0].firstName} ${reboundLeaders[0].lastName}" style="width:100%" class="w3-hover-opacity">
                     <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                        <p><b>RPG Leaders</b></p>
+                        <g:each status="i" in="${reboundLeaders}" var="reboundLeader">
+                            <p>${i+1}. <span>${reboundLeader.firstName?.encodeAsHTML()} ${reboundLeader.lastName?.encodeAsHTML()}</span> <span>${reboundLeader.team.location?.encodeAsHTML()}</span> ${reboundLeader.reboundsPerGame?.encodeAsHTML()}</p>
+                        </g:each>
                     </div>
                 </div>
             </div>
 
             <!-- Second Photo Grid-->
             <div class="w3-row-padding">
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/p1.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                    </div>
-                </div>
-                <div class="w3-third w3-container w3-margin-bottom">
-                    <img src="/w3images/p2.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
-                    <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
-                    </div>
-                </div>
                 <div class="w3-third w3-container">
-                    <img src="/w3images/p3.jpg" alt="Norway" style="width:100%" class="w3-hover-opacity">
+                    <img src="${stealLeaders[0].pictureURL}" alt="${stealLeaders[0].firstName} ${stealLeaders[0].lastName}" style="width:100%" class="w3-hover-opacity">
                     <div class="w3-container w3-white">
-                        <p><b>Lorem Ipsum</b></p>
-                        <p>Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+                        <p><b>FG% Leaders</b></p>
+                        <g:each status="i" in="${stealLeaders}" var="stealLeader">
+                            <p>${i+1}. <span>${stealLeader.firstName?.encodeAsHTML()} ${stealLeader.lastName?.encodeAsHTML()}</span> <span>${stealLeader.team.location?.encodeAsHTML()}</span> ${stealLeader.stealsPerGame?.encodeAsHTML()}</p>
+                        </g:each>
+                    </div>
+                </div>
+                <div class="w3-third w3-container w3-margin-bottom">
+                    <img src="${shootingPercentLeaders[0].pictureURL}" alt="${shootingPercentLeaders[0].firstName} ${shootingPercentLeaders[0].lastName}" style="width:100%" class="w3-hover-opacity">
+                    <div class="w3-container w3-white">
+                        <p><b>FG% Leaders</b></p>
+                        <g:each status="i" in="${shootingPercentLeaders}" var="shootingLeader">
+                            <p>${i+1}. <span>${shootingLeader.firstName?.encodeAsHTML()} ${shootingLeader.lastName?.encodeAsHTML()}</span> <span>${shootingLeader.team.location?.encodeAsHTML()}</span> ${shootingLeader.shootingPercentage?.encodeAsHTML()}</p>
+                        </g:each>
+                    </div>
+                </div>
+                <div class="w3-third w3-container w3-margin-bottom">
+                    <img src="${threePercentLeaders[0].pictureURL}" alt="${threePercentLeaders[0].firstName} ${threePercentLeaders[0].lastName}" style="width:100%" class="w3-hover-opacity">
+                    <div class="w3-container w3-white">
+                        <p><b>3PT% Leaders</b></p>
+                        <g:each status="i" in="${threePercentLeaders}" var="threeLeader">
+                            <p>${i+1}. <span>${threeLeader.firstName?.encodeAsHTML()} ${threeLeader.lastName?.encodeAsHTML()}</span> <span>${threeLeader.team.location?.encodeAsHTML()}</span> ${threeLeader.threePointPercentage?.encodeAsHTML()}</p>
+                        </g:each>
                     </div>
                 </div>
             </div>
