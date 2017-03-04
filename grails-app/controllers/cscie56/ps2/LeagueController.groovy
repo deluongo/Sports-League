@@ -157,9 +157,11 @@ class LeagueController {
 
         /*  --------------              *** Select Player ***           ---------------  */
         def person = Person.get(personIndex)
-        def personIndex = personIndex ?: "1"
+        personIndex = personIndex ?: "1"
 
         /*  --------------              *** Display Stats ***           ---------------  */
-        render(view: "season/showStandings/${personIndex}", model: [person: person])
+
+        render(view: "person/stats", model: [person: person])
+	    //respond(person, view: "person/stats/${personIndex}")
     }
 }
