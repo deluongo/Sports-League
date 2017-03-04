@@ -361,6 +361,99 @@ class SeasonController {
     }
     /*  ----------------------------   ( custom rendering )   -----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */
+
+    /*                          ==============  ***  ==============                          *
+     #  ---------------------             CUSTOM RENDERING            ---------------------  #
+     *                          ===================================                          */
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~ SHOW LEADERBOARD ~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def showLeaderboard(String conferenceName) {
+        /*------------------------------------------*
+        * ===========================================
+        * FUNCTION -> SHOW STANDINGS!
+        * ===========================================
+        * INPUTS:
+        *     -
+        * FUNCTIONS:
+        *     - playGame(homeTeam, awayTeam)
+        * DESCRIPTION:
+        *     - Displays league standings in the browser
+        * OUTPUT:
+        *     -
+        /*---------------------------------------------------------------------------------------------*/
+
+        /*  --------------               *** Sim Season  ***            ---------------  */
+        //simSeason('2017', 82)
+
+        /*  --------------            *** Load All Teams ***            ---------------  */
+        /* ___  Load Conference Objects  ___ */
+        def westernConference = Conference.findAllByName("Western Conference")
+        def easternConference = Conference.findAllByName("Eastern Conference")
+        /* ___  Teams List by Conference  ___ */
+        def westTeams = Team.findAllByConference(westernConference)
+        def eastTeams = Team.findAllByConference(easternConference)
+        def allTeams = Team.findAll()
+        /* ___  Players List by Conference  ___ */
+        def westPlayers = Person.findAllByTeam(westTeams)
+        def eastPlayers = Person.findAllByTeam(eastTeams)
+        def allPlayers = Person.all
+        /* ___  Remove Coaches  ___ */
+        westPlayers.removeIf { it.role != "player" }
+        eastPlayers.removeIf { it.role != "player" }
+        allPlayers.removeIf { it.role != "player" }
+
+        //Person.getAll()
+
+        /*  --------------          *** Create Conference Map  ***      ---------------  */
+
+        /* ___  Ensure Page Load for /season/showStandings  ___ */
+        def team
+        def players
+        if (conferenceName == 'east') {
+            team = eastTeams
+            players = eastPlayers
+        }
+        else if (conferenceName == 'west') {
+            team = westTeams
+            players = westPlayers
+        }
+        else {
+            conferenceName = "show"
+            team = allTeams
+            players = allPlayers
+        }
+        print("\n\n\n")
+        print(players)
+        /*  --------------            *** Determine Leaders  ***        ---------------  */
+
+        /*--|  sort players by PPG -> get top 5 players  |--*/
+        def pointsLeaders = players.sort{it.pointsPerGame}.reverse().take(5)
+        /*--|  sort players by PPG -> get top 5 players  |--*/
+        def assistsLeaders = players.sort{it.assistsPerGame}.reverse().take(5)
+        /*--|  sort players by PPG -> get top 5 players  |--*/
+        def reboundsLeaders = players.sort{it.reboundsPerGame}.reverse().take(5)
+        /*--|  sort players by PPG -> get top 5 players  |--*/
+        def stealsLeaders = players.sort{it.stealsPerGame}.reverse().take(5)
+        /*--|  sort players by PPG -> get top 5 players  |--*/
+        def fgPercentLeaders = players.sort{it.shootingPercentage}.reverse().take(5)
+        /*--|  sort players by PPG -> get top 5 players  |--*/
+        def threePercentLeaders = players.sort{it.threePointPercentage}.reverse().take(5)
+
+
+        /*  --------------            *** Display Standings ***         ---------------  */
+        /* ___  open standings view ___ */
+        render(view: "leaderboard/${conferenceName}",
+                model: [seasonName: westernConference.seasons.name.first(), teamList: team,
+                        scoringLeaders: pointsLeaders,  assistLeaders: assistsLeaders,
+                        reboundLeaders: reboundsLeaders, stealLeaders: stealsLeaders,
+                        shootingPercentLeaders: fgPercentLeaders, threePercentLeaders: threePercentLeaders
+                ])
+    }
+    /*  ----------------------------   ( custom rendering )   -----------------------------  */
+    /*  -----------------------------------   ~ END ~    ----------------------------------  */
+
 }
 /*  ----------------------------   ( season controller )   ----------------------------  */
 /*  -----------------------------------   ~ END ~    ----------------------------------  */
