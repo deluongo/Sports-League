@@ -14,6 +14,7 @@ class UrlMappings {
             action = 'showStandings'
         }
 
+
         "/league/season/showStandings/$conferenceIndex?" {
             controller = 'league'
             action = 'season'
