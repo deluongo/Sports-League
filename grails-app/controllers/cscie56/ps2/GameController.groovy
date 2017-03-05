@@ -1,73 +1,107 @@
 package cscie56.ps2
 
+import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+
+@Transactional(readOnly = true)
 class GameController {
 
-    static scaffold = Game
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-    /*---------------------------------------------------------------------------------------------*
-* ===========================================
-* FUNCTION -> PLAY GAME!
-* ===========================================
-* INPUTS:
-*     - Home Team (String homeTeam)
-*     - Away Team (String awayTeam)
-*     - Points 4 Home Team (Int ptsHome)
-*     - Points 4 Away Team (Int ptsAway)
-* DESCRIPTION:
-*     - Updates wins, losses, ties, winPercent, scored, allowed, delta for Home & Away Teams
-*     -
-/*---------------------------------------------------------------------------------------------*/
-    def playGame(homeTeam, awayTeam) {
-
-        /* ~~~~~~~~~~~ RANDOM WINNER ~~~~~~~~~~~~~ */
-        /* ~~~~~~ (w/ home court advantage) ~~~~~~ */
-        Random random = new Random()
-        Integer ptsHome = random.nextInt(70) + 70
-        Integer ptsAway = random.nextInt(65) + 65
-
-        /* ~~~~~~~~~~ UPDATE TEAM STATS ~~~~~~~~~~ */
-        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-        /* ---  scored  --- */
-        homeTeam.scores(ptsHome)
-        awayTeam.scores(ptsAway)
-        /* ---  allowed  --- */
-        homeTeam.allows(ptsAway)
-        awayTeam.allows(ptsHome)
-        /* --- record --- */
-        String winner
-        if (ptsHome > ptsAway) {
-            winner = homeTeam.name
-            homeTeam.wins()
-            awayTeam.loses()
-        }
-        else if (ptsHome < ptsAway) {
-            winner = awayTeam.name
-            homeTeam.loses()
-            awayTeam.wins()
-        }
-        else {
-            winner = null
-            homeTeam.ties()
-            awayTeam.ties()
-        }
-        /* ---  winPercent  --- */
-        homeTeam.calcWinPercent()
-        awayTeam.calcWinPercent()
-        /* ---  delta  --- */
-        homeTeam.calcDelta()
-        awayTeam.calcDelta()
-        /* ---  streak  --- */
-        homeTeam.calcStreak()
-        awayTeam.calcStreak()
-
-        /* ~~~~~~~~~~~~ PRINT RESULTS ~~~~~~~~~~~~ */
-        /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-        //println """
-        //$winner Wins!
-        //==============
-        //$homeTeam.name $ptsHome
-        //$awayTeam.name $ptsAway
-        //"""
+    def index(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        respond Game.list(params), model:[gameCount: Game.count()]
     }
 
+    def show(Game game) {
+        respond game
+    }
+
+    def create() {
+        respond new Game(params)
+    }
+
+    @Transactional
+    def save(Game game) {
+        if (game == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (game.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond game.errors, view:'create'
+            return
+        }
+
+        game.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'game.label', default: 'Game'), game.id])
+                redirect game
+            }
+            '*' { respond game, [status: CREATED] }
+        }
+    }
+
+    def edit(Game game) {
+        respond game
+    }
+
+    @Transactional
+    def update(Game game) {
+        if (game == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (game.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond game.errors, view:'edit'
+            return
+        }
+
+        game.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'game.label', default: 'Game'), game.id])
+                redirect game
+            }
+            '*'{ respond game, [status: OK] }
+        }
+    }
+
+    @Transactional
+    def delete(Game game) {
+
+        if (game == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        game.delete flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'game.label', default: 'Game'), game.id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    protected void notFound() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'game.label', default: 'Game'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*'{ render status: NOT_FOUND }
+        }
+    }
 }

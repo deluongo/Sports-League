@@ -1,0 +1,174 @@
+package cscie56.ps2
+
+import grails.test.mixin.*
+import spock.lang.*
+
+@TestFor(GameController)
+@Mock(Game)
+class GameControllerSpec extends Specification {
+
+    def populateValidParams(params) {
+
+
+        /*  ---------------             *** League~ ***            ---------------  */
+        League nba = new League(name: 'NBA')
+
+        /*  ---------------             *** 2Season~ ***           ---------------  */
+        Season season = new Season(name: '2017', startDate: new Date(), endDate: new Date(), league: nba)
+
+        /*  ---------------          *** Western ~Conference~ ***       ---------------  */
+        Conference west = new Conference(name: 'Western Conference', seasons: season)
+
+        /*  ---------------          *** Western ~Conference~ ***       ---------------  */
+        Team testTeam = new Team(name: "Team Name", wins: 0, losses: 0, ties: 0,
+                scored: 0, allowed: 0, location: "Golden State", conference: west,
+                seed: 0, gamesPlayed: 0,   lastResult: "-", result: "-" )
+
+
+        Team testTeam2 = new Team(name: "Team Name", wins: 0, losses: 0, ties: 0,
+                scored: 0, allowed: 0, location: "Golden State", conference: west,
+                seed: 0, gamesPlayed: 0,   lastResult: "-", result: "-" )
+
+
+        params << [homeTeam: testTeam.name, guestTeam: testTeam2, awayTeam: testTeam.name,
+                   hostTeam: testTeam, roadTeam: testTeam2, winner: testTeam.name, loser: testTeam2.name, homePoints: 100, awayPoints: 80,
+                   gameDate: new Date(), location: testTeam.location]
+
+        assert params != null
+    }
+
+    void "Test the index action returns the correct model"() {
+
+        when:"The index action is executed"
+            controller.index()
+
+        then:"The model is correct"
+            !model.gameList
+            model.gameCount == 0
+    }
+
+    void "Test the create action returns the correct model"() {
+        when:"The create action is executed"
+            controller.create()
+
+        then:"The model is correctly created"
+            model.game!= null
+    }
+
+    void "Test the save action correctly persists an instance"() {
+
+        when:"The save action is executed with an invalid instance"
+            request.contentType = FORM_CONTENT_TYPE
+            request.method = 'POST'
+            def game = new Game()
+            game.validate()
+            controller.save(game)
+
+        then:"The create view is rendered again with the correct model"
+            model.game!= null
+            view == 'create'
+
+        when:"The save action is executed with a valid instance"
+            response.reset()
+            populateValidParams(params)
+            game = new Game(params)
+
+            controller.save(game)
+
+        then:"A redirect is issued to the show action"
+            response.redirectedUrl == '/game/show/1'
+            controller.flash.message != null
+            Game.count() == 1
+    }
+
+    void "Test that the show action returns the correct model"() {
+        when:"The show action is executed with a null domain"
+            controller.show(null)
+
+        then:"A 404 error is returned"
+            response.status == 404
+
+        when:"A domain instance is passed to the show action"
+            populateValidParams(params)
+            def game = new Game(params)
+            controller.show(game)
+
+        then:"A model is populated containing the domain instance"
+            model.game == game
+    }
+
+    void "Test that the edit action returns the correct model"() {
+        when:"The edit action is executed with a null domain"
+            controller.edit(null)
+
+        then:"A 404 error is returned"
+            response.status == 404
+
+        when:"A domain instance is passed to the edit action"
+            populateValidParams(params)
+            def game = new Game(params)
+            controller.edit(game)
+
+        then:"A model is populated containing the domain instance"
+            model.game == game
+    }
+
+    void "Test the update action performs an update on a valid domain instance"() {
+        when:"Update is called for a domain instance that doesn't exist"
+            request.contentType = FORM_CONTENT_TYPE
+            request.method = 'PUT'
+            controller.update(null)
+
+        then:"A 404 error is returned"
+            response.redirectedUrl == '/game/index'
+            flash.message != null
+
+        when:"An invalid domain instance is passed to the update action"
+            response.reset()
+            def game = new Game()
+            game.validate()
+            controller.update(game)
+
+        then:"The edit view is rendered again with the invalid instance"
+            view == 'edit'
+            model.game == game
+
+        when:"A valid domain instance is passed to the update action"
+            response.reset()
+            populateValidParams(params)
+            game = new Game(params).save(flush: true)
+            controller.update(game)
+
+        then:"A redirect is issued to the show action"
+            game != null
+            response.redirectedUrl == "/game/show/$game.id"
+            flash.message != null
+    }
+
+    void "Test that the delete action deletes an instance if it exists"() {
+        when:"The delete action is called for a null instance"
+            request.contentType = FORM_CONTENT_TYPE
+            request.method = 'DELETE'
+            controller.delete(null)
+
+        then:"A 404 is returned"
+            response.redirectedUrl == '/game/index'
+            flash.message != null
+
+        when:"A domain instance is created"
+            response.reset()
+            populateValidParams(params)
+            def game = new Game(params).save(flush: true)
+
+        then:"It exists"
+            Game.count() == 1
+
+        when:"The domain instance is passed to the delete action"
+            controller.delete(game)
+
+        then:"The instance is deleted"
+            Game.count() == 0
+            response.redirectedUrl == '/game/index'
+            flash.message != null
+    }
+}

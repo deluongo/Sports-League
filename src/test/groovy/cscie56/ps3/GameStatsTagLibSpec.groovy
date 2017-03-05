@@ -4,17 +4,12 @@ import cscie56.ps2.Conference
 import cscie56.ps2.League
 import cscie56.ps2.Season
 import cscie56.ps2.Team
+
+import grails.test.mixin.TestFor
 import spock.lang.Specification
-import grails.test.mixin.*
 
 @TestFor(GameStatsTagLib)
 class GameStatsTagLibSpec extends Specification {
-
-    def setup() {
-    }
-
-    def cleanup() {
-    }
 
     /*  ---------------             *** League~ ***            ---------------  */
     League nba = new League(name: 'NBA')
@@ -47,7 +42,7 @@ class GameStatsTagLibSpec extends Specification {
                    threePointPercentage: 100.0,
                    personalFouls: 2)
 
-        new GameStats(player: testPlayer, minutesPlayed: 48,
+        GameStats game2 = new GameStats(player: testPlayer, minutesPlayed: 48,
                 points: 30, assists: 6,
                 rebounds: 9, steals: 3,
                 shotsAttempted: 30,
@@ -62,6 +57,7 @@ class GameStatsTagLibSpec extends Specification {
 
         String result = applyTemplate('<stats:seasonStats player="${person}" ></stats:seasonStats>',
                 [person : testPlayer]).trim()
+
 
         assert result.contains("<tbody>")
         assert result.contains("<tr>")
