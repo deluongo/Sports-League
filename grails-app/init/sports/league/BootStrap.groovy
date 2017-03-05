@@ -277,8 +277,24 @@ class BootStrap {
                 Date.parse("MM-dd-yyyy", "1-01-1900"), "Unknown Birthplace", "5'0\"", 100, "Unknown College", "http://www.tacticmusic.com/wp-content/uploads/2015/11/coming-soon.jpg")
 
         /*  ---------------           *** Simulate ~Season~ ***         ---------------  */
-        simSeason('2017', 82)
+
+
+
+
+
+
+
+        /*  ____________________________                            ___________________________  */
+        /*  ========================= !!! ---*** SIM SEASON ***--- !!! ========================  */
+        simSeason('2017', 10)
     }
+
+
+
+
+
+
+
 
     def destroy = {
     }
@@ -291,60 +307,63 @@ class BootStrap {
      *                          ===================================                          */
 
 
-    /*  ______________________                                       ______________________  */
-    /*  ====================== !!! ---*** PRIMARY FUNCTION ***--- !!!======================  */
+    /*  ____________________________                            ___________________________  */
+    /*  ======================= !!! ---*** SAVE FUNCTIONS ***--- !!! ======================  */
 
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	*   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ SIM SEASON ~~~~~~~~~~~~~~
-	*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def simSeason(String seasonName, Integer numGames) {
-        /* ---------------------------------------------
-        *  INPUTS:
-        *     - Number of Games per Season (Integer numGames)
-        *     - League of Teams (List league)
-        *  FUNCTIONS:
-        *     - playGame(homeTeam, awayTeam)
-        *  DESCRIPTION:
-        *     - Simulates an entire season of games for every team
-        *  OUTPUT:
-        *     - None
-        *     - (Updates league list with simulated stats)
-        /*---------------------------------------------------------------------------------------------*/
-
-
-        /*  --------------          *** Loop Through Each Game ***      ---------------  */
-        numGames.each{
-
-            /*  --------------             *** Load Team List ***           ---------------  */
-            /* ___  current season  ___ */
-            Season season = Season.findByName(seasonName)
-            /* ___  set calendar  ___ */
-            Date date = season.startDate - 7
-            def seasonDates = []
-            /* ___  participating conferences  ___ */
-            def conferences = Conference.findAllBySeasons(season)
-            /* ___  participating teams  ___ */
-            def teamList = []
-            conferences.each{ conf -> teamList.addAll(Team.findAllByConference(conf))}
-
-            /*  --------------             *** Simulate Games ***           ---------------  */
-            Integer gmsPerNight = (Math.floor(teamList.size()/2))*2
-            /* ___  weeks of games  ___ */
-            for(int i=0; i<numGames; i++) {
-                /* ___  randomize matchups  ___ */
-                Collections.shuffle(teamList)
-                /* ___  set calender week  ___ */
-                date += 7
-                seasonDates << date
-                /* ___  each team plays once  ___ */
-                for(int j=0; j<gmsPerNight; j+=2) {
-                    playGame(teamList[j].name, teamList[j+1].name, seasonDates[i])
-                }
-            }
-        }
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ CREATE TEAMS ~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def saveTeam(teamName, streak, wins, losses, ties, scored, allowed, delta, winPercent, lastResult, result, location, conference) {
+        /* ___  create team  ___ */
+        Team newTeam = new Team(name: teamName, streak: streak, wins: wins, losses: losses, ties: ties,
+                scored: scored, allowed: allowed, delta: delta, winPercent: winPercent,
+                lastResult: lastResult, result: result, location: location, conference: conference,
+                seed: -1, gamesBack: -1, l10: "0-0", homeRecord: "0-0", roadRecord: "0-0", gamesPlayed: 0)
+        /* ___  save team  ___ */
+        saveObject(newTeam)
+        /* ___  return team object ___ */
+        newTeam
     }
 
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ CREATE PLAYERS ~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def savePlayer(firstName, lastName, number, pointsScored, team, bio, birthDate, birthPlace, height, weight, universityAttended, pictureURL) {
+        /* ___  create player  ___ */
+        Person newPlayer = new Person(firstName: firstName, lastName: lastName, number: number, role: "player",
+                pointsScored: pointsScored, team: team, bio: bio, birthDate: birthDate, birthPlace: birthPlace, height: height,
+                weight: weight, universityAttended: universityAttended, pictureURL: pictureURL)
+        /* ___  save player  ___ */
+        saveObject(newPlayer)
+        /* ___  return player object  ___ */
+        newPlayer
+    }
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ CREATE COACHES ~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def saveCoach(firstName, lastName, team, bio, birthDate, birthPlace, height, weight, universityAttended, pictureURL) {
+        /* ___  create coach  ___ */
+        Person newCoach = new Person(firstName: firstName, lastName: lastName, number: "C", role: "coach",
+                pointsScored: 0, team: team, bio: bio, birthDate: birthDate, birthPlace: birthPlace, height: height,
+                weight: weight, universityAttended: universityAttended, pictureURL: pictureURL)
+        /* ___  save team  ___ */
+        saveObject(newCoach)
+        /* ___  return player object  ___ */
+        newCoach
+    }
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ SAVE OBJECTS ~~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def saveObject(object) {
+        if (!object.save(flush:true)) {
+            object.errors.allErrors.each { println it }
+        }
+    }
+    /*  -----------------------------   ( save functions )   ------------------------------  */
+    /*  -----------------------------------   ~ END ~    ----------------------------------  */
 
     /*  _____________________                                         _____________________  */
     /*  ===================== !!! ---*** SIMULATION HELPERS ***--- !!!=====================  */
@@ -444,65 +463,62 @@ class BootStrap {
     /*  ---------------------------   ( simulate functions )   ----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */
 
+    /*  ______________________                                       ______________________  */
+    /*  ====================== !!! ---*** PRIMARY FUNCTION ***--- !!!======================  */
 
-    /*  ____________________________                            ___________________________  */
-    /*  ======================= !!! ---*** SAVE FUNCTIONS ***--- !!! ======================  */
-
-
-    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ CREATE TEAMS ~~~~~~~~~~~~~
-     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def saveTeam(teamName, streak, wins, losses, ties, scored, allowed, delta, winPercent, lastResult, result, location, conference) {
-        /* ___  create team  ___ */
-        Team newTeam = new Team(name: teamName, streak: streak, wins: wins, losses: losses, ties: ties,
-                scored: scored, allowed: allowed, delta: delta, winPercent: winPercent,
-                lastResult: lastResult, result: result, location: location, conference: conference,
-                seed: -1, gamesBack: -1, l10: "0-0", homeRecord: "0-0", roadRecord: "0-0", gamesPlayed: 0)
-        /* ___  save team  ___ */
-        saveObject(newTeam)
-        /* ___  return team object ___ */
-        newTeam
-    }
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ CREATE PLAYERS ~~~~~~~~~~~~
-     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def savePlayer(firstName, lastName, number, pointsScored, team, bio, birthDate, birthPlace, height, weight, universityAttended, pictureURL) {
-        /* ___  create player  ___ */
-        Person newPlayer = new Person(firstName: firstName, lastName: lastName, number: number, role: "player",
-                pointsScored: pointsScored, team: team, bio: bio, birthDate: birthDate, birthPlace: birthPlace, height: height,
-                weight: weight, universityAttended: universityAttended, pictureURL: pictureURL)
-        /* ___  save player  ___ */
-        saveObject(newPlayer)
-        /* ___  return player object  ___ */
-        newPlayer
-    }
+	*   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~~ SIM SEASON ~~~~~~~~~~~~~~
+	*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def simSeason(String seasonName, Integer numGames) {
+        /* ---------------------------------------------
+        *  INPUTS:
+        *     - Number of Games per Season (Integer numGames)
+        *     - League of Teams (List league)
+        *  FUNCTIONS:
+        *     - playGame(homeTeam, awayTeam)
+        *  DESCRIPTION:
+        *     - Simulates an entire season of games for every team
+        *  OUTPUT:
+        *     - None
+        *     - (Updates league list with simulated stats)
+        /*---------------------------------------------------------------------------------------------*/
 
-    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ CREATE COACHES ~~~~~~~~~~~~
-     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def saveCoach(firstName, lastName, team, bio, birthDate, birthPlace, height, weight, universityAttended, pictureURL) {
-        /* ___  create coach  ___ */
-        Person newCoach = new Person(firstName: firstName, lastName: lastName, number: "C", role: "coach",
-                pointsScored: 0, team: team, bio: bio, birthDate: birthDate, birthPlace: birthPlace, height: height,
-                weight: weight, universityAttended: universityAttended, pictureURL: pictureURL)
-        /* ___  save team  ___ */
-        saveObject(newCoach)
-        /* ___  return player object  ___ */
-        newCoach
-    }
 
-    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~~ SAVE OBJECTS ~~~~~~~~~~~~~
-     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def saveObject(object) {
-        if (!object.save(flush:true)) {
-            object.errors.allErrors.each { println it }
+        /*  --------------          *** Loop Through Each Game ***      ---------------  */
+        numGames.each{
+
+            /*  --------------             *** Load Team List ***           ---------------  */
+            /* ___  current season  ___ */
+            Season season = Season.findByName(seasonName)
+            /* ___  set calendar  ___ */
+            Date date = season.startDate - 7
+            def seasonDates = []
+            /* ___  participating conferences  ___ */
+            def conferences = Conference.findAllBySeasons(season)
+            /* ___  participating teams  ___ */
+            def teamList = []
+            conferences.each{ conf -> teamList.addAll(Team.findAllByConference(conf))}
+
+            /*  --------------             *** Simulate Games ***           ---------------  */
+            Integer gmsPerNight = (Math.floor(teamList.size()/2))*2
+            /* ___  weeks of games  ___ */
+            for(int i=0; i<numGames; i++) {
+                /* ___  randomize matchups  ___ */
+                Collections.shuffle(teamList)
+                /* ___  set calender week  ___ */
+                date += 7
+                seasonDates << date
+                /* ___  each team plays once  ___ */
+                for(int j=0; j<gmsPerNight; j+=2) {
+                    playGame(teamList[j].name, teamList[j+1].name, seasonDates[i])
+                }
+                print("Week ${i} Completed")
+            }
         }
+        /*  -------------------------------   ( sim season )   --------------------------------  */
+        /*  -----------------------------------   ~ END ~    ----------------------------------  */
     }
-
-
-
     /*  ----------------------------   ( helper functions )   -----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */
 }
