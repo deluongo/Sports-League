@@ -1,4 +1,6 @@
 package cscie56.ps3
+import cscie56.ps2.Game
+import cscie56.ps2.Team
 
 import grails.test.mixin.*
 import spock.lang.*
@@ -10,9 +12,17 @@ class GameStatsControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
 
-        // TODO: Populate valid properties like...
-        //params["name"] = 'someValidName'
-        assert false, "TODO: Provide a populateValidParams() implementation for this generated test suite"
+
+        params << [player: new Person(), minutesPlayed: 48,
+                points: 30, assists: 8,
+                rebounds: 9, steals: 3,
+                shotsAttempted: 30,
+                shotsMade: 14,
+                shootingPercentage: 56.5,
+                threePointersAttempted: 2,
+                threePointersMade: 2,
+                threePointPercentage: 100.0,
+                personalFouls: 2]
     }
 
     void "Test the index action returns the correct model"() {
