@@ -259,14 +259,19 @@ class SeasonController {
         def eastTeams = Team.findAllByConference(easternConference)
         def allTeams = Team.findAll()
         /* ___  Players List by Conference  ___ */
-        def westPlayers = Person.findAllByTeam(westTeams)
-        def eastPlayers = Person.findAllByTeam(eastTeams)
+        def westPlayers = []
+        westTeams.each{ westPlayers.add(it.persons)}
+        westPlayers = westPlayers.flatten()
+        def eastPlayers = []
+        eastTeams.each{ eastPlayers.add(it.persons)}
+        eastPlayers = eastPlayers.flatten()
+        def allPlayers = Person.findAll()
 
         /* ___  Remove Coaches  ___ */
         westPlayers.removeIf { it.role != "player" }
         eastPlayers.removeIf { it.role != "player" }
+        allPlayers.removeIf { it.role != "player" }
 
-        def allPlayers = westPlayers + eastPlayers
         //Person.getAll()
 
         /*  --------------          *** Create Conference Map  ***      ---------------  */
@@ -292,6 +297,7 @@ class SeasonController {
 
         /*--|  sort players by PPG -> get top 5 players  |--*/
         def pointsRankings = players.sort{it.pointsPerGame}.reverse()
+        //print(pointsRankings)
         def pointsLeaders = pointsRankings.take(5)
         /*--|  sort players by APG -> get top 5 players  |--*/
         def assistsRankings = players.sort{it.assistsPerGame}.reverse()
