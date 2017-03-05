@@ -45,18 +45,18 @@ class GameStatsTagLib {
             }
             tr{
                 th{ mb.yield "Per Game" }
-                td{mb.yield "${player.minutesPerGame}"}
-                td{mb.yield "${player.pointsPerGame}"}
-                td{mb.yield "${player.assistsPerGame}"}
-                td{mb.yield "${player.reboundsPerGame}"}
-                td{mb.yield "${player.stealsPerGame}"}
-                td{mb.yield "${player.shotsAttemptedPerGame}"}
-                td{mb.yield "${player.shotsMadePerGame}"}
-                td{mb.yield "${player.shootingPercentage}%"}
-                td{mb.yield "${player.threePointersAttemptedPerGame}"}
-                td{mb.yield "${player.threePointersMadePerGame}"}
-                td{mb.yield "${player.threePointPercentage}%"}
-                td{mb.yield "${player.personalFoulsPerGame}"}
+                td{mb.yield "${(player.minutesPerGame  as double).round(1)}"}
+                td{mb.yield "${(player.pointsPerGame  as double).round(1)}"}
+                td{mb.yield "${(player.assistsPerGame  as double).round(1)}"}
+                td{mb.yield "${(player.reboundsPerGame  as double).round(1)}"}
+                td{mb.yield "${(player.stealsPerGame  as double).round(1)}"}
+                td{mb.yield "${(player.shotsAttemptedPerGame  as double).round(1)}"}
+                td{mb.yield "${(player.shotsMadePerGame  as double).round(1)}"}
+                td{mb.yield "${(player.shootingPercentage  as double).round(1)}%"}
+                td{mb.yield "${(player.threePointersAttemptedPerGame  as double).round(1)}"}
+                td{mb.yield "${(player.threePointersMadePerGame  as double).round(1)}"}
+                td{mb.yield "${(player.threePointPercentage  as double).round(1)}%"}
+                td{mb.yield "${(player.personalFoulsPerGame  as double).round(1)}"}
             }
         }
     }

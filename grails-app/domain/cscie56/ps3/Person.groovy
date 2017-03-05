@@ -191,77 +191,77 @@ class Person {
 	 *  ~~~~ PER GAME STATS ~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getPerGameStats() {
-        (seasonTotals/gamesPlayed as double).round(1)
+        seasonTotals/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~~ MINUTES ~~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getMinutesPerGame() {
-        (minutesPlayed/gamesPlayed as double).round(1)
+        minutesPlayed/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~ FG ATTEMPTS ~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getShotsAttemptedPerGame() {
-        (shotsAttempted/gamesPlayed as double).round(1)
+        shotsAttempted/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~ FG MAKES ~~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getShotsMadePerGame() {
-        (shotsMade/gamesPlayed as double).round(1)
+        shotsMade/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~~ POINTS ~~~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getPointsPerGame() {
-        (points/gamesPlayed as double).round(1)
+        points/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~~ ASSISTS ~~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getAssistsPerGame() {
-        (assists/gamesPlayed as double).round(1)
+        assists/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~ REBOUNDS ~~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getReboundsPerGame() {
-        (rebounds/gamesPlayed as double).round(1)
+        rebounds/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~~ STEALS ~~~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getStealsPerGame() {
-        (steals/gamesPlayed as double).round(1)
+        steals/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~ 3PT ATTEMPTS ~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getThreePointersAttemptedPerGame() {
-        (threePointersAttempted/gamesPlayed as double).round(1)
+        threePointersAttempted/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~ 3PT MAKES ~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getThreePointersMadePerGame() {
-        (threePointersMade/gamesPlayed as double).round(1)
+        threePointersMade/gamesPlayed
     }
 
     /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *  ~~~~~~~~~ FOULS ~~~~~~~~~
 	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def getPersonalFoulsPerGame() {
-        (personalFouls/gamesPlayed as double).round(1)
+        personalFouls/gamesPlayed
     }
 
 
