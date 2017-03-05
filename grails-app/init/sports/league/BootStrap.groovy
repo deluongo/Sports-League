@@ -513,7 +513,7 @@ class BootStrap {
                 for(int j=0; j<gmsPerNight; j+=2) {
                     playGame(teamList[j].name, teamList[j+1].name, seasonDates[i])
                 }
-                print("Week ${i} Completed")
+                print("Week ${i} Simulated ")
             }
         }
         /*  -------------------------------   ( sim season )   --------------------------------  */

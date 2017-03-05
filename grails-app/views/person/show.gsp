@@ -106,7 +106,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
                     <div>
-                        <g:render template="/sharedTemplates/allStatsRow" />
+                        <g:render template="/sharedTemplates/allStatRows" />
                     </div>
                     <br />
                 </div>

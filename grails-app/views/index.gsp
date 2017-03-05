@@ -51,6 +51,18 @@
         </div>
     </div>
 
+    <!-- Header -->
+    <header class="w3-container" id="portfolio">
+        <h1><b> Links to Assignments</b></h1>
+        <div class="w3-section w3-bottombar w3-padding-16">
+            <div class="nav" role="navigation">
+                <g:link class="w3-button w3-white" controller="season" action="leaderboard" params="[conferenceName: 'show']">Leaderboard</g:link>
+                <g:link class="w3-button w3-white" controller="league" action="person" >Steph Curry Stats</g:link>
+                <g:link class="w3-button w3-white" controller="season" action="showStandings" params="[conferenceIndex: 1]">Standings</g:link>
+            </div>
+        </div>
+    </header>
+
     <div id="content" role="main">
         <section class="row colset-2-its">
             <h1>Welcome to Grails</h1>

@@ -303,7 +303,7 @@ class Person {
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
     def rebounded(Integer totalPoints, ratio) {
         def totalRebounds = totalPoints * 2 / 3 - 20
-        (int)(totalRebounds * (1 - ratio))
+        (int)(totalRebounds * ratio)
     }
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
