@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="layout" content="main" />
-        <title>NBA Standings</title><!-- Bootstrap is a responsive web design framework with CSS and JS that we'll be using later in the course -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <title>NBA Standings</title>
         <asset:stylesheet src="application.css"/>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+        <!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" /> -->
+        <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" /> -->
+
+        <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.4.js">
+        </script>
+        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
+        </script>
+
+        <script type="text/javascript" class="init">
+
+            $(document).ready(function() {
+                $('#standings').DataTable({bFilter: false, bInfo: false, searching: false, paging: false});
+            } );
+
+        </script>
     </head>
     <body>
-        <a href="#list-team" class="skip bg-primary " tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-            </ul>
-        </div>
         <div>
             <div class="row">
+                <h1>Standings</h1>
                 <div class="nav" role="navigation">
-                    <ul>
+                    <ul class="nav nav-tabs">
                         <li><g:link action="showStandings" params="[conferenceIndex: '1']">Western Conference</g:link></li>
-                        <li><g:link action="showStandings" params="[conferenceIndex: '2']">Eastern Conference</g:link></li>
+                        <li class="active"><g:link action="showStandings" params="[conferenceIndex: '2']">Eastern Conference</g:link></li>
                     </ul>
                 </div>
-                <table id="example" class="table table-striped table-inverse table-bordered table-hover dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+                <table id="standings" class="table table-striped table-inverse table-bordered table-hover dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
                     <thead>
                     <tr role="row">
                         <th>#</th>
@@ -29,14 +39,14 @@
                         <th>W</th>
                         <th>L</th>
                         <th>Win %</th>
-                        <th>GB</th>
-                        <th>Home</th>
-                        <th>Road</th>
+                        <th class='hidden-xs'>GB</th>
+                        <th class='hidden-xs'>Home</th>
+                        <th class='hidden-xs'>Road</th>
                         <th>L10</th>
-                        <th>Streak</th>
-                        <th>Scored</th>
-                        <th>Allowed</th>
-                        <th>Diff.</th>
+                        <th class='hidden-xs'>Streak</th>
+                        <th class='hidden-xs'>Scored</th>
+                        <th class='hidden-xs'>Allowed</th>
+                        <th class='hidden-xs'>Diff.</th>
                     </thead>
                     <tbody>
                     <g:each status="i" in="${teamList.sort{it.seed}}" var="team">
@@ -47,14 +57,14 @@
                             <td>${team.wins?.encodeAsHTML()}</td>
                             <td>${team.losses?.encodeAsHTML()}</td>
                             <td>${team.winPercent?.encodeAsHTML()}</td>
-                            <td>${team.gamesBack?.encodeAsHTML()}</td>
-                            <td>${team.homeRecord?.encodeAsHTML()}</td>
-                            <td>${team.roadRecord?.encodeAsHTML()}</td>
+                            <td class='hidden-xs'>${team.gamesBack?.encodeAsHTML()}</td>
+                            <td class='hidden-xs'>${team.homeRecord?.encodeAsHTML()}</td>
+                            <td class='hidden-xs'>${team.roadRecord?.encodeAsHTML()}</td>
                             <td>${team.l10?.encodeAsHTML()}</td>
-                            <td>${team.streak?.encodeAsHTML()}</td>
-                            <td>${team.scored?.encodeAsHTML()}</td>
-                            <td>${team.allowed?.encodeAsHTML()}</td>
-                            <td>${team.delta?.encodeAsHTML()}</td>
+                            <td class='hidden-xs'>${team.streak?.encodeAsHTML()}</td>
+                            <td class='hidden-xs'>${team.scored?.encodeAsHTML()}</td>
+                            <td class='hidden-xs'>${team.allowed?.encodeAsHTML()}</td>
+                            <td class='hidden-xs'>${team.delta?.encodeAsHTML()}</td>
                         </tr>
                     </g:each>
                     </tbody>
