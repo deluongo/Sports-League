@@ -9,21 +9,12 @@ class UrlMappings {
             }
         }
 
-        "/season/showStandings/$conferenceIndex?" {
-            controller = 'season'
-            action = 'showStandings'
-        }
-
         "/season/leaderboard/$conferenceName?" {
             controller = 'season'
             action = 'showLeaderboard'
         }
 
 
-        "/league/season/showStandings/$conferenceIndex?" {
-            controller = 'league'
-            action = 'season'
-        }
 
         "/league/person/stats/$personIndex?" {
             controller = 'league'

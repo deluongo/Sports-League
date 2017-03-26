@@ -9,13 +9,33 @@
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<asset:stylesheet src="application.css"/>
 
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </style>
 <body class="w3-light-grey">
 
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Devon's League</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li id="standingsNav"><g:link controller="season" action="showStandings">Standings</g:link></li>
+                    <li id="leaderboard"><g:link controller="season" action="leaderboard">Stat Leaders</g:link></li>
+                    <li id="players"><g:link controller="person" action="index">Players</g:link></li>
+                    <li id="player" class="active"><g:link controller="league" action="person">Stephen Curry</g:link></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!-- Page Container -->
     <div class="w3-content w3-margin-top" style="max-width:1400px;">
 

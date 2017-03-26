@@ -3,7 +3,6 @@
     <head>
         <title>Players List</title>
         <asset:stylesheet src="application.css"/>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 
         <!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" /> -->
         <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" /> -->
@@ -16,16 +15,36 @@
         <script type="text/javascript" class="init">
 
             $(document).ready(function() {
-                $('#players').DataTable({bFilter: false, bInfo: false, searching: false, paging: false});
+                $('#players-table').DataTable({bFilter: false, bInfo: false, searching: false, paging: false});
             } );
 
         </script>
     </head>
     <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">WebSiteName</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li id="standingsNav"><g:link controller="season" action="showStandings">Standings</g:link></li>
+                        <li id="leaderboard"><g:link controller="season" action="leaderboard">Stat Leaders</g:link></li>
+                        <li id="players" class="active"><g:link controller="person" action="index">Players</g:link></li>
+                        <li id="player"><g:link controller="league" action="person">Stephen Curry</g:link></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
         <div>
             <div class="row">
-                <h1>Players List</h1>
-                <table id="players" class="table table-striped table-inverse table-bordered table-hover dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+                <h1 class="margin-16">Players List</h1>
+                <table id="players-table" class="table table-striped table-inverse table-bordered table-hover dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
                     <thead>
                     <tr>
                         <th>Name</th>

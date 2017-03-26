@@ -221,7 +221,7 @@ class SeasonController {
         /*  --------------            *** Display Standings ***         ---------------  */
         String nav = "standings"
         /* ___  open standings view ___ */
-        render(view: "showStandings/${conferenceIndex}", model: [seasonName: westernConference.seasons.name.first(), teamList: team, nav: nav])
+        render(view: "showStandings", model: [seasonName: westernConference.seasons.name.first(), teamList: team, nav: nav, conferenceIndex: conferenceIndex])
     }
     /*  ----------------------------   ( custom rendering )   -----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */
