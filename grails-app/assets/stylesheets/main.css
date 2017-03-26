@@ -49,7 +49,10 @@ a:hover, a:active {
     outline: none; /* prevents outline in webkit on active links but retains it for tab focus */
 }
 
-h1, h2, h3 {
+.margin-16 {
+    margin: 16px;
+}
+h2, h3 {
     font-weight: normal;
     font-size: 1.25em;
     margin: 0.8em 0 0.3em 0;
@@ -84,7 +87,7 @@ img {
 }
 
 .footer {
-    background: #48802c;
+    background: #009688;
     color: #000;
     clear: both;
     font-size: 0.8em;
@@ -174,7 +177,7 @@ img {
 }
 
 .nav li.dropdown.open ul.dropdown-menu {
-    background-color: #4D8618;
+    background-color: #2C6862;
 }
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */
@@ -446,7 +449,7 @@ th.desc a {
 }
 
 th:hover, tr:hover {
-    background: #79b94c;
+    background: #009688;
 }
 
 /* PAGINATION */

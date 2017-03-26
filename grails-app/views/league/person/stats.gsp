@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
 <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </style>
@@ -29,14 +32,14 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                             <h2>${person.firstName} ${person.lastName}</h2>
                         </div>
                     </div>
-                    <div class="w3-container">
+                    <div class="w3-container w3-margin-top">
                         <div class="w3-row">
-                            <div class="w3-col m5 l5">
+                            <div class="w3-col m5 l5 w3-margin-top">
                                 <p><i class="fa fa-shirtsinbulk fa-fw w3-margin-right w3-large w3-text-teal"></i>Number: ${person.number}</p>
                                 <p><i class="fa fa-male fa-fw w3-margin-right w3-large w3-text-teal"></i>Height: ${person.height}</p>
                                 <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-large w3-text-teal"></i>Weight: ${person.weight}</p>
                             </div>
-                            <div class="w3-col m7 l7">
+                            <div class="w3-col m7 l7 w3-margin-top">
                                 <p><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Date: ${person.birthDate.toString().substring(0, 10)}</p>
                                 <p><i class="fa fa-globe fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Place: ${person.birthPlace}</p>
                                 <p><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-large w3-text-teal"></i>College: ${person.universityAttended}</p>
@@ -88,7 +91,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
             <div class="w3-twothird">
 
                 <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
-                    <div class="w3-panel w3-border w3-border-green">
+                    <div class="w3-panel w3-border w3-border-teal">
                         <div class="w3-row">
                             <div class="w3-col m6 l9">
                                  <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-user fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Player Stats</h2>
@@ -104,33 +107,71 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                         </div>
                     </div>
                 </div>
-                <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
-                    <div id="show-season-stats" class="content scaffold-show" role="main">
-                        <g:if test="${flash.message}">
-                            <div class="message" role="status">${flash.message}</div>
-                        </g:if>
-                        <div>
-                            <g:render template="/sharedTemplates/seasonStatsRow" />
-                        </div>
-                        <br />
-                    </div>
-                </div>
-                <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
-                    <div id="show-per-game-stats" class="content scaffold-show" role="main">
-                        <g:if test="${flash.message}">
-                            <div class="message" role="status">${flash.message}</div>
-                        </g:if>
-                        <div>
-                            <g:render template="/sharedTemplates/gameStatsRow" />
-                        </div>
-                        <br />
-                    </div>
+
+                <div class="nav w3-card-2" role="navigation">
+                    <ul class="nav nav-tabs">
+                        <li class="<g:if test="${tabIndex == "personal"}">active</g:if>"><g:link action="person" params="[personIndex: person.id, tabIndex: 'personal']">Personal</g:link></li>
+                        <li class="<g:if test="${tabIndex == "season"}">active</g:if>"><g:link action="person" params="[personIndex: person.id, tabIndex: 'season']">Season Stats</g:link></li>
+                        <li class="<g:if test="${tabIndex == "games"}">active</g:if>"><g:link action="person" params="[personIndex: person.id, tabIndex: 'games']">Games</g:link></li>
+                    </ul>
                 </div>
 
-                <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
-                    <h2 class="w3-text-grey w3-padding-8"><i class="fa fa-id-card-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Bio</h2>
-                    <div class="w3-container">
-                        <p>${person.bio}</p>
+                <div id="show-person" class="content scaffold-show" role="main">
+                    <g:if test="${flash.message}">
+                        <div class="message" role="status">${flash.message}</div>
+                    </g:if>
+                    <div>
+
+                        <g:if test="${tabIndex == "personal"}">
+                            <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+                                <h2 class="w3-text-grey w3-padding-8"><i class="fa fa-id-card-o fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Bio</h2>
+                                <div class="w3-container">
+                                    <p>${person.bio}</p>
+                                </div>
+                                <div class="w3-row">
+                                    <div class="w3-col m4 l4 w3-margin-top w3-margin-left">
+                                        <p><i class="fa fa-shirtsinbulk fa-fw w3-margin-right w3-large w3-text-teal"></i>Number: ${person.number}</p>
+                                        <p><i class="fa fa-male fa-fw w3-margin-right w3-large w3-text-teal"></i>Height: ${person.height}</p>
+                                        <p><i class="fa fa-balance-scale fa-fw w3-margin-right w3-large w3-text-teal"></i>Weight: ${person.weight}</p>
+                                    </div>
+                                    <div class="w3-col m6 l6 w3-margin-top w3-margin-left">
+                                        <p><i class="fa fa-calendar fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Date: ${person.birthDate.toString().substring(0, 10)}</p>
+                                        <p><i class="fa fa-globe fa-fw w3-margin-right w3-large w3-text-teal"></i>Birth Place: ${person.birthPlace}</p>
+                                        <p><i class="fa fa-graduation-cap fa-fw w3-margin-right w3-large w3-text-teal"></i>College: ${person.universityAttended}</p>
+                                    </div>
+                                </div>
+                                <br />
+                            </div>
+                        </g:if>
+
+                        <g:if test="${tabIndex == "season"}">
+                            <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+                                <div id="show-season-stats" class="content scaffold-show" role="main">
+                                    <g:if test="${flash.message}">
+                                        <div class="message" role="status">${flash.message}</div>
+                                    </g:if>
+                                    <div>
+                                        <g:render template="/sharedTemplates/seasonStatsRow" />
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </g:if>
+
+                        <g:if test="${tabIndex == "games"}">
+                            <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+                                <div id="show-per-game-stats" class="content scaffold-show" role="main">
+                                    <g:if test="${flash.message}">
+                                        <div class="message" role="status">${flash.message}</div>
+                                    </g:if>
+                                    <div>
+                                        <g:render template="/sharedTemplates/gameStatsRow" />
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </g:if>
+
                     </div>
                     <br />
                 </div>

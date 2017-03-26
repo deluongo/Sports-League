@@ -219,8 +219,9 @@ class SeasonController {
         else { team = eastTeams}
 
         /*  --------------            *** Display Standings ***         ---------------  */
+        String nav = "standings"
         /* ___  open standings view ___ */
-        render(view: "showStandings/${conferenceIndex}", model: [seasonName: westernConference.seasons.name.first(), teamList: team])
+        render(view: "showStandings/${conferenceIndex}", model: [seasonName: westernConference.seasons.name.first(), teamList: team, nav: nav])
     }
     /*  ----------------------------   ( custom rendering )   -----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */

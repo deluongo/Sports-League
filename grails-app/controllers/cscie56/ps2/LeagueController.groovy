@@ -142,7 +142,7 @@ class LeagueController {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ SHOW PLAYER STATS ~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def person(String personIndex) {
+    def person(String personIndex, String tabIndex) {
         /*------------------------------------------*
         * ===========================================
         * FUNCTION -> SHOW PLAYER STATS!
@@ -161,9 +161,12 @@ class LeagueController {
         personIndex = personIndex ?: "1"
         def person = Person.get(personIndex)
 
+        /*  --------------             *** Default Tab Idx ***          ---------------  */
+        tabIndex = tabIndex ?: "personal"
+
         /*  --------------              *** Display Stats ***           ---------------  */
 
-        render(view: "person/stats", model: [person: person])
+        render(view: "person/stats", model: [person: person, tabIndex: tabIndex])
 	    //respond(person, view: "person/stats/${personIndex}")
     }
 }

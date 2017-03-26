@@ -101,12 +101,27 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                         </div>
                     </div>
                 </div>
+                <div class="nav" role="navigation">
+                    <ul class="nav nav-tabs">
+                        <li class="<g:if test="${tabIndex == "personal"}">active</g:if>"><g:link action="show" params="[tabIndex: 'personal']">Personal</g:link></li>
+                        <li class="<g:if test="${tabIndex == "season"}">active</g:if>"><g:link action="show" params="[tabIndex: 'season']">Season Stats</g:link></li>
+                        <li class="<g:if test="${tabIndex == "games"}">active</g:if>"><g:link action="show" params="[tabIndex: 'games']">Geames</g:link></li>
+                    </ul>
+                </div>
                 <div id="show-person" class="content scaffold-show" role="main">
                     <g:if test="${flash.message}">
                         <div class="message" role="status">${flash.message}</div>
                     </g:if>
                     <div>
-                        <g:render template="/sharedTemplates/allStatRows" />
+                        <g:if test="${tabIndex == "personal"}">
+                            <g:render template="/sharedTemplates/allStatRows" />
+                        </g:if>
+                        <g:if test="${tabIndex == "season"}">
+                            <g:render template="/sharedTemplates/seasonStatsRow" />
+                        </g:if>
+                        <g:if test="${tabIndex == "games"}">
+                            <g:render template="/sharedTemplates/gameStatsRow" />
+                        </g:if>
                     </div>
                     <br />
                 </div>

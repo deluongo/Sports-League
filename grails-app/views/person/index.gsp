@@ -41,16 +41,18 @@
                     <tbody>
                         <g:each status="i" in="${personList.sort{it.lastName}}" var="player">
                             <!-- Alternate CSS classes for the rows. -->
-                            <tr role="row" class="${ (i % 2) == 0 ? 'even' : 'odd'}">
-                                    <td><a href="/league/person/stats/${player.id}" class="w3-hover-text-blue ">${player.firstName?.encodeAsHTML()} ${player.lastName?.encodeAsHTML()}</a></td>
-                                    <td>${player.team.name?.encodeAsHTML()}</td>
-                                    <td>${player.number?.encodeAsHTML()}</td>
-                                    <td>${player.height?.encodeAsHTML()}</td>
-                                    <td>${player.weight?.encodeAsHTML()}</td>
-                                    <td class='hidden-xs'>${player.universityAttended?.encodeAsHTML()}</td>
-                                    <td class='hidden-xs'>${player.birthPlace?.encodeAsHTML()}</td>
-                                    <td class='hidden-xs'>${player.birthDate.toString().take(9)?.encodeAsHTML()}</td>
-                            </tr>
+                            <g:if test="${player.role == "player"}">
+                                <tr role="row" class="${ (i % 2) == 0 ? 'even' : 'odd'}">
+                                        <td><a href="/league/person/stats/${player.id}" class="w3-hover-text-blue ">${player.firstName?.encodeAsHTML()} ${player.lastName?.encodeAsHTML()}</a></td>
+                                        <td>${player.team.name?.encodeAsHTML()}</td>
+                                        <td>${player.number?.encodeAsHTML()}</td>
+                                        <td>${player.height?.encodeAsHTML()}</td>
+                                        <td>${player.weight?.encodeAsHTML()}</td>
+                                        <td class='hidden-xs'>${player.universityAttended?.encodeAsHTML()}</td>
+                                        <td class='hidden-xs'>${player.birthPlace?.encodeAsHTML()}</td>
+                                        <td class='hidden-xs'>${player.birthDate.toString().take(9)?.encodeAsHTML()}</td>
+                                </tr>
+                            </g:if>
                         </g:each>
 
                         <div class="pagination">

@@ -407,7 +407,7 @@ class Person {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	 *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ STORE GAME RESULTS ~~~~~~~~~~
 	 *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def storeResults(Integer totalPts, split) {
+    def storeResults(Integer totalPts, split, gameObj) {
 
         Integer pointsScored = scored(totalPts, split)
         def shotChart = shotSelection(pointsScored)
@@ -427,7 +427,9 @@ class Person {
                 threePointersAttempted: threesAttempted,
                 threePointersMade: madeThrees,
                 threePointPercentage: calcPercent(madeThrees, threesAttempted),
-                personalFouls: getFouls()).save(flush:true)
+                personalFouls: getFouls(),
+                game: gameObj).save(flush:true)
+
 
         this.addToGameStats(newGameStats)
         this.save(flush:true)

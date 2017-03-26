@@ -403,6 +403,9 @@ class BootStrap {
         Game newGame = new Game(homeTeam: homeTeamName, awayTeam: awayTeamName, winner: result["winner"], loser: result["loser"], homePoints: ptsHome,
                 awayPoints: ptsAway, gameDate: date, location: homeTeam.location, hostTeam: homeTeam, guestTeam: awayTeam).save(flush:true)
 
+        /*  ---------------     *** Determine Player Performances ***    ---------------  */
+        playerPerformance(homeTeam, ptsHome, awayTeam, ptsAway, newGame)
+
     }
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -431,6 +434,13 @@ class BootStrap {
         }
 
 
+        result
+    }
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~ DETERMINE RESULT ~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def playerPerformance(Team homeTeam, ptsHome, Team awayTeam, ptsAway, newGame) {
         /*  ---------------          *** Get List of Players ***       ---------------  */
         /* ___  get home team players  ___ */
         def homePlayers = Person.findAllByTeam(homeTeam)
@@ -446,19 +456,15 @@ class BootStrap {
         def statSplits = [0.35, 0.3, 0.2, 0.1, 0.05]
         Collections.shuffle(statSplits)
 
-
         /*  ---------------           *** Store Player Stats ***       ---------------  */
         /* ___  HOME | split stats among 5 players  ___ */
-        homePlayers.take(5).eachWithIndex{ player, idx ->
-            player.storeResults(ptsHome, statSplits[idx])
+        homePlayers.take(5).eachWithIndex { player, idx ->
+            player.storeResults(ptsHome, statSplits[idx], newGame)
         }
 
-        roadPlayers.take(5).eachWithIndex{ player, idx ->
-            player.storeResults(ptsAway, statSplits[idx])
+        roadPlayers.take(5).eachWithIndex { player, idx ->
+            player.storeResults(ptsAway, statSplits[idx], newGame)
         }
-
-
-        result
     }
     /*  ---------------------------   ( simulate functions )   ----------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */

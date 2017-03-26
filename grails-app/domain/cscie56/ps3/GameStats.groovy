@@ -21,6 +21,7 @@ class GameStats {
     Integer threePointersMade
     Double threePointPercentage
     Integer personalFouls
+    Game game
 
     static belongsTo = [player:Person]
 

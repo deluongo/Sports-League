@@ -14,37 +14,28 @@
 
 </head>
 <body>
-
-    <div class="navbar navbar-default navbar-static-top" role="navigation">
-        <div class="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/#">
-                    <i class="fa grails-icon">
-                        <asset:image src="grails-cupsonly-logo-white.svg"/>
-                    </i> Sports League
-                </a>
+                <a class="navbar-brand" href="#">Devon's League</a>
             </div>
-            <div class="navbar-collapse collapse" aria-expanded="false" style="height: 0.8px;">
-                <ul class="nav navbar-nav navbar-right">
-                    <g:pageProperty name="page.nav" />
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                <li class="<g:if test="${nav == "standings"}">active</g:if>"></li><a href="season/showStandings">Standings</a></li>
+                    <li><a href="season/leaderboard">Stat Leaders</a></li>
+                    <li><a href="person">Players</a></li>
+                    <li><a href="league/person/">Stephen Curry</a></li>
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
     <g:layoutBody/>
-
-    <div class="footer" role="contentinfo"></div>
-
-    <div id="spinner" class="spinner" style="display:none;">
-        <g:message code="spinner.alt" default="Loading&hellip;"/>
-    </div>
 
     <asset:javascript src="application.js"/>
 

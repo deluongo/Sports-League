@@ -24,13 +24,33 @@
     </script>
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Devon's League</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="<g:if test="${nav == "standings"}">active</g:if>"></li><a href="season/showStandings">Standings</a></li>
+                <li><a href="season/leaderboard">Stat Leaders</a></li>
+                <li><a href="person">Players</a></li>
+                <li><a href="league/person/">Stephen Curry</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div>
     <div class="row">
         <h1>Standings</h1>
         <div class="nav" role="navigation">
             <ul class="nav nav-tabs">
                 <li class="<g:if test="${conferenceIndex == 1}">active</g:if>"><g:link action="showStandings" params="[conferenceIndex: '1']">Western Conference</g:link></li>
-                <li class="<g:if test="${conferenceIndex == 1}">active</g:if>"><g:link action="showStandings" params="[conferenceIndex: '2']">Eastern Conference</g:link></li>
+                <li class="<g:if test="${conferenceIndex == 2}">active</g:if>"><g:link action="showStandings" params="[conferenceIndex: '2']">Eastern Conference</g:link></li>
             </ul>
         </div>
         <div>

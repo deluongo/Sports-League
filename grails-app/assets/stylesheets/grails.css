@@ -44,7 +44,7 @@ pre {
 
 }
 .navbar-default, .navbar-static-top {
-    background-color: #4D8618;
+    background-color: #009688;
     border: 0px;
 }
 a.navbar-brand {
@@ -52,18 +52,18 @@ a.navbar-brand {
     font-size: 19px !important;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
-    background-color: transparent;
+    background-color: #007A6E;
     color: white;
 }
 .navbar-nav>li.active>a {
     color: white !important;
 }
 .navbar-nav>li>a:hover {
-    background-color: #db4800 !important;
+    background-color: #00B8A5 !important;
     color: white !important;
 }
 .navbar-nav>li>a {
-    color: #c0d3db;
+    color: #00665Cb;
 }
 .navbar-default .navbar-toggle .icon-bar {
     background-color: white;
@@ -113,7 +113,7 @@ a.navbar-brand {
 
 #band {
     /*grey =#808080*/
-    background: #79B94C  no-repeat 50% 30%;
+    background: #777DA7  no-repeat 50% 30%;
     height: 400px;
 }
 
