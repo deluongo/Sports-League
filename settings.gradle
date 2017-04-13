@@ -1,2 +1,5 @@
 rootProject.name = 'sports-league'
 
+include 'bioprofile'
+
+project(':bioprofile').projectDir = new File('//Applications/MAMP/htdocs/groovy/league-project/bioprofile')

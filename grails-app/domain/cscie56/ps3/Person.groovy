@@ -1,5 +1,6 @@
 package cscie56.ps3
 import cscie56.ps2.Team
+import cscie56.ps5.User
 
 class Person {
 
@@ -15,6 +16,10 @@ class Person {
 
     /*  -------------------         *** Instantiate Variables ***       -------------------  */
 
+    //PS5
+    //User user
+
+
     //PS2
     String firstName
     String lastName
@@ -29,6 +34,8 @@ class Person {
     Integer weight
     String universityAttended
     String pictureURL
+
+
 
     /*  -------------------          *** Database Designations ***      -------------------  */
     static mapping = {

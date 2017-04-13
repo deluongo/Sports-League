@@ -1,8 +1,13 @@
 package cscie56.ps3
 
+import cscie56.ps5.Role
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
+
+@Secured([Role.ROLE_USER, Role.ROLE_ADMIN, Role.ROLE_ANONYMOUS])
 @Transactional(readOnly = true)
 class GameStatsController {
 

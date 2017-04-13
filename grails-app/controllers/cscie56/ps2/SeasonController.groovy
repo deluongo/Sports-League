@@ -1,9 +1,11 @@
 package cscie56.ps2
 import cscie56.ps3.Person
 
+
 /* ___  domain classes  ___ */
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
 
 @Transactional(readOnly = true)
 
@@ -19,6 +21,7 @@ import grails.transaction.Transactional
 *     - showStandings() -> Displays season standings.
 *     - simSeason() -> simulates a season
 /*---------------------------------------------------------------------------------------------*/
+@Secured(['permitAll'])
 class SeasonController {
 
     /*                          ==============  ***  ==============                          *
