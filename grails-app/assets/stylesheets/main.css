@@ -575,3 +575,11 @@ img.grails-logo {
     height:340px;
     margin-top:-10px;
 }
+
+.blue {
+    background-color: #3F51B5 !important;
+}
+
+.w3-theme-d1 {color:#fff !important; background-color:#57707d !important}
+.w3-theme-d2 {color:#fff !important; background-color:#4d636f !important}
+.w3-theme-d3 {color:#fff !important; background-color:#435761 !important}

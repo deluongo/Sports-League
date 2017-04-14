@@ -16,10 +16,6 @@ class Person {
 
     /*  -------------------         *** Instantiate Variables ***       -------------------  */
 
-    //PS5
-    //User user
-
-
     //PS2
     String firstName
     String lastName
@@ -27,14 +23,22 @@ class Person {
     String role
 
     //PS3
-    String bio
-    Date birthDate
-    String birthPlace
-    String height // must be displayed in feet and inches (e.g., 6’1”)
-    Integer weight
-    String universityAttended
-    String pictureURL
+    //String bio
+    //Date birthDate
+    //String birthPlace
+    //String height // must be displayed in feet and inches (e.g., 6’1”)
+    //Integer weight
+    //String universityAttended
+    //String pictureURL
 
+
+    //PS5
+    User user
+
+    /*  -------------------              *** Constraints ***            -------------------  */
+    static constraints = {
+        user unique: true
+    }
 
 
     /*  -------------------          *** Database Designations ***      -------------------  */
@@ -52,14 +56,13 @@ class Person {
             'minutesPerGame', 'pointsPerGame', 'assistsPerGame', 'reboundsPerGame', 'stealsPerGame', 'shotsAttemptedPerGame', 'shotsMadePerGame',
             'threePointersAttemptedPerGame', 'threePointersMadePerGame', 'personalFoulsPerGame',
             /* ___  helpers  ___ */
-            'seasonTotals', 'perGameStats']
+            'seasonTotals', 'perGameStats',
+            'bio', 'birthDate', 'birthPlace', 'height', 'weight', 'universityAttended', 'pictureURL']
 
     /*  -------------------             *** GORM Mapping ***            -------------------  */
     static belongsTo = [team: Team]
     static hasMany = [gameStats: GameStats]
-    /*  -------------------              *** Constraints ***            -------------------  */
-    static constraints = {
-    }
+
 
 
 
@@ -272,6 +275,33 @@ class Person {
     }
 
 
+    /*  -------------------              *** User Props ***             -------------------  */
+
+
+    /*  ~~~~~~~~~~~~~~~~~~~~~~~~~
+	 *  ~~~~ PLAYER BIO ~~~~~
+	 *  ~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def getBio() {
+        user.bio
+    }
+    def getBirthDate() {
+        user.birthDate
+    }
+    def getBirthPlace() {
+        user.birthPlace
+    }
+    def getHeight() {
+        user.height
+    }
+    def getWeight() {
+        user.weight
+    }
+    def getUniversityAttended() {
+        user.universityAttended
+    }
+    def getPictureURL() {
+        user.pictureURL
+    }
 
     /*  ---------------------------   ( transient functions )   ---------------------------  */
     /*  -----------------------------------   ~ END ~    ----------------------------------  */

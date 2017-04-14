@@ -15,6 +15,12 @@
 <style>
 html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
 </style>
+<!-- Latest compiled and minified JavaScript -->
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <body class="w3-light-grey">
 
     <nav class="navbar navbar-default">
@@ -134,6 +140,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                         <li class="<g:if test="${tabIndex == "personal"}">active</g:if>"><g:link action="person" params="[personIndex: person.id, tabIndex: 'personal']">Personal</g:link></li>
                         <li class="<g:if test="${tabIndex == "season"}">active</g:if>"><g:link action="person" params="[personIndex: person.id, tabIndex: 'season']">Season Stats</g:link></li>
                         <li class="<g:if test="${tabIndex == "games"}">active</g:if>"><g:link action="person" params="[personIndex: person.id, tabIndex: 'games']">Games</g:link></li>
+                        <li class="<g:if test="${tabIndex == "blog"}">active</g:if>"><g:link action="person" params="[personIndex: person.id, tabIndex: 'blog']">Blog</g:link></li>
                     </ul>
                 </div>
 
@@ -187,6 +194,20 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                                     </g:if>
                                     <div>
                                         <g:render template="/sharedTemplates/gameStatsRow" />
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </g:if>
+
+                        <g:if test="${tabIndex == "blog"}">
+                            <div class="w3-container w3-card-2 w3-white w3-margin-bottom">
+                                <div id="show-per-game-stats" class="content scaffold-show" role="main">
+                                    <g:if test="${flash.message}">
+                                        <div class="message" role="status">${flash.message}</div>
+                                    </g:if>
+                                    <div>
+                                        <g:render template="/sharedTemplates/publicBlogPosts" />
                                     </div>
                                     <br />
                                 </div>

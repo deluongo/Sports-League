@@ -105,7 +105,8 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                     <ul class="nav nav-tabs">
                         <li class="<g:if test="${tabIndex == "personal"}">active</g:if>"><g:link action="show" params="[tabIndex: 'personal']">Personal</g:link></li>
                         <li class="<g:if test="${tabIndex == "season"}">active</g:if>"><g:link action="show" params="[tabIndex: 'season']">Season Stats</g:link></li>
-                        <li class="<g:if test="${tabIndex == "games"}">active</g:if>"><g:link action="show" params="[tabIndex: 'games']">Geames</g:link></li>
+                        <li class="<g:if test="${tabIndex == "games"}">active</g:if>"><g:link action="show" params="[tabIndex: 'games']">Games</g:link></li>
+                        <li class="<g:if test="${tabIndex == "blog"}">active</g:if>"><g:link action="show" params="[tabIndex: 'blog']">Blog</g:link></li>
                     </ul>
                 </div>
                 <div id="show-person" class="content scaffold-show" role="main">
@@ -121,6 +122,9 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                         </g:if>
                         <g:if test="${tabIndex == "games"}">
                             <g:render template="/sharedTemplates/gameStatsRow" />
+                        </g:if>
+                        <g:if test="${tabIndex == "blog"}">
+                            <g:render template="/sharedTemplates/publicBlogPosts" />
                         </g:if>
                     </div>
                     <br />
