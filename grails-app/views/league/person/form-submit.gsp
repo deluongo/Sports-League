@@ -42,6 +42,50 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 
+
+
+<script>
+    $(document).ready( function() {
+        console.log("HERE");
+        $('#new-post-form').on('submit', function(event) {
+            console.log("HERE2");
+            console.log("HERE");
+
+            var that = $(this),
+                url = that.attr('action'),
+                method = that.attr('method'),
+                data = {};
+
+            that.find('[name]').each(function(){
+                var that = $(this),
+                    name = that.attr('name'),
+                    value = that.val();
+
+                data[name] = value;
+                console.log(data);
+            });
+
+
+
+
+        return false;
+        });
+
+
+        var submission = $.post("/league/newPostSubmit", $( '#new-post-form').serialize());
+        submission.done( function ( data ) {
+            $('#displayAllPosts').html(data);
+        });
+
+        submission.fail(function(jqXHR, textStatus) {
+            $('#displayAllPosts').html('<p>Book could not be created!</p>');
+        });
+        console.log(submission);
+    });
+
+
+</script>
+
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 
     <nav class="navbar navbar-default">
@@ -258,41 +302,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <i class="fa fa-linkedin w3-hover-text-indigo w3-large"></i>
         <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Devon Luongo</a></p>
     </footer>
-
-    <script>
-        console.log("HERE");
-        $('#new-post-form').on('submit', function() {
-            console.log("HERE2");
-
-            var querystring = $("#new-post-form").serialize();
-            console.log("Query String:" + querystring);
-
-
-            $.ajax({
-                type: "POST",
-                url: "/league/newPostSubmit",
-                data : querystring,
-                success : function(response) {
-                    alert("Submit Successfully !!");
-                    $('#postModal').modal('hide')
-                    $('#result').html(response);
-                    return false;
-                },
-
-                data: data,
-                success: function(response){
-                    $('#postModal').modal('hide')
-                    console.log(response)
-                },
-                error: function(){
-                    alert("failure");
-                }
-            });
-
-
-            return false;
-        });
-    </script>
 
     </body>
 </html>

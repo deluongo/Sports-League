@@ -2,16 +2,26 @@
 <html>
     <head>
         <title>NBA Standings</title>
-        <asset:stylesheet src="application.css"/>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <asset:stylesheet src="bootstrap.css"/>
+        <asset:stylesheet src="devon.css"/>
 
+        <style>
+        body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+        .w3-sidenav a,.w3-sidenav h4 {font-weight:bold}
+        </style>
 
         <!--  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css" /> -->
         <!-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" /> -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    </script>
-        <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
-    </script>
+        </script>
+            <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js">
+        </script>
 
         <script type="text/javascript" class="init">
             $(document).ready(function() {
@@ -19,7 +29,7 @@
             } );
         </script>
     </head>
-    <body>
+    <body class="w3-light-grey w3-content" style="max-width:1600px">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -40,8 +50,9 @@
                 </div>
             </div>
         </nav>
-        <div>
-            <div class="row">
+        <!-- !PAGE CONTENT! -->
+        <div class="w3-main">
+            <div class="w3-row">
                 <h1 class="margin-16">Standings</h1>
                 <div class="nav" role="navigation">
                     <ul class="nav nav-tabs">
