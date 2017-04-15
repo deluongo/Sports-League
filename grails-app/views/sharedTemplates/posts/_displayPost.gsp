@@ -17,6 +17,11 @@
             </div>
         </div>
     </div>
+
+    <!-- Display Blog entries -->
+    <g:render template="/sharedTemplates/comments/displayAllComments"/>
+
+
 </div>
 
 <hr>

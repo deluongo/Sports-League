@@ -115,16 +115,16 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
                     </g:if>
                     <div>
                         <g:if test="${tabIndex == "personal"}">
-                            <g:render template="/sharedTemplates/allStatRows" />
+                            <g:render template="/sharedTemplates/stats/allStatRows" />
                         </g:if>
                         <g:if test="${tabIndex == "season"}">
-                            <g:render template="/sharedTemplates/seasonStatsRow" />
+                            <g:render template="/sharedTemplates/stats/seasonStatsRow" />
                         </g:if>
                         <g:if test="${tabIndex == "games"}">
-                            <g:render template="/sharedTemplates/gameStatsRow" />
+                            <g:render template="/sharedTemplates/stats/gameStatsRow" />
                         </g:if>
                         <g:if test="${tabIndex == "blog"}">
-                            <g:render template="/sharedTemplates/publicBlogPosts" />
+                            <g:render template="/sharedTemplates/posts/publicBlogPosts" />
                         </g:if>
                     </div>
                     <br />

@@ -11,6 +11,7 @@ import cscie56.ps5.BlogEntry
 import cscie56.ps5.Role
 import cscie56.ps5.User
 import cscie56.ps5.UserRole
+import cscie56.ps5.Comment
 
 /*---------------------------------------------------------------------------------------------*
 * ===========================================
@@ -83,10 +84,16 @@ class BootStrap {
                 Date.parse("MM-dd-yyyy", "3-14-1988"), "Akron, OH", "6'3\"", 190, "Davidson", "https://static01.nyt.com/images/2016/02/29/sports/basketball/STEPHCURRY/STEPHCURRY-articleLarge.jpg")
         savePlayer(stephcurry, "Steph", "Curry", 30, 0, warriors)
 
+        Comment comment1 = saveComment("You're the best!!!", new Date(), user)
+        Comment comment2 = saveComment("You SUCK!!!", new Date(), admin)
 
         BlogEntry blog = saveBlog("TEST Title", "TEST Description", "TEST TEXT - ipsum lorem sdff sdfs", new Date(), new Date(), Boolean.TRUE, "http://www.mrltactics.com/content/images/2017/01/Test_sign.jpg", stephcurry)
         BlogEntry blog2 = saveBlog("TEST Title 2", "TEST Description 2", "TEST TEXT2 - ipsum lorem sdff sdfs", new Date(), new Date(), Boolean.TRUE, "http://www.mrltactics.com/content/images/2017/01/Test_sign.jpg", stephcurry)
         //blog.addToAuthors(name:"Dierk Koenig")
+
+        blog2.addToComments(comment1)
+        blog2.addToComments(comment2)
+        blog2.save(flush:true)
 
         savePlayer(saveUser(userRole, "klaythompson", "klaythompson", "Klay Thompson was born on 8th February 1990 in Los Angeles, California to mother Julie Thompson and former NBA player, Mychal Thompson. When Klay was 2 years old he moved with his family to Lake Oswego, Oregon. And when he was 14 years old he moved to Ladera Ranch, California along with his parents and two siblings. His older brother Mychel played basketball for Pepperdine University whereas his younger brother Trayce Thompson was drafted in the 2009 MLB Draft by the Chicago White Sox.\n" +
                 "\n" +
@@ -223,6 +230,18 @@ class BootStrap {
         saveObject(newBlog)
         /* ___  return player object  ___ */
         newBlog
+    }
+
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~~~ BLOG COMMENTS ~~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def saveComment(text, dateCreated, author) {
+        /* ___  create player  ___ */
+        Comment newComment= new Comment(text: text, dateCreated: dateCreated, author: author )
+        /* ___  save user  ___ */
+        saveObject(newComment)
+        /* ___  return player object  ___ */
+        newComment
     }
 
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

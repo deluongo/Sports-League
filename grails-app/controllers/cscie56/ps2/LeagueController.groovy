@@ -190,9 +190,9 @@ class LeagueController {
 
     @Secured([Role.ROLE_USER, Role.ROLE_ADMIN])
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ SHOW PLAYER STATS ~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~ PUBLISH A BLOG POST ~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def newPostSubmit() {
+    def publishPost() {
         //String personIndex, String tabIndex, String postTitle, String postDescription, String backgroundImage, String blogText
 
         /*------------------------------------------*
@@ -211,6 +211,7 @@ class LeagueController {
 
         def personIndex = params.list('personIndex')
         def tabIndex = params.list('tabIndex')
+        def validation_error = []
         //String personIndex, String tabIndex,
 
 
@@ -226,38 +227,109 @@ class LeagueController {
             flash.message = "You aren't authorized to create new blog posts for ${person.firstName} ${person.lastName}"
         }
         else {
-            /*  --------------            *** Add New Blog Post ***         ---------------  */
-            print("\n\n")
-            print(person.user.blogPosts)
-            print("\n\n")
-
             /*  --------------            *** Load Form Results ***         ---------------  */
             def postTitle = params.list('postTitle')
             def postDescription = params.list('postDescription')
             def blogText = params.list('blogText')
             def backgroundImage = params.list('backgroundImage')
 
+            /*  --------------            *** Add New Blog Post ***         ---------------  */
+            BlogEntry newPost = new BlogEntry(published:true, title: postTitle, description: postDescription, text: blogText, pictureURL: backgroundImage, dateCreated: new Date(), datePublished: new Date(), author: currentUser)
 
             /*  --------------             *** Add Post to DB ***           ---------------  */
-            BlogEntry newPost = new BlogEntry(title: postTitle, description: postDescription, text: blogText, pictureURL: backgroundImage, dateCreated: new Date(), datePublished: new Date(), author: currentUser)
-
             if (newPost.validate()) {
-
                 saveObject(newPost)
-                saveObject(person.user)
                 person.user.addToBlogPosts(newPost)
-
                 saveObject(person.user)
 
-                print(person.user.blogPosts)
             }
+
+            /*  --------------             *** Display Errors ***           ---------------  */
             else {
-                newPost.errors.allErrors.each {
-                    println it
-                }
+                def response = []
+                return response
             }
 
+            /*  --------------             *** Default Tab Idx ***          ---------------  */
+            tabIndex = tabIndex ?: "personal"
 
+
+            /*  --------------              *** Display Stats ***           ---------------  */
+            render params
+
+            //render(template: "/sharedTemplates/displayAllPosts", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
+
+
+            //render params
+            //render(view: "person/form-submit", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
+
+            //template: "displayAllPosts"
+            //respond(person, view: "person/stats/${personIndex}")
+        }
+
+    }
+
+    @Secured([Role.ROLE_USER, Role.ROLE_ADMIN])
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ SHOW PLAYER STATS ~~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def savePost() {
+        //String personIndex, String tabIndex, String postTitle, String postDescription, String backgroundImage, String blogText
+
+        /*------------------------------------------*
+        * ===========================================
+        * FUNCTION -> SHOW PLAYER STATS!
+        * ===========================================
+        * INPUTS:
+        *     -
+        * FUNCTIONS:
+        *     - playGame(homeTeam, awayTeam)
+        * DESCRIPTION:
+        *     - Displays league standings in the browser
+        * OUTPUT:
+        *     -
+        /*---------------------------------------------------------------------------------------------*/
+
+        def personIndex = params.list('personIndex')
+        def tabIndex = params.list('tabIndex')
+        def validation_error = []
+        //String personIndex, String tabIndex,
+
+
+
+
+        /*  --------------              *** Select Player ***           ---------------  */
+        personIndex = personIndex ?: "1"
+        def person = Person.get(personIndex)
+
+        /*  --------------            *** Authenticate User ***         ---------------  */
+        def currentUser = springSecurityService.currentUser
+        if(person.user != currentUser) {
+            flash.message = "You aren't authorized to create new blog posts for ${person.firstName} ${person.lastName}"
+        }
+        else {
+            /*  --------------            *** Load Form Results ***         ---------------  */
+            def postTitle = params.list('postTitle')
+            def postDescription = params.list('postDescription')
+            def blogText = params.list('blogText')
+            def backgroundImage = params.list('backgroundImage')
+
+            /*  --------------            *** Add New Blog Post ***         ---------------  */
+            BlogEntry newPost = new BlogEntry(published:false, title: postTitle, description: postDescription, text: blogText, pictureURL: backgroundImage, dateCreated: new Date(), author: currentUser)
+
+            /*  --------------             *** Add Post to DB ***           ---------------  */
+            if (newPost.validate()) {
+                saveObject(newPost)
+                person.user.addToBlogPosts(newPost)
+                saveObject(person.user)
+
+            }
+
+            /*  --------------             *** Display Errors ***           ---------------  */
+            else {
+                def response = []
+                return response
+            }
 
             /*  --------------             *** Default Tab Idx ***          ---------------  */
             tabIndex = tabIndex ?: "personal"
@@ -265,9 +337,9 @@ class LeagueController {
 
             /*  --------------              *** Display Stats ***           ---------------  */
 
-            render params
+            //render params
             //render(view: "person/form-submit", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
-            //render(template: "/sharedTemplates/displayAllPosts", params: [person: person, tabIndex: tabIndex, currentUser: currentUser])
+            render(template: "/sharedTemplates/displayAllPosts", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
             //template: "displayAllPosts"
             //respond(person, view: "person/stats/${personIndex}")
         }

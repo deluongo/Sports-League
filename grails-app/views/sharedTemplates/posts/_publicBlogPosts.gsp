@@ -30,8 +30,9 @@
                             <div class="modal-body remove-margin-b remove-padding-b">
                                 <div class="container remove-margin-b remove-padding-b">
 
+                                    <div id="validation-error-messages"></div>
 
-                                    <g:form class="w3-container remove-margin-b remove-padding-b" name="new-post-form" action="newPostSubmit" id="${person.id}">
+                                    <g:form class="w3-container remove-margin-b remove-padding-b" name="new-post-form" action="publishPost" id="${person.id}">
                                     <!--<form class="w3-container remove-margin-b remove-padding-b" id="new-post-form" method="post" action="/league/newPostSubmit">-->
                                         <div class="w3-row margin-10-b">
                                             <label for="postTitle">Title</label>
@@ -55,11 +56,11 @@
                                         <input type="hidden" id="tabIndex" name="tabIndex" value="${person.id}" />
                                         <div class="form-group row w3-margin w3-padding remove-margin-b remove-padding-b w3-center">
 
-                                            <g:actionSubmit class="w3-btn w3-black w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red" action="newPostSubmit" value="Save & Publish" />
-                                            <g:actionSubmit class="w3-btn w3-white w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red" action="newPostSubmit" value="Save" />
+                                            <g:actionSubmit class="w3-btn w3-black w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red" name="publishPost" action="publishPost" value="Save & Publish" />
+                                            <g:actionSubmit class="w3-btn w3-white w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red" name="savePost" action="savePost" value="Save" />
 
-                                            <!--<button class="w3-btn w3-black w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red" type="submit">Save & Publish</button>
-                                            <button class="w3-btn w3-white w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red">Save</button>-->
+                                            <button class="w3-btn w3-black w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red" name="publishPost" id="publishPost" type="submit">Save & Publish</button>
+                                            <button class="w3-btn w3-white w3-padding w3-margin remove-padding-b remove-margin-b w3-hover-red" name="savehPost" id="savePost" >Save</button>
 
                                         </div>
 
@@ -120,7 +121,8 @@
 
     <!-- Display Blog entries -->
     <div id="displayAllPosts">
-        <g:render template="/sharedTemplates/displayAllPosts"/>
+        <div id="action-results-message"></div>
+        <g:render template="/sharedTemplates/posts/displayAllPosts"/>
     </div>
 
     <!-- END BLOG ENTRIES -->

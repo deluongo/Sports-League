@@ -200,7 +200,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                                         <div class="message" role="status">${flash.message}</div>
                                     </g:if>
                                     <div>
-                                        <g:render template="/sharedTemplates/seasonStatsRow" />
+                                        <g:render template="/sharedTemplates/stats/seasonStatsRow" />
                                     </div>
                                     <br />
                                 </div>
@@ -214,7 +214,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                                         <div class="message" role="status">${flash.message}</div>
                                     </g:if>
                                     <div>
-                                        <g:render template="/sharedTemplates/gameStatsRow" />
+                                        <g:render template="/sharedTemplates/stats/gameStatsRow" />
                                     </div>
                                     <br />
                                 </div>
@@ -228,7 +228,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                                         <div class="message" role="status">${flash.message}</div>
                                     </g:if>
                                     <div>
-                                        <g:render template="/sharedTemplates/publicBlogPosts" />
+                                        <g:render template="/sharedTemplates/posts/publicBlogPosts" />
                                     </div>
                                     <br />
                                 </div>
@@ -260,29 +260,40 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </footer>
 
     <script>
-        console.log("HERE");
+        function objectifyForm(formArray) {//serialize data function
+
+            var returnArray = {};
+            for (var i = 0; i < formArray.length; i++){
+                returnArray[formArray[i]['name']] = formArray[i]['value'];
+            }
+            return returnArray;
+        }
+
         $('#new-post-form').on('submit', function() {
-            console.log("HERE2");
 
             var querystring = $("#new-post-form").serialize();
+            var inputArray =  $("#new-post-form").serializeArray();
+
+
             console.log("Query String:" + querystring);
 
-
+            var url = "/league/" + objectifyForm(inputArray)['action'];
+            console.log(objectifyForm(inputArray))
             $.ajax({
                 type: "POST",
-                url: "/league/newPostSubmit",
+                url: url,
                 data : querystring,
                 success : function(response) {
-                    alert("Submit Successfully !!");
-                    $('#postModal').modal('hide')
-                    $('#result').html(response);
-                    return false;
-                },
-
-                data: data,
-                success: function(response){
-                    $('#postModal').modal('hide')
-                    console.log(response)
+                    if( response == [] ) {
+                        $('#validation-error-messages').append('<div class="w3-panel w3-card-4 w3-red w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-red w3-large w3-display-topright">×</span><h3> Error! </h3><p> You\'ve encountered a validation error. Please make sure your form contents match the placeholder requirements. </p></div>');
+                        return false;
+                    }
+                    else {
+                        $('#action-results-message').append('<div class="w3-panel w3-card-4 w3-green w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-green w3-large w3-display-topright">×</span><h3> Success! </h3><p>A new post was successfully published to your blog.</p></div>');
+                        $('#postModal').modal('hide');
+                        console.log(response)
+                        $('#displayPosts').html(response);
+                       }
                 },
                 error: function(){
                     alert("failure");

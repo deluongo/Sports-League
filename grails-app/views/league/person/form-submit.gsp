@@ -244,7 +244,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                                         <div class="message" role="status">${flash.message}</div>
                                     </g:if>
                                     <div>
-                                        <g:render template="/sharedTemplates/seasonStatsRow" />
+                                        <g:render template="/sharedTemplates/stats/seasonStatsRow" />
                                     </div>
                                     <br />
                                 </div>
@@ -258,7 +258,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                                         <div class="message" role="status">${flash.message}</div>
                                     </g:if>
                                     <div>
-                                        <g:render template="/sharedTemplates/gameStatsRow" />
+                                        <g:render template="/sharedTemplates/stats/gameStatsRow" />
                                     </div>
                                     <br />
                                 </div>
@@ -272,7 +272,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                                         <div class="message" role="status">${flash.message}</div>
                                     </g:if>
                                     <div>
-                                        <g:render template="/sharedTemplates/publicBlogPosts" />
+                                        <g:render template="/sharedTemplates/posts/publicBlogPosts" />
                                     </div>
                                     <br />
                                 </div>
