@@ -2,9 +2,9 @@ package cscie56.ps2
 
 import grails.test.mixin.*
 import spock.lang.*
-
+import cscie56.ps5.BlogEntry
 @TestFor(LeagueController)
-@Mock(League)
+@Mock([League, BlogEntry])
 class LeagueControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -146,5 +146,21 @@ class LeagueControllerSpec extends Specification {
             League.count() == 0
             response.redirectedUrl == '/league/index'
             flash.message != null
+    }
+
+
+
+    void "test that newPost method saves a post"() {
+
+
+        when:"A domain instance is created"
+        response.reset()
+        populateValidParams(params)
+        def post = new BlogEntry(params).save(flush: true)
+
+        then:"It exists"
+        true
+
+\
     }
 }

@@ -7,11 +7,13 @@ import cscie56.ps2.Season
 import cscie56.ps2.Team
 import grails.test.mixin.TestFor
 import spock.lang.Specification
+import grails.test.mixin.Mock
 
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Person)
+@Mock(cscie56.ps5.User)
 class PersonSpec extends Specification {
 
     def setup() {

@@ -152,7 +152,7 @@ class LeagueController {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ SHOW PLAYER STATS ~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    @Secured([Role.ROLE_USER, Role.ROLE_ADMIN])
+    @Secured([Role.ROLE_USER, Role.ROLE_ADMIN, Role.ROLE_ANONYMOUS])
     def person(String personIndex, String tabIndex) {
         /*------------------------------------------*
         * ===========================================
