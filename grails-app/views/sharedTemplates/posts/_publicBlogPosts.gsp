@@ -8,9 +8,9 @@
 
         <!-- Buttons -->
          <div class="w3-container w3-card-2 w3-white w3-round w3-margin w3-center"><br>
-            <button type="button" class="w3-button w3-theme-d3 w3-margin-bottom" data-toggle="modal" data-target="#postModal"><i class="fa fa-pencil"></i>  New Post</button>
-            <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom" data-toggle="modal" data-target="#managementModal"><i class="fa fa-bars"></i>  Blog Management</button>
-            <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom" data-toggle="modal" data-target="#approvalModal"><i class="fa fa-comment"></i>  Comment Approval</button>
+            <button type="button" class="w3-btn w3-theme-d3 w3-margin-bottom" data-toggle="modal" data-target="#postModal"><i class="fa fa-pencil"></i>  New Post</button>
+            <button type="button" class="w3-btn w3-theme-d2 w3-margin-bottom" data-toggle="modal" data-target="#managementModal"><i class="fa fa-bars"></i>  Blog Management</button>
+            <button type="button" class="w3-btn w3-theme-d1 w3-margin-bottom" data-toggle="modal" data-target="#approvalModal"><i class="fa fa-comment"></i>  Comment Approval</button>
          </div>
 
         <hr>
@@ -53,7 +53,8 @@
                             <h4 class="modal-title">Modal Header</h4>
                         </div>
                         <div class="modal-body">
-                            <p>This is a large modal.</p>
+                            <!-- Display Post Management -->
+                            <g:render template="/sharedTemplates/management/posts/saved"/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -73,7 +74,8 @@
                             <h4 class="modal-title">Modal Header</h4>
                         </div>
                         <div class="modal-body">
-                            <p>This is a large modal.</p>
+                            <!-- Display Post Management -->
+                            <g:render template="/sharedTemplates/management/comments/pending"/>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

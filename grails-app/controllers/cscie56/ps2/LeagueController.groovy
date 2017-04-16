@@ -210,8 +210,6 @@ class LeagueController {
         /*---------------------------------------------------------------------------------------------*/
 
         def personIndex = params.list('personIndex')
-        def tabIndex = params.list('tabIndex')
-        def validation_error = []
         //String personIndex, String tabIndex,
 
 
@@ -250,14 +248,11 @@ class LeagueController {
                 return response
             }
 
-            /*  --------------             *** Default Tab Idx ***          ---------------  */
-            tabIndex = tabIndex ?: "personal"
-
 
             /*  --------------              *** Display Stats ***           ---------------  */
             //render params
 
-            render(template: "/sharedTemplates/posts/displayAllPosts", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
+            render(template: "/sharedTemplates/posts/displayAllPosts", model: [person: person, currentUser: currentUser])
 
 
             //render params
@@ -291,8 +286,7 @@ class LeagueController {
         /*---------------------------------------------------------------------------------------------*/
 
         def personIndex = params.list('personIndex')
-        def tabIndex = params.list('tabIndex')
-        def validation_error = []
+        //def validation_error = []
         //String personIndex, String tabIndex,
 
 
@@ -331,15 +325,12 @@ class LeagueController {
                 return response
             }
 
-            /*  --------------             *** Default Tab Idx ***          ---------------  */
-            tabIndex = tabIndex ?: "personal"
-
 
             /*  --------------              *** Display Stats ***           ---------------  */
 
             //render params
             //render(view: "person/form-submit", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
-            render(template: "/sharedTemplates/displayAllPosts", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
+            render(template: "/sharedTemplates/displayAllPosts", model: [person: person, currentUser: currentUser])
             //template: "displayAllPosts"
             //respond(person, view: "person/stats/${personIndex}")
         }
@@ -368,10 +359,10 @@ class LeagueController {
         * OUTPUT:
         *     -
         /*---------------------------------------------------------------------------------------------*/
+        print(params)
 
-        //def personIndex = params.list('personIndex')
-        //def tabIndex = params.list('tabIndex')
-        def validation_error = []
+        def personIndex = params.list('personIndex')
+        def postId = params.list('postIndex')
         //String personIndex, String tabIndex,
 
 
@@ -380,6 +371,7 @@ class LeagueController {
         /*  --------------              *** Select Player ***           ---------------  */
         //personIndex = personIndex ?: "1"
         def person = Person.get(personIndex)
+        BlogEntry post = BlogEntry.get(postId)
 
         /*  --------------            *** Authenticate User ***         ---------------  */
         def currentUser = springSecurityService.currentUser
@@ -388,16 +380,17 @@ class LeagueController {
         }
         else {
             /*  --------------            *** Load Form Results ***         ---------------  */
-            def commentText = params.list('comment-text')
+            def commentText = params.list('textarea')
 
             /*  --------------            *** Add New Blog Post ***         ---------------  */
-            Comment newComment = new Comment(text: commentText, dateCreated: new Date(), author: currentUser)
+            Comment newComment = new Comment(text: commentText, dateCreated: new Date(), author: currentUser, approved: false)
 
             /*  --------------             *** Add Post to DB ***           ---------------  */
             if (newComment.validate()) {
                 saveObject(newComment)
                 person.user.addToComments(newComment)
                 post.addToComments(newComment)
+                saveObject(person.user)
                 saveObject(person.user)
 
             }
@@ -408,14 +401,11 @@ class LeagueController {
                 return response
             }
 
-            /*  --------------             *** Default Tab Idx ***          ---------------  */
-            tabIndex = tabIndex ?: "personal"
-
 
             /*  --------------              *** Display Stats ***           ---------------  */
-            render params
+            //render params
 
-            //render(template: "/sharedTemplates/displayAllPosts", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
+            render(template: "/sharedTemplates/comments/displayAllComments", model: [person: person, post: post, currentUser: currentUser])
 
 
             //render params

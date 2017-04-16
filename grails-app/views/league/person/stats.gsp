@@ -300,6 +300,35 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </script>
 
     <script>
+
+        $('#new-comment-form').on('submit', function() {
+            var querystring = $(this).closest("form").serialize();
+            console.log("Query String:" + querystring);
+            $.ajax({
+                type: "POST",
+                url: "/league/submitComment",
+                data : querystring,
+                success : function(response) {
+                    if( response == [] ) {
+                        $('.new-comment-error-messages').append('<div class="w3-panel w3-card-4 w3-red w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-red w3-large w3-display-topright">×</span><h3> Error! </h3><p> You\'ve encountered a validation error. Please make sure your form contents match the placeholder requirements. </p></div>');
+                        console.log("No Validation Errors");
+                        return false;
+                    }
+                    else {
+                        $('.new-comment-success-message').append('<div class="w3-panel w3-card-4 w3-green w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-green w3-large w3-display-topright">×</span><h3> Success! </h3><p>A new post was successfully published to your blog.</p></div>');
+                        console.log(response)
+                        $('#displayComments').html(response);
+                    }
+                },
+                error: function(){
+                    alert("failure");
+                }
+            });
+            return false;
+        });
+    </script>
+
+    <script>
         function commentAccordian(id) {
             var x = document.getElementById(id);
             if (x.className.indexOf("w3-show") == -1) {

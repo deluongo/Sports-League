@@ -16,7 +16,7 @@
             </div>
 
             <div class="w3-col l4 m8 s6" align="right" onclick="commentAccordian('post-${post.id}-comments')">
-                <p ><button class="w3-btn w3-padding-large w3-white w3-hover-blue w3-right"><b>Comments  </b> <span class="w3-tag">0</span></button></p>
+                <p ><button class="w3-btn w3-padding-large w3-white w3-hover-blue w3-right"><b>Comments  </b> <span class="w3-tag">${post.numComments}</span></button></p>
             </div>
 
         </div>

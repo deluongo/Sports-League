@@ -77,6 +77,7 @@ a.navbar-brand {
 .dl-comment-avatar {
     width: 85px;
     height: 85px;
+    margin-bottom: 10px;
 }
 
 .dl-comment-name {
@@ -100,8 +101,90 @@ a.navbar-brand {
     font-size: 15px;
     font-family: "Raleway", sans-serif;
     padding-top: 15px;
+
 }
 
 .dl-comment-reply-btn {
     /*margin: -16px; */ /* <----- for left alignment */
+}
+
+.dl-post-date {
+    margin: 0;
+    color: #000000;
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+}
+
+.dl-post-title {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+dl-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+dl-text-overflow {
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dl-container {
+    display: -webkit-flex;
+}
+
+.dl-container>div:first-child{
+    white-space:wrap;
+    -webkit-order:1;
+    -webkit-flex: 0 1 auto; /*important*/
+    text-overflow: ellipsis;
+    overflow:hidden;
+    min-width:0; /* new algorithm overrides the width calculation */
+}
+
+.dl-container > div:last-child {
+    -webkit-flex: 1;
+    -webkit-order:2;
+    -webkit-flex:1 0 auto; /*important*/
+}
+.dl-container > div:first-child:hover{
+    white-space:normal;
+}
+
+.dl-post-name {
+    margin-top: 0px;
+    color: #000000;
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+
+}
+
+.saved-post-info {
+    margin-left: 10px;
+}
+
+.dl-no-margin {
+    margin: 0px;
+}
+
+.dl-no-padding {
+    padding: 0px;
+}
+
+.dl-max-height {
+    height: 100%;
+    min-height: 100px;
+}
+
+.dl-height-122 {
+    height: 122px;
+}
+
+.dl-publish-parent {
+    vertical-align: middle;
 }
