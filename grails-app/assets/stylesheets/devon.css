@@ -63,3 +63,45 @@ a.navbar-brand {
     margin: 16px;
 }
 
+
+
+.dl-avatar-wrapper {
+    display: inline-block; /* change the default display type to inline-block */
+    overflow: hidden;      /* hide the overflow */
+}
+
+.dl-centered-and-cropped {
+    object-fit: cover;
+}
+
+.dl-comment-avatar {
+    width: 85px;
+    height: 85px;
+}
+
+.dl-comment-name {
+    margin: 0;
+    color: #000000;
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+}
+
+.dl-comment-date {
+    padding-top: 5px;
+    color: #9b9b9b;
+    font-size: 13px;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+}
+
+.dl-comment-text {
+    color: #757575;
+    font-size: 15px;
+    font-family: "Raleway", sans-serif;
+    padding-top: 15px;
+}
+
+.dl-comment-reply-btn {
+    /*margin: -16px; */ /* <----- for left alignment */
+}
