@@ -271,18 +271,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         }
 
         $('#new-post-form').on('submit', function() {
-
             var querystring = $("#new-post-form").serialize();
-            var inputArray =  $("#new-post-form").serializeArray();
-
-
             console.log("Query String:" + querystring);
-
-            var url = "/league/" + objectifyForm(inputArray)['action'];
-            console.log(objectifyForm(inputArray))
             $.ajax({
                 type: "POST",
-                url: url,
+                url: "/league/publishPost",
                 data : querystring,
                 success : function(response) {
                     if( response == [] ) {

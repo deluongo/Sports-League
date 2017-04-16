@@ -10,7 +10,7 @@
             <div class="w3-container w3-cell">
                 <div class="comment-info">
                     <h6 class="dl-comment-name">${comment.author.username}</h6>
-                    <span class="dl-comment-date">${println(comment.dateCreated)}</span>
+                    <span class="dl-comment-date">${comment.localTime}</span>
                     <p class="dl-comment-text">${comment.text}</p>
                 </div>
                 <br/>

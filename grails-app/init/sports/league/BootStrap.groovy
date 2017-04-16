@@ -84,7 +84,7 @@ class BootStrap {
                 Date.parse("MM-dd-yyyy", "3-14-1988"), "Akron, OH", "6'3\"", 190, "Davidson", "https://static01.nyt.com/images/2016/02/29/sports/basketball/STEPHCURRY/STEPHCURRY-articleLarge.jpg")
         savePlayer(stephcurry, "Steph", "Curry", 30, 0, warriors)
 
-        Comment comment1 = saveComment("We continuosly seek between design and technology. For over a decade, we've helped businesses to craft honest, emotional experiences through strategy, brand development, graphic design, our team hand picked to provide the right balance of skills to work!!!", new Date(), user)
+        Comment comment1 = saveComment("We continuosly seek between design and technology. For over a decade, we've helped businesses to craft honest, emotional experiences through strategy, brand development, graphic design, our team hand picked to provide the right balance of skills to work", new Date(), user)
         Comment comment2 = saveComment("We continuosly seek between design and technology. For over a decade, we've helped businesses to craft honest, emotional experiences through strategy, brand development, graphic design, our team hand picked to provide the right balance of skills to work", new Date(), admin)
 
         BlogEntry blog = saveBlog("TEST Title", "TEST Description", "TEST TEXT - ipsum lorem sdff sdfs", new Date(), new Date(), Boolean.TRUE, "http://www.mrltactics.com/content/images/2017/01/Test_sign.jpg", stephcurry)

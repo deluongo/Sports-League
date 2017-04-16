@@ -5,7 +5,7 @@
 
     <div class="w3-container w3-padding-16">
         <h3><b>${post.title}</b></h3>
-        <h5 class="w3-text-black">${post.description}, <span class="w3-opacity w3-medium">${post.datePublished.toString().substring(0, 10)}</span></h5>
+        <h5 class="w3-text-black">${post.description}, <span class="w3-opacity w3-medium">${post.localTimePublished}</span></h5>
     </div>
 
     <div class="w3-container">
@@ -15,16 +15,9 @@
                 <p ><button class="w3-btn w3-padding-large w3-white w3-border"><b class="w3-hide-medium w3-hide-small">READ MORE </b> <b>»</b></button></p>
             </div>
 
-
-
-
             <div class="w3-col l4 m8 s6" align="right" onclick="commentAccordian('post-${post.id}-comments')">
                 <p ><button class="w3-btn w3-padding-large w3-white w3-hover-blue w3-right"><b>Comments  </b> <span class="w3-tag">0</span></button></p>
             </div>
-
-
-
-
 
         </div>
     </div>
