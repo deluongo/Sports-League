@@ -22,7 +22,17 @@
             </div>
             <div class="w3-container w3-col m4 dl-text-overflow dl-container dl-max-height">
                 <div class="dl-max-height w3-container w3-cell w3-cell-middle dl-publish-parent">
-                    <p><button class="w3-btn w3-padding-large w3-white w3-hover-blue w3-right"><b>Publish  </b> <span class="w3-tag"><i class="fa fa-check"></i></span></button></p>
+
+                    <g:form class="publish-post-form" name="publish-post-form" action="approveComment" id="post-management-form-${post.id}">
+
+                        <input type="hidden" name="personIndex" value="${person.id}" />
+
+                        <g:actionSubmit class="w3-btn w3-padding-large w3-white w3-hover-blue w3-right" align="right" name="publishPost" action="publishPost" value="Publish  " />
+
+                    </g:form>
+
+
+                    <p><button class=""><b>Publish  </b> <span class="w3-tag"><i class="fa fa-check"></i></span></button></p>
                     <!--
                     <button class="w3-btn w3-padding-large w3-white w3-hover-blue w3-right w3-cell-middle"><b>View  </b> <span class="w3-tag"><i class="fa fa-check"></i></span></button> -->
                 </div>

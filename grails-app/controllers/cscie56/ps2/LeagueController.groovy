@@ -405,7 +405,7 @@ class LeagueController {
             /*  --------------              *** Display Stats ***           ---------------  */
             //render params
 
-            render(template: "/sharedTemplates/comments/displayAllComments", model: [person: person, post: post, currentUser: currentUser])
+            render(template: "/sharedTemplates/posts/displayAllPosts", model: [person: person, post: post, currentUser: currentUser])
 
 
             //render params
@@ -474,7 +474,8 @@ class LeagueController {
             //render params
             //String commentApprovalAction = "league/approveComment"
 
-            render(template: "/sharedTemplates/comments/displayAllComments", model: [person: person, post: post, currentUser: currentUser]) //, commentApprovalAction: commentApprovalAction
+            //render(template: "/sharedTemplates/management/comments/pending", model: [person: person, currentUser: currentUser]) //, commentApprovalAction: commentApprovalAction
+            render(template: "/sharedTemplates/posts/displayAllPosts", model: [person: person, currentUser: currentUser])
 
 
             //render params
@@ -484,6 +485,7 @@ class LeagueController {
             //respond(person, view: "person/stats/${personIndex}")
         }
     }
+
 
 
 

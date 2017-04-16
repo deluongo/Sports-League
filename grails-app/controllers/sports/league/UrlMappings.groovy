@@ -14,6 +14,11 @@ class UrlMappings {
             action = 'showLeaderboard'
         }
 
+        //"/season/leaderboard/$conferenceName?" {
+        "/league/approveComment/$comment_id?" {
+            controller = 'league'
+            action = 'approveComment'
+        }
 
 
         "/league/person/stats/$personIndex?" {

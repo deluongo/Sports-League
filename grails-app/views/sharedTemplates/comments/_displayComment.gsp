@@ -1,6 +1,6 @@
 <div class="blog-post-comments">
     <hr>
-    <!-- Comment 1 -->
+<!-- Comment 1 -->
     <g:if test="${comment.approved == false}">
         <g:if test="${comment.author == currentUser}">
             <div class="w3-panel w3-orange">
@@ -13,7 +13,7 @@
         <div class="w3-row">
             <div class="w3-container w3-col m12 l2">
                 <div class="comment-avatar">
-                        <img src="${comment.author.pictureURL}" class="dl-centered-and-cropped w3-circle dl-comment-avatar" alt="Avatar">
+                    <img src="${comment.author.pictureURL}" class="dl-centered-and-cropped w3-circle dl-comment-avatar" alt="Avatar">
                 </div>
             </div>
             <div class="w3-container w3-col m12 l10 dl-text-overflow dl-container">

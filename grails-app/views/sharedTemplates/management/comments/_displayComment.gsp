@@ -27,7 +27,7 @@
 
                     </g:form>
 
-                    <!--class="dl-comment-reply-btn w3-button w3-hover-blue">-->
+                <!--class="dl-comment-reply-btn w3-button w3-hover-blue">-->
                 </div>
             </div>
         </div><!-- / .bp-comment -->

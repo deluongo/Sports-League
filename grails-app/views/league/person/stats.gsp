@@ -302,11 +302,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
     <script>
 
-
-
         $('.new-comment-form').on('submit', function() {
             var querystring = $(this).closest("form").serialize();
             console.log("Query String:" + querystring);
+
             $.ajax({
                 type: "POST",
                 url: "/league/submitComment",
@@ -322,7 +321,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                         console.log(response)
                         //console.log(renderTemplate("comments/displayAllComments", response, "comment"))
                         //$('#displayPendingComments').html(renderTemplate("management/comments/pending", response, "comment"));
-                        $('#displayComments').html(response);
+                        $('#displayPosts').html(response);
 
                     }
                 },
@@ -338,6 +337,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         function renderTemplate(path, model_params, value_label) {
             return "<" + "g:render template='/sharedTemplates/" + path + "' model= '" + model_params + "' var= '" + value_label + "' />"
         }
+
 
         $('.approve-comment-form').on('submit', function() {
             var querystring = $(this).closest("form").serialize();
@@ -378,13 +378,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                 x.className = x.className.replace(" w3-show", "");
             }
         }
-    </script>
-
-    <script>
-        $(".post-comment-submit-button").click(function() {
-            var id = $(this).attr('id'); // $(this) refers to button that was clicked
-            alert(id);
-        });
     </script>
 
     </body>
