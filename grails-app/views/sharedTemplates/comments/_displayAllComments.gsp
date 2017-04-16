@@ -1,5 +1,5 @@
 <!-- Blog entries -->
-<div class="w3-container" id = "displayComments-post${post.id}">
+<div class="w3-container displayComments" id = "displayComments-post${post.id}">
 
 
     <!-- Display Blog entries -->

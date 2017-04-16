@@ -248,7 +248,7 @@ class LeagueController {
                 return response
             }
 
-
+            print(params)
             /*  --------------              *** Display Stats ***           ---------------  */
             //render params
 
@@ -268,7 +268,7 @@ class LeagueController {
     /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~~ SHOW PLAYER STATS ~~~~~~~~~~~
      *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
-    def savePost() {
+    def newPost() {
         //String personIndex, String tabIndex, String postTitle, String postDescription, String backgroundImage, String blogText
 
         /*------------------------------------------*
@@ -307,6 +307,7 @@ class LeagueController {
             def postDescription = params.list('postDescription')
             def blogText = params.list('blogText')
             def backgroundImage = params.list('backgroundImage')
+
 
             /*  --------------            *** Add New Blog Post ***         ---------------  */
             BlogEntry newPost = new BlogEntry(published:false, title: postTitle, description: postDescription, text: blogText, pictureURL: backgroundImage, dateCreated: new Date(), author: currentUser)
@@ -405,7 +406,7 @@ class LeagueController {
             /*  --------------              *** Display Stats ***           ---------------  */
             //render params
 
-            render(template: "/sharedTemplates/posts/displayAllPosts", model: [person: person, post: post, currentUser: currentUser])
+            render(template: "/sharedTemplates/comments/displayAllComments", model: [person: person, post: post, postIndex: postId, currentUser: currentUser])
 
 
             //render params
@@ -475,7 +476,7 @@ class LeagueController {
             //String commentApprovalAction = "league/approveComment"
 
             //render(template: "/sharedTemplates/management/comments/pending", model: [person: person, currentUser: currentUser]) //, commentApprovalAction: commentApprovalAction
-            render(template: "/sharedTemplates/posts/displayAllPosts", model: [person: person, currentUser: currentUser])
+            render(template: "/sharedTemplates/management/comments/pending", model: [person: person, currentUser: currentUser])
 
 
             //render params

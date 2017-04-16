@@ -3,9 +3,7 @@
     <div class="comment-form">
         <h4 class="blog-section-title">Leave a comment</h4>
 
-        <g:javascript >
-            var formId = "${currentUser.id}-on-${post.id}-${post.numComments}";
-        </g:javascript>
+
         <g:form class="new-comment-form" name="new-comment-form" action="submitComment" id="${currentUser.id}-on-${post.id}-${post.numComments}">
             <!-- Comment -->
             <div class="col-md-12 form-group no-gap">

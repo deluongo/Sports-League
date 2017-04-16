@@ -260,17 +260,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">Devon Luongo</a></p>
     </footer>
 
-    <script>
 
+
+<script>
         function objectifyForm(formArray) {//serialize data function
-
             var returnArray = {};
             for (var i = 0; i < formArray.length; i++){
                 returnArray[formArray[i]['name']] = formArray[i]['value'];
             }
             return returnArray;
         }
-
         $('#new-post-form').on('submit', function() {
             var querystring = $("#new-post-form").serialize();
             console.log("Query String:" + querystring);
@@ -288,17 +287,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                         $('#postModal').modal('hide');
                         console.log(response)
                         $('#displayPosts').html(response);
-                       }
+                    }
                 },
                 error: function(){
                     alert("failure");
                 }
             });
-
-
             return false;
         });
     </script>
+
 
     <script>
 
@@ -318,10 +316,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                     }
                     else {
                         $('.new-comment-success-message').append('<div class="w3-panel w3-card-4 w3-green w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-green w3-large w3-display-topright">×</span><h3> Success! </h3><p>A new post was successfully published to your blog.</p></div>');
-                        console.log(response)
-                        //console.log(renderTemplate("comments/displayAllComments", response, "comment"))
-                        //$('#displayPendingComments').html(renderTemplate("management/comments/pending", response, "comment"));
-                        $('#displayPosts').html(response);
+                        console.log(response);
+
+                        $('.displayComments').html(response);
+
+
 
                     }
                 },
@@ -355,9 +354,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                     else {
                         $('.comment-approved-success-message').append('<div class="w3-panel w3-card-4 w3-green w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-green w3-large w3-display-topright">×</span><h3> Success! </h3><p>A new post was successfully published to your blog.</p></div>');
                         console.log(response)
-                        $('#approveModal').modal('hide');
+
                         $('#displayPendingComments').html(response);
-                        $('#approveModal').modal('show');
+
                         //$('#displayComments').html(renderTemplate("comments/displayAllComments", response, "comment"));
                     }
                 },

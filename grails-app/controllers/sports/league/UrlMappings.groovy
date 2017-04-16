@@ -15,10 +15,7 @@ class UrlMappings {
         }
 
         //"/season/leaderboard/$conferenceName?" {
-        "/league/approveComment/$comment_id?" {
-            controller = 'league'
-            action = 'approveComment'
-        }
+
 
 
         "/league/person/stats/$personIndex?" {
