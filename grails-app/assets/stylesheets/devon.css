@@ -188,3 +188,10 @@ dl-text-overflow {
 .dl-publish-parent {
     vertical-align: middle;
 }
+
+.dl-warning-panel {
+    font-family: "Raleway", sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    padding: 10px;
+}

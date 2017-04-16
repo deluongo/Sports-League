@@ -416,6 +416,75 @@ class LeagueController {
         }
     }
 
+    @Secured([Role.ROLE_USER, Role.ROLE_ADMIN])
+    /*  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     *   ~~ !!! FUNCTION !!! ~~~  | ~~~~~~~~~ PUBLISH A BLOG POST ~~~~~~~~~~
+     *  ========================= | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    def approveComment() {
+        //String personIndex, String tabIndex, String postTitle, String postDescription, String backgroundImage, String blogText
+
+        /*------------------------------------------*
+        * ===========================================
+        * FUNCTION -> SHOW PLAYER STATS!
+        * ===========================================
+        * INPUTS:
+        *     -
+        * FUNCTIONS:
+        *     - playGame(homeTeam, awayTeam)
+        * DESCRIPTION:
+        *     - Displays league standings in the browser
+        * OUTPUT:
+        *     -
+        /*---------------------------------------------------------------------------------------------*/
+        print(params)
+
+        def personIndex = params.list('personIndex')
+        def commentIndex = params.list('commentIndex')
+        //String personIndex, String tabIndex,
+
+
+
+
+        /*  --------------              *** Select Player ***           ---------------  */
+        //personIndex = personIndex ?: "1"
+        def person = Person.get(personIndex)
+        Comment comment = Comment.get(commentIndex)
+
+        /*  --------------            *** Authenticate User ***         ---------------  */
+        def currentUser = springSecurityService.currentUser
+        if(person.user != currentUser) {
+            flash.message = "Please LOG IN. Anonymous users are not permitted to submit a comments."
+        }
+        else {
+
+            /*  --------------             *** Add Post to DB ***           ---------------  */
+            if (comment.validate()) {
+                comment["approved"] = true
+                saveObject(comment)
+            }
+
+            /*  --------------             *** Display Errors ***           ---------------  */
+            else {
+                def response = []
+                return response
+            }
+
+
+            /*  --------------              *** Display Stats ***           ---------------  */
+            //render params
+            //String commentApprovalAction = "league/approveComment"
+
+            render(template: "/sharedTemplates/comments/displayAllComments", model: [person: person, post: post, currentUser: currentUser]) //, commentApprovalAction: commentApprovalAction
+
+
+            //render params
+            //render(view: "person/form-submit", model: [person: person, tabIndex: tabIndex, currentUser: currentUser])
+
+            //template: "displayAllPosts"
+            //respond(person, view: "person/stats/${personIndex}")
+        }
+    }
+
 
 
 }

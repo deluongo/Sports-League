@@ -1,4 +1,4 @@
-<g:form class="w3-container remove-margin-b remove-padding-b" name="new-post-form" action="publishPost" id="${person.id}">
+<g:form class="w3-container remove-margin-b remove-padding-b" name="new-post-form" action="publishPost" >
     <!--<form class="w3-container remove-margin-b remove-padding-b" id="new-post-form" method="post" action="/league/newPostSubmit">-->
     <div class="w3-row margin-10-b">
         <label for="postTitle">Title</label>

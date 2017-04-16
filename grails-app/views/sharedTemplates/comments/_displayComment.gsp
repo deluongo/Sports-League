@@ -1,6 +1,14 @@
 <div class="blog-post-comments">
     <hr>
     <!-- Comment 1 -->
+    <g:if test="${comment.approved == false}">
+        <g:if test="${comment.author == currentUser}">
+            <div class="w3-panel w3-orange">
+                <p class="dl-warning-panel w3-center-align">Your comment is pending the moderators approval and is only visible to you. </p>
+            </div>
+
+        </g:if>
+    </g:if>
     <div class="bp-comment">
         <div class="w3-row">
             <div class="w3-container w3-col m12 l2">
@@ -24,4 +32,7 @@
             </div>
         </div><!-- / .bp-comment -->
     </div>
+
+
+
 </div>

@@ -228,7 +228,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                                     <g:if test="${flash.message}">
                                         <div class="message" role="status">${flash.message}</div>
                                     </g:if>
-                                    <div>
+                                    <div id="publicBlogPosts">
                                         <g:render template="/sharedTemplates/posts/publicBlogPosts" />
                                     </div>
                                     <br />
@@ -261,6 +261,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
     </footer>
 
     <script>
+
         function objectifyForm(formArray) {//serialize data function
 
             var returnArray = {};
@@ -301,7 +302,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
     <script>
 
-        $('#new-comment-form').on('submit', function() {
+
+
+        $('.new-comment-form').on('submit', function() {
             var querystring = $(this).closest("form").serialize();
             console.log("Query String:" + querystring);
             $.ajax({
@@ -317,7 +320,45 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                     else {
                         $('.new-comment-success-message').append('<div class="w3-panel w3-card-4 w3-green w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-green w3-large w3-display-topright">×</span><h3> Success! </h3><p>A new post was successfully published to your blog.</p></div>');
                         console.log(response)
+                        //console.log(renderTemplate("comments/displayAllComments", response, "comment"))
+                        //$('#displayPendingComments').html(renderTemplate("management/comments/pending", response, "comment"));
                         $('#displayComments').html(response);
+
+                    }
+                },
+                error: function(){
+                    alert("failure");
+                }
+            });
+            return false;
+        });
+    </script>
+
+    <script>
+        function renderTemplate(path, model_params, value_label) {
+            return "<" + "g:render template='/sharedTemplates/" + path + "' model= '" + model_params + "' var= '" + value_label + "' />"
+        }
+
+        $('.approve-comment-form').on('submit', function() {
+            var querystring = $(this).closest("form").serialize();
+            console.log("Query String:" + querystring);
+            $.ajax({
+                type: "POST",
+                url: "/league/approveComment",
+                data : querystring,
+                success : function(response) {
+                    if( response == [] ) {
+                        $('.new-comment-error-messages').append('<div class="w3-panel w3-card-4 w3-red w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-red w3-large w3-display-topright">×</span><h3> Error! </h3><p> You\'ve encountered a validation error. Please make sure your form contents match the placeholder requirements. </p></div>');
+                        console.log("No Validation Errors");
+                        return false;
+                    }
+                    else {
+                        $('.comment-approved-success-message').append('<div class="w3-panel w3-card-4 w3-green w3-display-container w3-padding w3-margin"><span onclick="this.parentElement.style.display=\'none\'" class="w3-button w3-green w3-large w3-display-topright">×</span><h3> Success! </h3><p>A new post was successfully published to your blog.</p></div>');
+                        console.log(response)
+                        $('#approveModal').modal('hide');
+                        $('#displayPendingComments').html(response);
+                        $('#approveModal').modal('show');
+                        //$('#displayComments').html(renderTemplate("comments/displayAllComments", response, "comment"));
                     }
                 },
                 error: function(){
@@ -337,6 +378,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                 x.className = x.className.replace(" w3-show", "");
             }
         }
+    </script>
+
+    <script>
+        $(".post-comment-submit-button").click(function() {
+            var id = $(this).attr('id'); // $(this) refers to button that was clicked
+            alert(id);
+        });
     </script>
 
     </body>

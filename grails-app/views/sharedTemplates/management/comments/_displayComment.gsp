@@ -17,7 +17,16 @@
                 </div>
                 <br/>
                 <div align="right">
-                    <button class="dl-comment-reply-btn w3-btn w3-white remove-margin-b w3-hover-green w3-right-align"><i class="fa fa-plus"></i> Approve</button>
+
+                    <g:form class="approve-comment-form" name="approve-comment-form" action="approveComment" id="${comment.id}">
+
+                        <input type="hidden" name="personIndex" value="${person.id}" />
+                        <input type="hidden" name="commentIndex" value="${comment.id}" />
+
+                        <g:actionSubmit class="dl-comment-reply-btn w3-btn w3-white remove-margin-b w3-hover-green w3-right-align" align="right" name="approveComment" action="approveComment" value="Approve Comment" />
+
+                    </g:form>
+
                     <!--class="dl-comment-reply-btn w3-button w3-hover-blue">-->
                 </div>
             </div>
